@@ -22,7 +22,7 @@ function App() {
       <nav className="flex flex-col md:flex-row fixed w-full top-0 bg-turquesa py-1">
         <Link to="/" className="flex items-center ml-8 mb-4 md:mb-0 md:mr-8">
           <img
-            className="w-25 h-20 flex-wrap rounded-md"
+            className="w-18 h-16 flex-wrap rounded-md"
             src={imagen}
             alt="logo"
           />
