@@ -41,6 +41,7 @@ export default function Footer() {
                   <a
                     href="https://www.facebook.com/profile.php?id=100076763264003"
                     target="_blank"
+                    rel="noreferrer"
                     className="hover:underline "
                   >
                     Facebook
@@ -63,9 +64,11 @@ export default function Footer() {
                 </li>
                 <li className="mb-4 flex items-center">
                   <FaCookieBite className="mr-2 "style={{ color: 'black' }} />
-                  <a href="#" className="hover:underline">
+                  <Link 
+                  to="/inicio/cookies" 
+                  className="hover:underline">
                     Cookies
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a href="#" className="hover:underline">
@@ -85,6 +88,7 @@ export default function Footer() {
             <a
               href="https://www.facebook.com/profile.php?id=100076763264003"
               target="_blank"
+              rel="noreferrer"
               className="text-gray-900 hover:animate-bounce text-2xl"
             >
               <BsFacebook />
