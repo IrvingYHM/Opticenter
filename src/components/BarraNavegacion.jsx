@@ -87,13 +87,13 @@ function App() {
             </div>
             <div className=" hidden md:flex items-end justify-end gap-2 ml-4 md:ml-32">
               <a
-                className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex flex"
+                className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex"
                 href=""
               >
                 Gestionar Cita
               </a>
               <a
-                className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex flex"
+                className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex"
                 href=""
               >
                 Iniciar Sesion

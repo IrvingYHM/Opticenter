@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import an from "../img/an.jpg";
+import an from "../img/an.png";
+import anun from "../img/img.png";
+
 
 function ImgInicio() {
   const slides = [
     {
       url: an,  // Ajusta la ruta según la ubicación de tu imagen
     },
+    {
+      url:anun,
+    }
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

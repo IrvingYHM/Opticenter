@@ -39,7 +39,7 @@ export default function Footer() {
               <ul className="font-medium text-gray-900">
                 <li className="mb-4">
                   <a
-                    href="https://web.facebook.com/people/CAIH/100043352531874/"
+                    href="https://www.facebook.com/profile.php?id=100076763264003"
                     target="_blank"
                     className="hover:underline "
                   >
@@ -83,7 +83,7 @@ export default function Footer() {
           </span>
           <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
             <a
-              href="https://web.facebook.com/people/CAIH/100043352531874/"
+              href="https://www.facebook.com/profile.php?id=100076763264003"
               target="_blank"
               className="text-gray-900 hover:animate-bounce text-2xl"
             >
