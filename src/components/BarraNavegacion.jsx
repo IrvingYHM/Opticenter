@@ -1,16 +1,21 @@
-import { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import imagen from "../img/logo.jpg";
 import carrito from "../img/carrit.png";
+import burgerMenu from '../img/burgerMenu.png'
+//import closeBtn from '../img/icon-menu-close.svg'
+
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+ // const [menuClicked, setMenuClicked] = useState(true)
+
+/*   const handleClick = () => {
+    setMenuClicked(prevState => !prevState)
+  } */
+
+
 
   const handleSearch = () => {
     // Lógica de búsqueda aquí
@@ -18,20 +23,25 @@ function App() {
   };
 
   return (
-    <div className="container mt-5">
-      <nav className="flex flex-col md:flex-row fixed w-full top-0 bg-turquesa py-1">
+    <div className="container mt-5" >
+      <nav className="flex flex-col md:flex-row fixed w-full top-0 bg-turquesa py-1" style={{ zIndex: 1000 }}>
+    <div className="flex ">
         <Link to="/" className="flex items-center ml-8 mb-4 md:mb-0 md:mr-8">
           <img
-            className="w-18 h-16 flex-wrap rounded-md"
+            className="w-18 md:w-25 h-16 md:h-20 flex-wrap rounded-md"
             src={imagen}
             alt="logo"
           />
         </Link>
+        <img className='w-16 h-16 cursor-pointer sm:hidden ml-auto' src={burgerMenu} alt="Menu hamburguesa" />
+        </div>
+
 
 
         <div className="md:flex-row items-end justify-between w-full ml-4 md:ml-13">
           <div className="mb-4 md:mb-0 flex items-center">
             {/* Barra de búsqueda con icono a la derecha */}
+            <div className="hidden md:flex items-center">
             <input
               type="text"
               placeholder="Barra de búsqueda"
@@ -40,13 +50,15 @@ function App() {
           <button
             type="button"
             onClick={handleSearch}
+            
           >
             <AiOutlineSearch className="text-white ml-4 bg-black w-8 h-7 rounded-md" />
           </button>
           </div>
+          </div>
 
           <div className="flex items-end justify-end gap-12">
-            <div className="flex items-end justify-end mb-4 md:mb-0 md:ml-auto gap-2 md:ml-16">
+            <div className="hidden md:flex items-end justify-end mb-4 md:mb-0 md:ml-auto gap-2 md:ml-16">
               <Link
                 to="/inicio"
                 className="hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex items-center"
@@ -58,6 +70,7 @@ function App() {
                 to="/lentes"
                 className="hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex items-center"
               >
+
                 Lentes
               </Link>
               <Link
@@ -72,7 +85,7 @@ function App() {
                 Accesorios
               </Link>
             </div>
-            <div className="flex items-end justify-end gap-2 ml-4 md:ml-32">
+            <div className=" hidden md:flex items-end justify-end gap-2 ml-4 md:ml-32">
               <a
                 className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex flex"
                 href=""
@@ -103,7 +116,7 @@ function App() {
         </div>
 
         {/* Ícono para dispositivos pequeños */}
-        <button
+{/*         <button
           type="button"
           className="md:hidden inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
           aria-controls="mega-menu"
@@ -124,7 +137,8 @@ function App() {
               clipRule="evenodd"
             />
           </svg>
-        </button>
+        </button> */}
+
       </nav>
     </div>
   );
