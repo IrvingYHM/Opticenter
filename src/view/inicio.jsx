@@ -9,8 +9,6 @@ function App() {
 
       <div className='flex-center text-center mt-16'> {/* Ajusta la clase mt-16 según el espacio que desees */}
         <div className='my-32'>
-          <h1>Gola</h1>
-          <h2>Soy Julio</h2>
           <ImgInicio />
         </div>
       </div>
