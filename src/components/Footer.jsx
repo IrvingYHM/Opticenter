@@ -3,6 +3,7 @@ import logo  from "../img/logo.jpg";
 import  caihqr  from "../img/caihqr.png";
 import { Link } from "react-router-dom";
 import { FaCookieBite } from "react-icons/fa";
+import poli from "../img/politica.png";
 
 
 
@@ -54,7 +55,8 @@ export default function Footer() {
                 Legal
               </h2>
               <ul className="font-medium text-gray-300 space-y-2">
-                <li className="mb-4">
+                <li className="mb-4 flex items-center">
+                <img src={poli} style={{ width: '30px', height: '30px' }} alt="Imagen politica de privacidad" />
 
                   <Link
                    to="/inicio/avisoP" 
@@ -71,9 +73,11 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <Link 
+                  to="/inicio/terminosC" 
+                  className="hover:underline">
                     Terminos y condiciones
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
