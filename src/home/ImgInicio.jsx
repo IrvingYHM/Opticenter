@@ -48,7 +48,7 @@ function ImgInicio() {
           backgroundSize: "cover", // Ajusta el tamaño de la imagen para cubrir completamente el contenedor
           backgroundPosition: "center", // Ajusta la posición de la imagen
         }}
-        className="w-full h-[400px] rounded-2xl bg-center duration-500"
+        className="w-full h-[300px] rounded-2xl bg-center duration-500"
       ></div>
       {/* Left Arrow */}
       <div

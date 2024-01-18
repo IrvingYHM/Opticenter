@@ -32,6 +32,7 @@ function App() {
             <Link to="/accesorios" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Accesorios </Link>
           </div>
 
+<<<<<<< HEAD
           <div className="hidden md:flex items-center gap-4 ml-4 md:ml-32">
             <a className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex" href=""> Gestionar Cita </a>
             <a className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex" href=""> Iniciar Sesión </a>
@@ -39,6 +40,51 @@ function App() {
             <Link to="/carrito">
               <img src={carrito} className="w-10 h-10 ml-2 rounded-md m-1" alt="carrito" />
             </Link>
+=======
+                Lentes
+              </Link>
+              <Link
+                to="/lentesS"
+                className=" hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"
+              >
+                Lentes solares
+              </Link>
+              <Link
+              to="/accesorios"
+              className="hover:bg-blue-900 text-s rounded-md px-4 py-2 font-bold flex items-center">
+                Accesorios
+              </Link>
+            </div>
+            <div className=" hidden md:flex items-end justify-end gap-2 ml-4 md:ml-32">
+              <Link
+              to="/gestionarCi"
+                className="bg-aRey hover:bg-blue-900 text-white rounded-md px-4 py-2 font-bold flex"
+              >
+                Gestionar Cita
+              </Link>
+              <Link
+                to="/inicioS"
+                className="bg-aRey hover:bg-blue-900 text-white rounded-md px-4 py-2 font-bold flex"
+              >
+                Iniciar Sesion
+              </Link>
+              <Link
+              to="/registrarseL"
+                className="bg-aRey hover:bg-blue-900 text-white rounded-md px-4 py-2 font-bold"
+                
+              >
+                Registrarse
+              </Link>
+              <Link 
+              to="/carrito">
+                <img
+                  src={carrito}
+                  className="w-10 h-10 ml-2 rounded-md m-1"
+                  alt="carrito"
+                />
+              </Link>
+            </div>
+>>>>>>> origin/master
           </div>
         </div>
       </nav>

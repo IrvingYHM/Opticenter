@@ -1,3 +1,6 @@
+import Fot from '../components/Footer';
+
+
 function App() {
 
     return (
@@ -7,7 +10,10 @@ function App() {
               <p>Como accesorios </p>
           </div>
           </div>
+    <Fot />
+
     </>
+
     )
   }
   
