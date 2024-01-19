@@ -7,7 +7,7 @@ function App() {
     <>
           <div className='my-28 text-center'>
             <div>
-              <p className='sm:text-slate-900  font-bold'>Formulario para registrarse </p>
+              <p className='sm:text-slate-100  font-bold'>Formulario para registrarse </p>
           </div>
           </div>
     <Fot />
