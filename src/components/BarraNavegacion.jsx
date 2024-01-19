@@ -32,18 +32,20 @@ function App() {
             <Link to="/accesorios" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Accesorios </Link>
           </div>
 
-          <div className="hidden md:flex items-center gap-4 ml-4 md:ml-32">
+          <div className="hidden md:flex items-center gap-4 ml-4 md:ml-32 -translate-x-16">
             <Link
             to="/gestionarCi"
-            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex" href=""> Gestionar Cita </Link>
+            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-3 py-1 font-bold flex text-center"> 
+            Gestionar Cita
+            </Link>
             <Link
             to="/inicioS"
-            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex" href=""> Iniciar Sesión </Link>
+            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-3 py-1 font-bold flex"> Iniciar Sesión </Link>
             <Link
             to="/registrarseL"
-            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex" href=""> Registrarse </Link>
+            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex"> Registrarse </Link>
             <Link to="/carrito">
-              <img src={carrito} className="w-10 h-10 ml-2 rounded-md m-1" alt="carrito" />
+              <img src={carrito} className="w-20 h-16 ml-2 rounded-md m-3" alt="carrito"/>
             </Link>
           </div>
         </div>
