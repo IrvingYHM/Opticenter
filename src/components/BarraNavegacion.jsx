@@ -33,9 +33,15 @@ function App() {
           </div>
 
           <div className="hidden md:flex items-center gap-4 ml-4 md:ml-32">
-            <a className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex" href=""> Gestionar Cita </a>
-            <a className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex" href=""> Iniciar Sesión </a>
-            <a className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex" href=""> Registrarse </a>
+            <Link
+            to="/gestionarCi"
+            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex" href=""> Gestionar Cita </Link>
+            <Link
+            to="/inicioS"
+            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex" href=""> Iniciar Sesión </Link>
+            <Link
+            to="/registrarseL"
+            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex" href=""> Registrarse </Link>
             <Link to="/carrito">
               <img src={carrito} className="w-10 h-10 ml-2 rounded-md m-1" alt="carrito" />
             </Link>
