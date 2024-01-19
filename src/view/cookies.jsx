@@ -53,7 +53,7 @@ const App = () => {
 
         <br />
 
-    <table className="min-w-full border border-gray-300">
+    <table className="w-full overflow-x-auto md:overflow-hidden bg-white shadow-md rounded-md">
       <thead className="bg-gray-200">
         <tr>
           <th className="py-2 px-4 border-b">Nombre</th>

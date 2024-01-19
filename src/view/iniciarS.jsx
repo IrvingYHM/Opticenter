@@ -6,6 +6,37 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
     const [mostrarContra, setMostrarContra] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+
+    const handleLogin = () => {
+
+        if (email && password) {
+            setIsLoggedIn(true);
+            alert('Inicio de sesion exitoso');
+        } else {
+
+            alert('Por favor, completa todos los campos.');
+        }
+    };
+
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+    };
+
+
+        if (isLoggedIn) {
+            return (
+                <div>
+                    <p className='flex-center my-64 text-center' >Bienvenido, usuario!</p>
+                    <button className=''  onClick={handleLogout}>Cerrar sesión</button>
+                </div>
+            );
+        }
 
 
     return (
@@ -31,6 +62,9 @@ function App() {
                         <input 
                         type='email'
                         placeholder='Correo electronico'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+
                         className='w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none' 
                         />
                         <label htmlFor="password" className="input-text">Contraseña:</label>
@@ -38,6 +72,8 @@ function App() {
                         <input 
                             type={mostrarContra ? 'text' : 'password'}
                             placeholder='Contraseña'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             className='w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none' 
                         />
                         <FontAwesomeIcon
@@ -58,7 +94,9 @@ function App() {
                         </div>
 
                         <div className='w-full flex flex-col my-12'>
-                            <button className='w-full text-white bg-black rounded-md p-4 text-center flex items-center justify-center'>
+                            <button className='w-full text-white bg-black rounded-md p-4 text-center flex items-center justify-center'
+                            onClick={handleLogin}
+                            >
                                 Ingresar
                             </button>
                         </div>

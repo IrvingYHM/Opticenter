@@ -5,9 +5,9 @@ function App() {
 
     return (
     <>
-          <div className='flex-center my-60 text-center'>
+          <div className='my-28 text-center'>
             <div>
-              <p>Formulario para registrarse </p>
+              <p className='sm:text-slate-900  font-bold'>Formulario para registrarse </p>
           </div>
           </div>
     <Fot />
