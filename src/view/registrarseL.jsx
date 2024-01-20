@@ -9,58 +9,22 @@ function App() {
     return (
     <>
           <div className='my-28 text-center'>
-            <div>
-            <p className='sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4'>Formulario de registro</p>
+          <div className='container ml-auto mr-auto flex items-center justify-center'>
+            <div className='w-full md:w-1/2'>
+            <form className='bg-white px-8 pt-6 pb-8 mb-4'>
+            <div className='mb-4'>
+              <div className='grid grid-flow-row sm:grid-flow-col gap-3'>
+                <div className='sm:col-span-4 justify-center'>
+                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='nya'>Nombre y apellidos</label>
+                <input type="text" className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' />
+                </div>
 
-            <form >
-          <div className="mb-4">
-          <label htmlFor="nombre" className="block text-sm font-medium text-gray-800">
-            Nombre:
-          </label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            className="mt-1 p-2 border rounded-md w-72 text-center"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="nombre" className="block text-sm font-medium text-gray-800">
-            Apellido Paterno:
-          </label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            className="mt-1 p-2 border rounded-md w-72 text-center"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="nombre" className="block text-sm font-medium text-gray-800">
-            Apellido Materno:
-          </label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            className="mt-1 p-2 border rounded-md w-72 text-center"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="nombre" className="block text-sm font-medium text-gray-800">
-            
-          </label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            className="mt-1 p-2 border rounded-md w-72 text-center"
-          />
-        </div>
+              </div>
+            </div>
 
 
-
-        </form>
+            </form>
+            </div>
 
           </div>
           </div>
