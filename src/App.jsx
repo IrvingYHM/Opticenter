@@ -12,7 +12,7 @@ import TerminoC from './view/terminosC';
 import GestionarC from './view/gestionarCi';
 import RegistrarseLo from './view/registrarseL';
 import Carrito from './view/carrito';
-import NotFound from './components/err/NotFound';
+/* import NotFound from './components/err/NotFound'; */
 
 //import Piepa from './components/foother';
 
@@ -39,7 +39,7 @@ function App() {
       <Route path='/inicio/terminosC' element={<TerminoC/>} />
 
       {/* Agrega la ruta NotFound para manejar errores 404 */}
-      <Route path='*' element={<NotFound />} /> 
+{/*       <Route path='*' element={<NotFound />} /> */} 
     </Routes>
   </BrowserRouter>
 
