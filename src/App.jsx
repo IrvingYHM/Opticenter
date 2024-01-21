@@ -12,6 +12,11 @@ import TerminoC from './view/terminosC';
 import GestionarC from './view/gestionarCi';
 import RegistrarseLo from './view/registrarseL';
 import Carrito from './view/carrito';
+import OpcionRe from './view/opcionRe';
+import RegistroCorr from './view/RegistroCorr';
+import RegistroContra from './view/registroContra';
+import Direccion from './view/registroDirec';
+
 /* import NotFound from './components/err/NotFound'; */
 
 //import Piepa from './components/foother';
@@ -36,7 +41,11 @@ function App() {
       <Route path='/inicio/avisoP' element={<AvisoP/>}/>
       <Route path='/inicio/cookies' element={<Cookies/>}/> 
       <Route path='/inicioS' element={<IniciarS/>}/>
-      <Route path='/inicio/terminosC' element={<TerminoC/>} />
+      <Route path='/inicio/terminosC' element={<TerminoC/>}/>
+      <Route path='/opcionesRe' element={<OpcionRe/>}/>
+      <Route path='/RegistroCorr' element={<RegistroCorr/>}/>
+      <Route path='/Contraseña' element={<RegistroContra/>} />
+      <Route path='/Direccion' element={<Direccion/>}/>
 
       {/* Agrega la ruta NotFound para manejar errores 404 */}
 {/*       <Route path='*' element={<NotFound />} /> */} 

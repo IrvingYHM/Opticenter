@@ -3,6 +3,7 @@ import { useState } from 'react';
 import imagen from "../img/paisaje.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 function App() {
     const [mostrarContra, setMostrarContra] = useState(false);
@@ -105,7 +106,9 @@ function App() {
 
                     </div>
                     <div className='w-full flex items-center justify-center'>
-                        <p className='text-sm font-normal text-black'>¿No tienes una cuenta? <span className='font-semibold underline underline-offset-2 cursor-pointer'>Registrate gratis </span></p>
+                        <p className='text-sm font-normal text-black'>¿No tienes una cuenta? <span className='font-semibold underline underline-offset-2 cursor-pointer'>
+                            <Link to='/opcionesRe'>Registrate gratis</Link>
+                             </span></p>
                     </div>
 
                 </div>

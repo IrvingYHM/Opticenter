@@ -12,7 +12,7 @@ function App() {
           <Link to="/" className="flex items-center">
             <img className="w-18 md:w-25 h-16 md:h-20 flex-wrap rounded-md" src={imagen} alt="logo" />
           </Link>
-          <img className="w-16 h-16 cursor-pointer sm:hidden ml-auto" src={burgerMenu} alt="Menu hamburguesa" />
+          <img className="w-16 h-16 cursor-pointer md:hidden ml-auto" src={burgerMenu} alt="Menu hamburguesa" />
         </div>
 
         <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-13">
@@ -42,7 +42,7 @@ function App() {
             to="/inicioS"
             className="bg-aRey hover:bg-blue-900 text-black rounded-md px-3 py-1 font-bold flex"> Iniciar Sesión </Link>
             <Link
-            to="/registrarseL"
+            to="/opcionesRe"
             className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex"> Registrarse </Link>
             <Link to="/carrito">
               <img src={carrito} className="w-20 h-16 ml-2 rounded-md m-3" alt="carrito"/>
