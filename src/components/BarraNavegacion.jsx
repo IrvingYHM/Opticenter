@@ -1,6 +1,6 @@
 import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import logo from "../img/logo2.jpg";
+import logo from "../img/logo.png";
 import carrito from "../img/carrit.png";
 import burgerMenu from "../img/burgerMenu.png";
 
