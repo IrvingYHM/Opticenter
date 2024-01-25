@@ -1,32 +1,54 @@
 import Fot from '../components/Footer';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+
+const validateName = (value) => /^[A-Za-z\s]+$/.test(value) || value === '';
 
 function App() {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
+  const [state, setState] = useState({
+    nombre: '',
+    apellidoPaterno: '',
+    apellidoMaterno: '',
+    email: '',
+  });
 
+  const handleChangeInput = (evento) => {
+    const { name, value } = evento.target;
+
+    if ((name === 'nombre' || name === 'apellidoPaterno' || name === 'apellidoMaterno') && !validateName(value)) {
+      console.log('es numero');
+      return;
+    }
+
+    console.log(name, value);
+    setState({
+      ...state,
+      [name]: value,
+    });
+  };
+
+  const onSubmit = (data) => {
     const fechaNacimiento = new Date(data.fechaNacimiento);
     const fechaActual = new Date();
-
-    // Comparar años
     const diferenciaAnios = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
 
     if (diferenciaAnios < 18) {
       alert("Debes tener al menos 18 años para registrarte.");
-      return; // Detener la función aquí si hay un error
+      return;
     }
+
     console.log(data);
     // Aquí puedes manejar la lógica de envío del formulario
   };
-
 
   return (
     <>
       <div className='my-28 text-center'>
         <div className='container ml-auto mr-auto flex items-center justify-center'>
           <div>
-            <p className='sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4'>Formulario de informacion personal</p>
+            <p className='sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4'>Formulario de información personal</p>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4">
@@ -38,6 +60,7 @@ function App() {
                   id="nombre"
                   name="nombre"
                   required
+                  placeholder='Nombre'
                   {...register("nombre", 
                   { 
                     required:{
@@ -49,13 +72,15 @@ function App() {
                     message: "El nombre debe tener al menos 3 caracteres"
                    },
                    pattern:{
-                    value: /^[A-Za-z]+$/,
+                    value: /^[A-Za-z\s]+$/,
                     message: "Solo se permiten letras de la A a la Z"
                 }
                   }
                   
                   )}
                   className="mt-1 p-2 border rounded-md w-72 text-center"
+                  onChange={handleChangeInput}
+                  value={state.nombre}
                 />
 
               </div>
@@ -69,6 +94,7 @@ function App() {
                   type="text"
                   id="apellidoPaterno"
                   name="apellidoPaterno"
+                  placeholder='Apellido Paterno'
                   required
                   {...register("apellidoPaterno", {                     required:{
                     value:true,
@@ -83,6 +109,8 @@ function App() {
                   message: "Solo se permiten letras de la A a la Z"
               } })}
                   className="mt-1 p-2 border rounded-md w-72 text-center"
+                  onChange={handleChangeInput}
+                  value={state.apellidoPaterno}
                 />
               </div>
               {errors.apellidoPaterno && <span className='text-red-500 text-sm mt-1'>{errors.apellidoPaterno.message}</span>}
@@ -95,8 +123,10 @@ function App() {
                   type="text"
                   id="apellidoMaterno"
                   name="apellidoMaterno"
+                  placeholder='Apellido Materno'
                   required
-                  {...register("apellidoMaterno", {                     required:{
+                  {...register("apellidoMaterno", {                     
+                required:{
                     value:true,
                     message:"El campo es requerido"
                 },
@@ -109,6 +139,8 @@ function App() {
                   message: "Solo se permiten letras de la A a la Z"
               } })}
                   className="mt-1 p-2 border rounded-md w-72 text-center"
+                  onChange={handleChangeInput}
+                  value={state.apellidoMaterno}
                 />
               </div>
               {errors.apellidoMaterno && <span className='text-red-500 text-sm mt-1'>{errors.apellidoMaterno.message}</span>}
@@ -124,14 +156,15 @@ function App() {
                   required
                   {...register("fechaNacimiento", { required: "El campo es requerido" })}
                   className="mt-1 p-2 border rounded-md w-72 text-center"
+
                 />
               </div>
               {errors.fechaNacimiento && <span className='text-red-500 text-sm mt-1'>{errors.fechaNacimiento.message}</span>}
 
               <button
-              style={{ backgroundColor: 'green', color: 'white' }}
-              className='bg-blue-700 border-2 border-black hover:bg-green-400 text-white rounded-md font-bold flex px-4 py-2 justify-center mx-auto items-center'
-               type='submit'>
+                style={{ backgroundColor: 'green', color: 'white' }}
+                className='bg-blue-700 border-2 border-black hover:bg-green-400 text-white rounded-md font-bold flex px-4 py-2 justify-center mx-auto items-center'
+                type='submit'>
                 Guardar
               </button>
             </form>

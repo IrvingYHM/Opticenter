@@ -9,17 +9,35 @@ function App() {
     // Aquí puedes manejar la lógica de envío del formulario
   };
 
-  const passwordValidation = (value) => {
-    // Agrega tus propias validaciones para la contraseña
-    const minLength = 6; // Mínimo 6 caracteres
-    if (value.length < minLength) {
-      return `La contraseña debe tener al menos ${minLength} caracteres`;
+  const passwordValidation = (password) => {
+    const minLength = 8;
+
+    if (password.length < minLength) {
+      return "La contraseña debe tener al menos 8 caracteres";
     }
-    // Puedes agregar más validaciones según tus necesidades
+
+    if (!/[A-Z]/.test(password)) {
+      return "La contraseña debe contener al menos una letra mayúscula";
+    }
+
+    if (!/[a-z]/.test(password)) {
+      return "La contraseña debe contener al menos una letra minúscula";
+    }
+
+    if (!/\d/.test(password)) {
+      return "La contraseña debe contener al menos un número";
+    }
+
+    const specialChars = /[!@#\$%^&*(),.¿=?":\_{/\+}|<>[\]\-]/;
+    if (!specialChars.test(password)) {
+      return "La contraseña debe contener al menos un carácter especial";
+    }
+
+    // Si pasa todas las validaciones, la contraseña es considerada válida
     return true;
   };
 
-  const selectedQuestion = watch("question"); // Obtener el valor seleccionado de la pregunta
+  const selectedQuestion = watch("question"); // Obtiene el valor seleccionado de la pregunta
 
   return (
     <>
@@ -72,8 +90,9 @@ function App() {
                   Selecciona una pregunta secreta:
                 </label>
                 <select id="question" {...register("question")} className='border border-gray-300 py-4 rounded-lg focus:border-indigo-500 outline-none focus:right-1 focus:ring-indigo-500 w-72 select-selected text-sm '>
-                  <option value="" className=''>Selecciona uno</option>
-                  <option value="infancia">¿Cuál es el nombre de tu mejor amigo?</option>
+                  <option disabled className=''>Selecciona uno</option>
+                  <option value="color">¿Cuál es tu color favorito?</option>
+                  <option value="materia">¿Cuál es tu materia favorita?</option>
                   <option value="mascota">¿Cuál es el nombre de tu mascota?</option>
                   <option value="comida">¿Cuál es tu comida favorita?</option>
                 </select>

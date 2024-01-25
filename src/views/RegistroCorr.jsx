@@ -1,14 +1,27 @@
 import Fot from '../components/Footer';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+
 
 function App() {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const [setGuardado] = useState(false);
+
+
+  // Función para validar que solo se ingresen números
+  const handlePhoneNumberChange = (event) => {
+    const inputValue = event.target.value;
+    const onlyNumbers = inputValue.replace(/[^0-9]/g, ''); // Eliminar cualquier caracter no numérico
+
+    // Actualizar el valor del campo de teléfono con solo números
+    event.target.value = onlyNumbers;
+  };
 
   const onSubmit = (data) => {
     // Verificar si hay errores en los campos
     if (Object.keys(errors).length === 0) {
+      setGuardado(true)
       window.alert('Datos guardados', data);
-      window.alert(data);
     } else {
       // Hay errores, no hacer nada o puedes mostrar mensajes de error adicionales si lo deseas
     }
@@ -58,7 +71,6 @@ function App() {
                   id="numeroTelefono"
                   name="numeroTelefono"
                   required
-                  max= {10}
                   {...register("numeroTelefono", 
                     { 
                       required: {
@@ -76,7 +88,9 @@ function App() {
                     }
                   )}
                   className="mt-1 p-2 border rounded-md w-72 text-center"
+                  maxLength={10}  // Establecer la longitud máxima
                   placeholder='Número de teléfono'
+                  onChange={handlePhoneNumberChange}  // Agregar el evento onChange para validar y actualizar
                 />
               </div>
               {errors.numeroTelefono && <span className='text-red-500 text-sm mt-1'>{errors.numeroTelefono.message}</span>}
