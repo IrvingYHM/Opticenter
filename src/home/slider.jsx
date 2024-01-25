@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import an from "../img/an.png";
+<<<<<<< HEAD:src/home/slider.jsx
 import anuncioOpti from "../img/anuncioOpti.jpg";
+=======
+import anuncio from "../img/anuncioOpti.jpg";
+>>>>>>> 8a388ff325fe379a1e564b9f470b4ff9c89c0f0c:src/home/ImgInicio.jsx
 
 
 function ImgInicio() {
@@ -10,7 +14,11 @@ function ImgInicio() {
       url: an,  // Ajusta la ruta según la ubicación de tu imagen
     },
     {
+<<<<<<< HEAD:src/home/slider.jsx
       url:anuncioOpti,
+=======
+      url:anuncio,
+>>>>>>> 8a388ff325fe379a1e564b9f470b4ff9c89c0f0c:src/home/ImgInicio.jsx
     }
   ];
 
