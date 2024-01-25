@@ -1,23 +1,23 @@
 import './App.css'
 import Barra from './components/BarraNavegacion';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Inicio from './view/inicio';
-import Lentes from './view/lentes';
-import LenteS from './view/lentesS';
-import Accesorios from './view/accesorios';
-import AvisoP from './view/avisoP';
-import Cookies from './view/cookies';
-import IniciarS from './view/iniciarS';
-import TerminoC from './view/terminosC';
-import GestionarC from './view/gestionarCi';
-import RegistrarseLo from './view/registrarseL';
-import Carrito from './view/carrito';
-import OpcionRe from './view/opcionRe';
-import RegistroCorr from './view/RegistroCorr';
-import RegistroContra from './view/registroContra';
-import Direccion from './view/registroDirec';
+import Inicio from './views/inicio';
+import Lentes from './views/lentes';
+import LenteS from './views/lentesS';
+import Accesorios from './views/accesorios';
+import AvisoP from './views/avisoP';
+import Cookies from './views/cookies';
+import IniciarS from './views/iniciarS';
+import TerminoC from './views/terminosC';
+import GestionarC from './views/gestionarCi';
+import RegistrarseLo from './views/registrarseL';
+import Carrito from './views/carrito';
+import OpcionRe from './views/opcionRe';
+import RegistroCorr from './views/RegistroCorr';
+import RegistroContra from './views/registroContra';
+import Direccion from './views/registroDirec';
 
-/* import NotFound from './components/err/NotFound'; */
+import NotFound from './components/err/NotFound';
 
 //import Piepa from './components/foother';
 
@@ -48,7 +48,7 @@ function App() {
       <Route path='/Direccion' element={<Direccion/>}/>
 
       {/* Agrega la ruta NotFound para manejar errores 404 */}
-{/*       <Route path='*' element={<NotFound />} /> */} 
+       <Route path='*' element={<NotFound />} /> 
     </Routes>
   </BrowserRouter>
 
