@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import an from "../img/an.png";
-import anuncio from "../img/anuncioOpti.jpg";
+import anuncioOpti from "../img/anuncioOpti.jpg";
 
 
 function ImgInicio() {
@@ -10,7 +10,7 @@ function ImgInicio() {
       url: an,  // Ajusta la ruta según la ubicación de tu imagen
     },
     {
-      url:anuncio,
+      url:anuncioOpti,
     }
   ];
 

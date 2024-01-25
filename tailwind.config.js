@@ -11,7 +11,8 @@ export default {
         turquesa: '#19BDFD',
         aRey: '#1446F5'
       }
-    },
+    }
+    ,
   },
   plugins: [],
 }
