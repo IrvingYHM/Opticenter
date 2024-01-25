@@ -1,5 +1,5 @@
 import Navbar from '../components/BarraNavegacion';
-import ImgInicio from '../home/ImgInicio';
+import Slider from '../home/slider';
 import Fot from '../components/Footer';
 import imagen from "../img/logo.jpg";
 
@@ -10,7 +10,7 @@ function App() {
 
       <div className='flex-center text-center mt-16'>
         <div className='my-32 '>
-          <ImgInicio />
+          <Slider />
           <br />
           <div className="max-w-sm rounded overflow-hidden shadow-lg ">
             <img className="w-full" src={imagen} alt="Sunset in the mountains" />
