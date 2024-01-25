@@ -1,7 +1,6 @@
 import './App.css'
 import Barra from './components/BarraNavegacion';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-<<<<<<< HEAD
 import Inicio from './views/inicio';
 import Lentes from './views/lentes';
 import LenteS from './views/lentesS';
@@ -19,19 +18,6 @@ import RegistroContra from './views/registroContra';
 import Direccion from './views/registroDirec';
 
 import NotFound from './components/err/NotFound';
-=======
-import Inicio from './vistas/inicio';
-import Lentes from './vistas/lentes';
-import LenteS from './vistas/lentesS';
-import Accesorios from './vistas/accesorios';
-import AvisoP from './vistas/avisoP';
-import Cookies from './vistas/cookies';
-import IniciarS from './vistas/iniciarS';
-import TerminoC from './vistas/terminosC';
-import GestionarC from './vistas/gestionarCi';
-import RegistrarseLo from './vistas/registrarseL';
-import Carrito from './vistas/carrito';
->>>>>>> 8a388ff325fe379a1e564b9f470b4ff9c89c0f0c
 
 //import Piepa from './components/foother';
 

@@ -1,5 +1,4 @@
 import { BsFacebook } from "react-icons/bs"; 
-import logo  from "../img/logo.jpg";
 import  caihqr  from "../img/caihqr.png";
 import { Link } from "react-router-dom";
 import { FaCookieBite } from "react-icons/fa";
@@ -24,13 +23,6 @@ export default function Footer() {
           </a>
         </div>
         <div className="mb-6 md:mb-0 md:flex md:items-center">
-          <a className="flex items-center mx-auto md:mx-0">
-            <img
-              src={logo}
-              className="h-40 mx-auto md:mx-0 rounded-md"
-              alt="Logo caih"
-            />
-          </a>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
           <div>
@@ -56,15 +48,15 @@ export default function Footer() {
               </h2>
               <ul className="font-medium text-gray-300 space-y-2">
                 <li className="mb-4 flex items-center">
-                <img src={poli} style={{ width: '30px', height: '30px' }} alt="Imagen politica de privacidad" />
+                <img className="-translate-x-2" src={poli} style={{ width: '30px', height: '30px' }} alt="Imagen politica de privacidad" />
 
                   <Link
                    to="/inicio/avisoP" 
-                   className="hover:underline">
+                   className="hover:underline -translate-x-1">
                     Politica de privacidad
                   </Link>
                 </li>
-                <li className="mb-4 flex items-center">
+                <li className="mb-4 flex items-center ">
                   <FaCookieBite className="mr-2 "style={{ color: 'black' }} />
                   <Link 
                   to="/inicio/cookies" 
