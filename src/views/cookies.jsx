@@ -52,14 +52,9 @@ const App = () => {
         <p>Las cookies, en función de su permanencia, pueden dividirse en cookies de sesión o permanentes. Las que expiran cuando el usuario cierra el navegador. Las que expiran en función de cuando se cumpla el objetivo para el que sirven (por ejemplo, para que el usuario se mantenga identificado en los servicios de Said Valdivia Hernandez) o bien cuando se borran manualmente.</p>
 
         <br />
-<<<<<<<< HEAD:src/views/cookies.jsx
         <div className='overflow-x-auto'>
 
     <table className="w-full  bg-white shadow-md rounded-md table-auto">
-========
-
-    <table className="w-full overflow-x-auto md:overflow-hidden bg-white shadow-md rounded-md">
->>>>>>>> 8a388ff325fe379a1e564b9f470b4ff9c89c0f0c:src/vistas/cookies.jsx
       <thead className="bg-gray-200">
         <tr>
           <th className="py-2 px-4 border-b">Nombre</th>
@@ -100,10 +95,7 @@ const App = () => {
         </tr>
       </tbody>
     </table>
-<<<<<<<< HEAD:src/views/cookies.jsx
     </div>
-========
->>>>>>>> 8a388ff325fe379a1e564b9f470b4ff9c89c0f0c:src/vistas/cookies.jsx
     <br />
     <p>Adicionalmente, en función de su objetivo, las cookies pueden clasificarse de la siguiente forma:</p>
     <br />
@@ -181,11 +173,7 @@ const App = () => {
     <br />
 
     <p>Para más información sobre la administración de las cookies en Google Chrome: 
-<<<<<<<< HEAD:src/views/cookies.jsx
         <a className='text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl' href="https://support.google.com/chrome/answer/95647?hl=es">https://support.google.com/chrome/answer/95647?hl=es</a></p>
-========
-        <a href="https://support.google.com/chrome/answer/95647?hl=es">https://support.google.com/chrome/answer/95647?hl=es</a></p>
->>>>>>>> 8a388ff325fe379a1e564b9f470b4ff9c89c0f0c:src/vistas/cookies.jsx
         <br />
         <p>Para más información sobre la administración de las cookies en Internet Explorer: 
         <a href=" http://windows.microsoft.com/es-es/windows-vista/cookies-frequently-asked-questions"> http://windows.microsoft.com/es-es/windows-vista/cookies-frequently-asked-questions</a>
@@ -216,11 +204,7 @@ const App = () => {
     <p>Protección de datos de Google Analytics:<a href="http://www.google.com/analytics/learn/privacy.html">http://www.google.com/analytics/learn/privacy.html</a>
     </p>
     <br />
-<<<<<<<< HEAD:src/views/cookies.jsx
     <p>Cómo usa Google Analytics las cookies:<a className='text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl' href=" https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es#analyticsjs"> https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es#analyticsjs
-========
-    <p>Cómo usa Google Analytics las cookies:<a href=" https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es#analyticsjs"> https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage?hl=es#analyticsjs
->>>>>>>> 8a388ff325fe379a1e564b9f470b4ff9c89c0f0c:src/vistas/cookies.jsx
     </a>
     </p>
     <br />
