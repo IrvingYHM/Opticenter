@@ -1,11 +1,11 @@
 import Fot from '../components/Footer';
+import SearchAdvanced from "../views/Busqueda/searchAdvanced";
 
 const LenteS = () => {
     return (
         <div className='flex-center'>
             <div className='my-32'>
-                <h1>Hola soy lentes</h1>
-                <h1>Hola soy lentes</h1>
+                <SearchAdvanced/>
 
             </div>
         <Fot />

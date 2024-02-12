@@ -9,7 +9,9 @@ export default {
       colors:{
         danger: '#FFD099',
         turquesa: '#19BDFD',
-        aRey: '#1446F5'
+        aRey: '#1446F5',
+        azulOp: '#6786F6'
+
       }
     }
     ,

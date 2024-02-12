@@ -8,17 +8,14 @@ function App() {
   const [setGuardado] = useState(false);
 
 
-  // Función para validar que solo se ingresen números
   const handlePhoneNumberChange = (event) => {
     const inputValue = event.target.value;
     const onlyNumbers = inputValue.replace(/[^0-9]/g, ''); // Eliminar cualquier caracter no numérico
 
-    // Actualizar el valor del campo de teléfono con solo números
     event.target.value = onlyNumbers;
   };
 
   const onSubmit = (data) => {
-    // Verificar si hay errores en los campos
     if (Object.keys(errors).length === 0) {
       setGuardado(true)
       window.alert('Datos guardados', data);

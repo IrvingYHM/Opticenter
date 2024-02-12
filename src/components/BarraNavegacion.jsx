@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate,useLocation  } from "react-router-dom";
 import imagen from "../img/logo.png";
 /* import carrito from "../img/carrit.png"; */
 import burgerMenu from "../img/burgerMenu.png";
@@ -8,12 +8,24 @@ import { FaShoppingCart } from 'react-icons/fa';
 
 function App() {
   const [busqueda, setBusqueda] = useState('');
+  const [menuVisible, setMenuVisible] = useState(false);
+  const location = useLocation();
+
   const lentes = [
     { id: 1, nombre: 'Lente 1', seccion: 'lente1' },
     { id: 2, nombre: 'Lente 2', seccion: 'lente2' },
     // ... otros productos
   ];
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Reiniciar el estado del menú al cargar la página de inicio
+    if (location.pathname === '/') {
+      setMenuVisible(false);
+    }
+  }, [location.pathname]);
+
+
   const handleSearch = () => {
     console.log("Barra de búsqueda:", busqueda);
     // Realiza la lógica de búsqueda y determina la ruta del producto encontrado
@@ -29,7 +41,9 @@ function App() {
       console.log("Producto no encontrado");
     }
   };
-
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible); // Cambiar el estado de visibilidad del menú
+  };
 
   return (
     <div className="container mt-5">
@@ -39,16 +53,18 @@ function App() {
           <Link to="/" className="flex items-center">
             <img className="w-18 md:w-25 h-16 md:h-20 flex-wrap rounded-md" src={imagen} alt="logo" />
           </Link>
-          <Link
-              to="/opcionesRe"
-              className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex md:hidden ml-auto cursor-pointer"
-            >
-              Registrarse
-            </Link>
-          <img className="w-16 h-16 cursor-pointer md:hidden ml-auto" src={burgerMenu} alt="Menu hamburguesa" />
-
-
-
+          <img className="w-16 h-16 cursor-pointer md:hidden ml-auto" src={burgerMenu} alt="Menu hamburguesa"  onClick={toggleMenu} />
+        </div>
+        <div className={`md:hidden ${menuVisible ? 'block' : 'hidden'}`}> {/* Agregar clase 'block' o 'hidden' dependiendo del estado de visibilidad del menú */}
+          <div className="flex flex-col items-center mt-4">
+            <Link to="/inicio" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> <AiOutlineHome size={20} className="mr-1" /> Inicio </Link>
+            <Link to="/lentes" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Lentes </Link>
+            <Link to="/lentesS" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Lentes solares </Link>
+            <Link to="/accesorios" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Accesorios </Link>
+            <Link to="/gestionarCi" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Gestionar Cita </Link>
+            <Link to="/inicioS" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Iniciar Sesión </Link>
+            <Link to="/opcionesRe" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Registrarse </Link>
+          </div>
         </div>
 
         <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-13">
@@ -78,15 +94,15 @@ function App() {
           <div className="hidden md:flex items-center gap-4 ml-4 md:ml-32 -translate-x-16">
             <Link
             to="/gestionarCi"
-            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-3 py-1 font-bold flex text-center"> 
+            className="bg-azulOp hover:bg-blue-900 text-black rounded-md px-3 py-1 font-bold flex text-center"> 
             Gestionar Cita
             </Link>
             <Link
             to="/inicioS"
-            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-3 py-1 font-bold flex"> Iniciar Sesión </Link>
+            className="bg-azulOp hover:bg-blue-900 text-black rounded-md px-3 py-1 font-bold flex"> Iniciar Sesión </Link>
             <Link
             to="/opcionesRe"
-            className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex "> Registrarse </Link>
+            className="bg-azulOp hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex "> Registrarse </Link>
           <Link to="/carrito" className="relative inline-block">
             <FaShoppingCart size={30} className="rounded-md text-gray-800" alt='carrito' />
 {/*             {cartItems.length > 0 && (

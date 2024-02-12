@@ -2,14 +2,18 @@ import Navbar from '../components/BarraNavegacion';
 import Slider from '../home/slider';
 import Fot from '../components/Footer';
 import imagen from "../img/logo.jpg";
-import Chatbot from '../views/carrito';
+/* import Chatbot from '../views/carrito'; */
 
 function App() {
   return (
     <>
       <Navbar />
-
+      <script src="//code.tidio.co/lr3byfcdvywtakcwkxqmh0yvvnggymum.js" async></script>
       <div className='flex-center text-center mt-16'>
+{/*         <br />
+        <br />
+      <Chatbot /> */}
+
         <div className='my-32 '>
           <Slider />
           <br />
@@ -24,14 +28,10 @@ function App() {
             <div className="px-6 pt-4 pb-2">
               <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Ver más</span>
             </div>
-
           </div>
-          <Chatbot />
           <br />
-
         </div>
       </div>
-
       <Fot />
     </>
   );
