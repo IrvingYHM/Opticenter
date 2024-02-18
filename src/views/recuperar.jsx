@@ -1,6 +1,6 @@
 import Footer from '../components/Footer';
 import { useForm } from 'react-hook-form';
-import { toast, ToastContainer } from "react-toastify"; // Importa ToastContainer
+import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 
 function Recuperar() {
@@ -17,18 +17,15 @@ function Recuperar() {
       });
 
       if (response.ok) {
-        // Manejar la respuesta exitosa
         toast.success("Este correo si existe");
         setTimeout(() => {
           window.location.href = "/Direccion";
         }, 3000);
 
       } else {
-        // Manejar errores de la solicitud
         toast.error("Error correo no existente");
       }
     } catch (error) {
-      // Manejar errores de red
       toast.error("Error de red al recuperar la contraseña:", error);
     }
   };
@@ -56,7 +53,7 @@ function Recuperar() {
               {errors.correoRe && <span className="text-red-500 text-sm mt-1">Este campo es requerido</span>}
               <button
                 className='bg-blue-700 border-2 border-black hover:bg-blue-600 text-white rounded-md font-bold flex px-4 py-2 justify-center mx-auto items-center'
-                type="submit" // Cambia el tipo a "submit"
+                type="submit" 
               >
                 Enviar
               </button>
@@ -74,7 +71,6 @@ function Recuperar() {
         draggable 
         pauseOnHover 
       />
-
       </div>
       <Footer />
     </>
