@@ -107,7 +107,6 @@ function App() {
                     Correo Electronico:
                   </label>
                   <input
-                  autoComplete="email"
                     type="email"
                     placeholder="Correo electronico"
                     {...register("vchCorreo", {
