@@ -182,8 +182,7 @@ function App() {
                       />
                   </div>
                   <button
-                    style={{ backgroundColor: "black", color: "white" }}
-                    className="w-full bg-black text-white rounded-md p-4 text-center flex items-center justify-center"
+                    className="w-full bg-blue-700 text-white rounded-md p-4 text-center flex items-center justify-center"
                     type="submit"
                     disabled={intentosFallidos >= 3}
                   >
