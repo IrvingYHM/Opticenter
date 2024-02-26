@@ -32,7 +32,7 @@ function App() {
 
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-22">
       <nav className="flex flex-col md:flex-row fixed w-full top-0 bg-turquesa py-1" style={{ zIndex: 1000 }}>
         <div className="flex items-center justify-between w-full md:w-auto md:pl-8 pr-8 md:pr-0">
           <Link to="/" className="flex items-center">
@@ -75,7 +75,7 @@ function App() {
             to="/inicioS"
             className="bg-aRey hover:bg-blue-900 text-black rounded-md px-3 py-1 font-bold flex"> Iniciar Sesión </Link>
             <Link
-            to="/opcionesRe"
+            to="/RegistroPage"
             className="bg-aRey hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex"> Registrarse </Link>
           <Link to="/carrito" className="relative inline-block">
             <FaShoppingCart size={30} className="rounded-md text-gray-800" alt='carrito' />

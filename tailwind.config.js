@@ -10,6 +10,9 @@ export default {
         danger: '#FFD099',
         turquesa: '#19BDFD',
         aRey: '#1446F5'
+      },
+      spacing: {
+        '22': '88px',
       }
     }
     ,

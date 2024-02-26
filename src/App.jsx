@@ -10,12 +10,13 @@ import Cookies from './views/cookies';
 import IniciarS from './views/iniciarS';
 import TerminoC from './views/terminosC';
 import GestionarC from './views/gestionarCi';
-import RegistrarseLo from './views/registrarseL';
+import InfoPersonal from './views/Registro/InfoPersonal';
 import Carrito from './views/carrito';
 import OpcionRe from './views/opcionRe';
-import RegistroCorr from './views/RegistroCorr';
-import RegistroContra from './views/registroContra';
-import Direccion from './views/registroDirec';
+import RCorreo from './views/Registro/RCorreo';
+import RContraseña from './views/Registro/RContraseña';
+import RDireccion from './views/Registro/RDireccion';
+import RegistroPage from "./views/Registro/RegistroPage";
 
 import NotFound from './components/err/NotFound';
 
@@ -36,16 +37,17 @@ function App() {
       <Route path='/lentesS' element={<LenteS/>}/>
       <Route path='/accesorios' element={<Accesorios/>}/>
       <Route path='/gestionarCi' element={<GestionarC/>} />
-      <Route path='/registrarseL' element={<RegistrarseLo/>}/>
+      <Route path='/registrarseL' element={<InfoPersonal/>}/>
       <Route path='/carrito' element={<Carrito/>}/>
       <Route path='/inicio/avisoP' element={<AvisoP/>}/>
       <Route path='/inicio/cookies' element={<Cookies/>}/> 
       <Route path='/inicioS' element={<IniciarS/>}/>
       <Route path='/inicio/terminosC' element={<TerminoC/>}/>
       <Route path='/opcionesRe' element={<OpcionRe/>}/>
-      <Route path='/RegistroCorr' element={<RegistroCorr/>}/>
-      <Route path='/Contraseña' element={<RegistroContra/>} />
-      <Route path='/Direccion' element={<Direccion/>}/>
+      <Route path='/RCorreo' element={<RCorreo/>}/>
+      <Route path='/Contraseña' element={<RContraseña/>} />
+      <Route path='/RDireccion' element={<RDireccion/>}/>
+      <Route path='/RegistroPage' element={<RegistroPage/>}/>
 
       {/* Agrega la ruta NotFound para manejar errores 404 */}
        <Route path='*' element={<NotFound />} /> 

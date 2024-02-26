@@ -1,4 +1,4 @@
-/*
+/* 
 ! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com
 */
 
@@ -223,17 +223,17 @@ select {
 2. Remove default button styles.
 */
 
-button,
+/* button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
   -webkit-appearance: button;
   /* 1 */
-  background-color: transparent;
+ /*  background-color: transparent; */
   /* 2 */
-  background-image: none;
+  /* background-image: none;
   /* 2 */
-}
+/* } */ */
 
 /*
 Use the modern Firefox focus style for all focusable elements.
@@ -1033,6 +1033,3 @@ video {
     background-color: rgb(34 197 94 / var(--tw-bg-opacity));
   }
 }
-
-
-
