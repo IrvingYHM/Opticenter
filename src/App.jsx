@@ -10,15 +10,13 @@ import Cookies from "./views/cookies";
 import IniciarS from "./views/iniciarS";
 import TerminoC from "./views/terminosC";
 import GestionarC from "./views/opcionRe";
-import RegistrarseLo from "./views/registrarseL";
 import Carrito from "./views/carrito";
 import OpcionRe from "./views/gestionarCi";
-import RegistroCorr from "./views/RegistroCorr";
-import RegistroContra from "./views/registroContra";
-import Direccion from "./views/registroDirec";
 import NotFound from "./components/err/NotFound";
 import NotFound500 from "./components/err/error500";
 import Recuperar from "./views/recuperar";
+import Registrarse from "./views/Registro/RegistroPage";
+import Cambiar from './views/cambioCon';
 
 
 //import Piepa from './components/foother';
@@ -35,17 +33,15 @@ function App() {
           <Route path="/lentesS" element={<LenteS />} />
           <Route path="/accesorios" element={<Accesorios />} />
           <Route path="/gestionarCi" element={<GestionarC />} />
-          <Route path="/registrarseL" element={<RegistrarseLo />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/inicio/avisoP" element={<AvisoP />} />
           <Route path="/inicio/cookies" element={<Cookies />} />
           <Route path="/inicioS" element={<IniciarS />} />
           <Route path="/inicio/terminosC" element={<TerminoC />} />
           <Route path="/opcionesRe" element={<OpcionRe />} />
-          <Route path="/RegistroCorr" element={<RegistroCorr />} />
-          <Route path="/Contraseña" element={<RegistroContra />} />
-          <Route path="/Direccion" element={<Direccion />} />
           <Route path= "/Recuperar" element={<Recuperar/>}/>
+          <Route path="/RegistroPage" element={<Registrarse/>}/>
+          <Route path="/Cambio" element={<Cambiar/>}/>
           {/* Agrega la ruta NotFound para manejar errores 404 */}
           <Route path="*" element={<NotFound />} />
           <Route path="500" element={<NotFound500 />} />

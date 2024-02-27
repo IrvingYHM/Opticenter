@@ -1,4 +1,3 @@
-import React from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import imagen from "../img/logo.jpg";

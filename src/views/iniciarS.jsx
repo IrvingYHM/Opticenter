@@ -197,7 +197,7 @@ function App() {
               <p className="text-sm font-normal text-black">
                 ¿No tienes una cuenta?{" "}
                 <span className="font-semibold underline underline-offset-2 cursor-pointer">
-                  <Link to="/opcionesRe">Registrate gratis</Link>
+                  <Link to="/RegistroPage">Registrate gratis</Link>
                 </span>
               </p>
             </div>

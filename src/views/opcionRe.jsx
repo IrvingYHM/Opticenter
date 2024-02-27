@@ -26,12 +26,6 @@ function App() {
             <Link to='/Contraseña'>Agregar</Link>
             </button>
           </div>
-          <div className='flex bg-white h-20  sm:w-80 lg:w-1/2 items-center justify-between mx-auto rounded-md border-4 border-black px-4 font-bold'>
-            Direccion
-            <button className='bg-aRey  border-2 border-black hover:bg-blue-900 text-black rounded-md  font-bold flex px-4 py-2'>
-            <Link to='/Direccion'>Agregar</Link>
-            </button>
-          </div>
         </div>
       </div>
       <Fot />

@@ -19,9 +19,9 @@ const Carrito = () => {
   };
 
   return (
-    <div>
-      <h2>Carrito de compras</h2>
-      <ul>
+    <div className='py-32 flex items-center'>
+      <h2 className='flex items-center'>Carrito de compras</h2>
+      <ul >
         {items.map((item) => (
           <li key={item.id}>
             {item.name} - ${item.price}
