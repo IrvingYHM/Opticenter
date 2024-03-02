@@ -60,8 +60,9 @@ function App() {
 
           <div className="flex items-center justify-end gap-8">
             <Link to="/inicio" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> <AiOutlineHome size={20} className="mr-1" /> Inicio </Link>
-            <Link to="/lentes" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Lentes </Link>
-            <Link to="/lentesS" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Lentes solares </Link>
+            {/* <Link to="/lentes" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center">
+               Lentes </Link> */}
+            <Link to="/lentesS" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Lentes </Link>
             <Link to="/accesorios" className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"> Accesorios </Link>
           </div>
 

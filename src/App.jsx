@@ -19,7 +19,7 @@ import RDireccion from './views/Registro/RDireccion';
 import RegistroPage from "./views/Registro/RegistroPage";
 
 import NotFound from './components/err/NotFound';
-
+import Scroll from './components/scroll';
 //import Piepa from './components/foother';
 
 function App() {
@@ -54,7 +54,7 @@ function App() {
     </Routes>
   </BrowserRouter>
 
-
+    <Scroll/>
   </>
   )
 }

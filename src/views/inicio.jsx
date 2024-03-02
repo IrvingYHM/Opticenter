@@ -12,7 +12,7 @@ function App() {
         <div className='my-32 '>
           <Slider />
           <br />
-          <div className="max-w-sm rounded overflow-hidden shadow-lg ">
+          <div className="max-w-sm rounded overflow-hidden shadow-lg mx-6">
             <img className="w-full" src={imagen} alt="Sunset in the mountains" />
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
