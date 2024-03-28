@@ -1,19 +1,25 @@
-import React, { createContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 const initialState = {
-  infoPersonal: {},
+  info: {},
   correo: {},
-  contraseña: {},
+  contrasena: "",
   direccion: {},
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_INFO_PERSONAL":
-      return { ...state, infoPersonal: action.payload };
-    case "UPDATE_CORREO":
+      return { ...state, info: action.payload };
+    case "UPDATE_RCORREO":
       return { ...state, correo: action.payload };
     case "UPDATE_CONTRASEÑA":
-      return { ...state, contraseña: action.payload };
+      return {
+        ...state,
+        info: {
+          ...state.info,
+          ...action.payload,
+        },
+      };
     case "UPDATE_DIRECCION":
       return { ...state, direccion: action.payload };
     default:

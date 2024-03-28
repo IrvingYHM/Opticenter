@@ -1,13 +1,12 @@
-import Fot from "../../components/Footer";
 import { useForm } from "react-hook-form";
-import { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { RegistroContext } from "./RegistroContext";
-import { toast, ToastContainer } from "react-toastify"; // Importa ToastContainer
-import "react-toastify/dist/ReactToastify.css";
 
 function InfoPersonal({ onNext, onBack, onValidationChange }) {
   const { state, dispatch } = useContext(RegistroContext);
   const [isValid, setIsValid] = useState(false); // Estado local de validación
+
+  /* console.log(state); // Verifica el estado aquí */
 
   const handleInfoChange = (info) => {
     dispatch({ type: "UPDATE_INFO_PERSONAL", payload: info });
@@ -31,8 +30,10 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
   const onSubmit = (data) => {
     const fechaNacim = new Date(data.fechaNacim);
     const fechaActual = new Date();
+
     // Calcular la diferencia de años entre la fecha de nacimiento y la fecha actual
     let diferenciaAnios = fechaActual.getFullYear() - fechaNacim.getFullYear();
+
     // Ajustar la diferencia de años si el cumpleaños todavía no ha pasado este año
     if (
       fechaActual.getMonth() < fechaNacim.getMonth() ||
@@ -44,38 +45,45 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
 
     // Verificar si la diferencia de años es menor que 18
     if (diferenciaAnios < 18) {
-      toast.error("Debes tener al menos 18 años para registrarte.");
+      alert("Debes tener al menos 18 años para registrarte.");
       return; // Detener la función aquí si hay un error
     } else {
+      handleInfoChange(data); // Envía todo el objeto data
       onNext(); // Pasar al siguiente paso si el formulario es válido
     }
   };
 
+
+
+
   return (
     <>
-      <div className="my-28 text-center">
-        <div className="container ml-auto mr-auto flex items-center justify-center">
-          <div>
+      <div className="pt-24 text-center rounded-lg shadow-md overflow-hidden">
+        <div className="container ml-auto mr-auto">
+          <div className="bg-white px-12">
             <p className="sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4">
               Formulario de informacion personal
             </p>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="grid grid-cols-1"
+            >
               <div className="mb-4">
                 <label
                   htmlFor="nombre"
-                  className="block text-sm font-medium text-gray-800 -translate-x-32"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Nombre:
                 </label>
                 <input
                   type="text"
-                  id="nombre"
-                  name="nombre"
+                  id="vchNomCliente"
+                  name="vchNomCliente"
                   placeholder="Nombre"
                   onChange={(e) => {
                     const value = e.target.value.replace(/[0-9]/g, ""); // Eliminar números de la entrada
-                    handleInfoChange({ nombre: value }); // Actualizar el estado con el valor limpio
+                    handleInfoChange({ vchNomCliente: value }); // Actualizar el estado con el valor limpio
                   }}
                   onKeyDown={(e) => {
                     if (!/[A-Za-zÀ-ÖØ-öø-ÿ\s]/.test(e.key)) {
@@ -83,7 +91,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                     }
                   }}
                   required
-                  {...register("nombre", {
+                  {...register("vchNomCliente", {
                     required: {
                       value: true,
                       message: "El campo es requerido",
@@ -98,30 +106,30 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                         "Solo se permiten letras de la A a la Z y espacios",
                     },
                   })}
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
-              {errors.nombre && (
-                <span className="text-red-500 text-sm mt-1">
-                  {errors.nombre.message}
+              {errors.vchNomCliente && (
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.vchNomCliente.message}
                 </span>
               )}
 
               <div className="mb-4">
                 <label
                   htmlFor="apPaterno"
-                  className="block text-sm font-medium text-gray-800 -translate-x-24"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Apellido Paterno:
                 </label>
                 <input
                   type="text"
-                  id="apPaterno"
+                  id="vchAPaterno"
+                  name="vchAPaterno"
                   placeholder="Apellido Paterno"
-                  name="apPaterno"
                   onChange={(e) => {
                     const value = e.target.value.replace(/[0-9]/g, ""); // Eliminar números de la entrada
-                    handleInfoChange({ apPaterno: value }); // Actualizar el estado con el valor limpio
+                    handleInfoChange({ vchAPaterno: value }); // Actualizar el estado con el valor limpio
                   }}
                   onKeyDown={(e) => {
                     if (!/[A-Za-zÀ-ÖØ-öø-ÿ\s]/.test(e.key)) {
@@ -129,14 +137,14 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                     }
                   }}
                   required
-                  {...register("apPaterno", {
+                  {...register("vchAPaterno", {
                     required: {
                       value: true,
                       message: "El campo es requerido",
                     },
                     minLength: {
                       value: 3,
-                      message: "El nombre debe tener al menos 3 caracteres",
+                      message: "El apellido debe tener al menos 3 caracteres",
                     },
                     pattern: {
                       value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/, // Permite letras y espacios en blanco
@@ -144,30 +152,30 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                         "Solo se permiten letras de la A a la Z y espacios",
                     },
                   })}
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
-              {errors.apPaterno && (
-                <span className="text-red-500 text-sm mt-1">
-                  {errors.apPaterno.message}
+              {errors.vchAPaterno && (
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.vchAPaterno.message}
                 </span>
               )}
 
               <div className="mb-4">
                 <label
                   htmlFor="apMaterno"
-                  className="block text-sm font-medium text-gray-800 -translate-x-24"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Apellido Materno:
                 </label>
                 <input
                   type="text"
-                  id="apMaterno"
-                  name="apMaterno"
+                  id="vchAMaterno"
+                  name="vchAMaterno"
                   placeholder="Apellido Materno"
                   onChange={(e) => {
                     const value = e.target.value.replace(/[0-9]/g, ""); // Eliminar números de la entrada
-                    handleInfoChange({ apMaterno: value }); // Actualizar el estado con el valor limpio
+                    handleInfoChange({ vchAMaterno: value }); // Actualizar el estado con el valor limpio
                   }}
                   onKeyDown={(e) => {
                     if (!/[A-Za-zÀ-ÖØ-öø-ÿ\s]/.test(e.key)) {
@@ -175,14 +183,14 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                     }
                   }}
                   required
-                  {...register("apMaterno", {
+                  {...register("vchAMaterno", {
                     required: {
                       value: true,
                       message: "El campo es requerido",
                     },
                     minLength: {
                       value: 3,
-                      message: "El nombre debe tener al menos 3 caracteres",
+                      message: "El apellido debe tener al menos 3 caracteres",
                     },
                     pattern: {
                       value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/, // Permite letras y espacios en blanco
@@ -190,66 +198,84 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                         "Solo se permiten letras de la A a la Z y espacios",
                     },
                   })}
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
-              {errors.apMaterno && (
-                <span className="text-red-500 text-sm mt-1">
-                  {errors.apMaterno.message}
+              {errors.vchAMaterno && (
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.vchAMaterno.message}
+                </span>
+              )}
+
+              <div className="mb-4">
+                <label
+                  htmlFor="sexo"
+                  className="block text-gray-800 text-left font-bold"
+                >
+                  Sexo:
+                </label>
+                <select
+                  id="chrSexo"
+                  name="chrSexo"
+                  onChange={(e) =>
+                    handleInfoChange({ chrSexo: e.target.value })
+                  }
+                  required
+                  {...register("chrSexo", {
+                    required: "El campo es requerido",
+                  })}
+                  className="mt-1 p-2 border rounded-md w-full"
+                >
+                  <option value="">Seleccionar</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Femenino">Femenino</option>
+                </select>
+              </div>
+              {errors.chrSexo && (
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.chrSexo.message}
                 </span>
               )}
 
               <div className="mb-4">
                 <label
                   htmlFor="fechaNacim"
-                  className="block text-sm font-medium text-gray-800 -translate-x-20"
+                  className="block text-gray-800 text-left font-bold"
                 >
-                  Fecha de nacimiento
+                  Fecha de nacimiento:
                 </label>
                 <input
                   type="date"
-                  id="fechaNacim"
-                  name="fechaNacim"
+                  id="dtFechaNacimiento"
+                  name="dtFechaNacimiento"
                   max={new Date().toISOString().split("T")[0]} // Restringe la fecha máxima a la fecha actual
                   onChange={(e) =>
-                    handleInfoChange({ fechaNacim: e.target.value })
+                    handleInfoChange({ dtFechaNacimiento: e.target.value })
                   }
                   required
-                  {...register("fechaNacim", {
+                  {...register("dtFechaNacimiento", {
                     required: "El campo es requerido",
                   })}
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
-              {errors.fechaNacim && (
-                <span className="text-red-500 text-sm mt-1">
-                  {errors.fechaNacim.message}
+              {errors.dtFechaNacimiento && (
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.dtFechaNacimiento.message}
                 </span>
               )}
-              <br />
+
               <button
                 type="submit"
-                className="bg-blue-700 text-white p-2 rounded-md"
+                className="bg-blue-700 border border-black hover:bg-blue-600 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"
                 disabled={Object.keys(errors).length > 0}
               >
                 Siguiente
               </button>
             </form>
           </div>
-          <ToastContainer
-        position="top-center" 
-        autoClose={5000} 
-        hideProgressBar={false} 
-        newestOnTop={false} 
-        closeOnClick 
-        rtl={false} 
-        pauseOnFocusLoss 
-        draggable 
-        pauseOnHover 
-      />
         </div>
       </div>
-      <Fot />
     </>
   );
 }

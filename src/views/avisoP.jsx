@@ -43,14 +43,14 @@ function App() {
                         La negativa para el uso de sus datos personales para estas finalidades no podrá ser un motivo para
                         que le neguemos los servicios y productos que solicita o contrata con nosotros.
         </p>
-        <p>
+        <div>
             <strong>¿Qué datos personales utilizaremos para estos fines</strong><br />
             Para llevar a cabo las finalidades descritas en el presente aviso privacidad, utilizaremos los siguientes datos personales:
             <ul>
                   <li>Datos de identificación</li>
                   <li>Datos de contacto</li>
             </ul>
-      </p>
+      </div>
 
       <p>
             <strong>¿Cómo puede acceder, rectificar o cancelar sus datos personales, u oponerse a su uso? </strong><br />
@@ -62,7 +62,7 @@ function App() {
             <p>Para conocer el procedimiento y requisitos para el ejercicio de los derechos ARCO, ponemos a su disposición el siguiente medio:</p>
             <ul>Llamando al número telefónico +52 7711231054 o a través del sitio web oficial: www.OptiCenter.com</ul>
             <p>Los datos de contacto de la persona o departamento de datos personales, que está a cargo de dar trámite a las solicitudes de derechos ARCO, son los siguientes: </p>
-            <p>
+            <div>
             <ul>
             a) Nombre de la persona o departamento de datos personales: Said Valdivia Hernandez
             </ul>
@@ -72,9 +72,9 @@ function App() {
             <ul>
             d) Número telefónico: +52 7711231054
             </ul>
-            </p>
+            </div>
 
-            <p>
+            <>
             <br/>
             <strong>Usted puede revocar su consentimiento para el uso de sus datos personales</strong><br/>
             Usted puede revocar el consentimiento que, en su caso, nos haya otorgado para el tratamiento de sus datos personales. Sin embargo, es importante que tenga en cuenta que no en todos los casos podremos atender su solicitud o concluir el uso de forma inmediata, ya que es posible que por alguna obligación legal requiramos seguir tratando sus datos personales. Asimismo, usted deberá considerar que para ciertos fines, la revocación de su consentimiento implicará que no le podamos seguir prestando el servicio que nos solicitó, o la conclusión de su relación con nosotros.
@@ -82,17 +82,17 @@ function App() {
             <ul>Llamando al número telefónico +52 7711231054 o a través del sitio web oficial: www.OptiCenter.com </ul>
             <p>Para conocer el procedimiento y requisitos para la revocación del consentimiento, ponemos a su disposición el siguiente medio:</p>
             <ul>Llamando al número telefónico +52 7711231054 o a través del sitio web oficial: www.OptiCenter.com</ul>
-            </p>
+            </>
 
-            <p>
+            <>
             <br/>
             <strong>¿Cómo puede limitar el uso o divulgación de su información personal? </strong><br/>
             Con objeto de que usted pueda limitar el uso y divulgación de su información personal, le ofrecemos los siguientes medios: 
             <ul>A través del panel de configuración de privacidad </ul>
             <ul>Asimismo, usted se podrá inscribir a los siguientes registros, en caso de que no desee obtener publicidad de nuestra parte: </ul>
             <ul>Registro Público para Evitar Publicidad, para mayor información consulte el portal de internet de la PROFECO</ul>
-            </p>
-            <p>
+            </>
+            <>
             <br/>
             <strong>El uso de tecnologías de rastreo en nuestro portal de internet </strong><br/>
             Le informamos que en nuestra página de internet utilizamos cookies, web beacons u otras tecnologías, a través de las cuales es posible monitorear su comportamiento como usuario de internet, así como brindarle un mejor servicio y experiencia al navegar en nuestra página. Los datos personales que recabamos a través de estas tecnologías, los utilizaremos para los siguientes fines:
@@ -102,15 +102,15 @@ function App() {
             </ul>
             <p>Para conocer la forma en que se pueden deshabilitar estas tecnologías, consulte el siguiente medio:</p>
             <ul>Opciones de cookies </ul>
-            </p>
-            <p>
+            </>
+            <>
             <br/>
             <strong>¿Cómo puede conocer los cambios en este aviso de privacidad? </strong><br/>
             El presente aviso de privacidad puede sufrir modificaciones, cambios o actualizaciones derivadas de nuevos requerimientos legales; de nuestras propias necesidades por los productos o servicios que ofrecemos; de nuestras prácticas de privacidad; de cambios en nuestro modelo de negocio, o por otras causas.
             <p>Nos comprometemos a mantenerlo informado sobre los cambios que pueda sufrir el presente aviso de privacidad, a través de: Página de Internet. </p>
             <p>El procedimiento a través del cual se llevarán a cabo las notificaciones sobre cambios o actualizaciones al presente aviso de privacidad es el siguiente:  </p>
             <ul>Notificación anticipada y descripción de los cambios</ul>
-            </p>
+            </>
             <p>
             <br/>
             <strong>Su consentimiento para el tratamiento de sus datos personales  </strong><br/>

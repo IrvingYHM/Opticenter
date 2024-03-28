@@ -4,11 +4,15 @@ import { Link } from "react-router-dom";
 import { FaCookieBite } from "react-icons/fa";
 import poli from "../img/politica.png";
 
+import {useCart } from '../views/Lente/hooks/useCart'
+
 
 
 
 
 export default function Footer() {
+  const { cart } = useCart();
+
   return (
     <footer className="bg-turquesa">
     <div className="w-full max-w-screen-xl p-4 py-6 mx-auto lg:p-8">
@@ -41,6 +45,11 @@ export default function Footer() {
                   </a>
                 </li>
               </ul>
+            </div>
+            <div>
+              {
+                JSON.stringify(cart, null, 2)
+              }
             </div>
             <div>
               <h2 className="mb-6 text-sm font-semibold text-gray-200 uppercase">

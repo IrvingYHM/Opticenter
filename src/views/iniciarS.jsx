@@ -1,5 +1,5 @@
 import Fot from "../components/Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import imagen from "../img/paisaje.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +14,17 @@ function App() {
   const [mostrarContra, setMostrarContra] = useState(false);
   const [intentosFallidos, setIntentosFallidos] = useState(0);
   const [token, setToken] = useState(null); // Estado para almacenar el token
+/*   const [usuarioLogueado, setUsuarioLogueado] = useState(false); */
+  const [usuarioLogueado, setUsuarioLogueado] = useState(false); // Estado para almacenar si el usuario está logueado
+ /*  const [haIniciadoSesion, setHaIniciadoSesion] = useState(false); // Nueva variable de estado
+ */
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setUsuarioLogueado(true);
+/*       setHaIniciadoSesion(true); */
+    }
+  }, []);
 
   const {
     register,
@@ -26,6 +37,7 @@ function App() {
   const onChange = () => {
     if (captcha.current.getValue()) {
       console.log("El usuario no es un robot");
+
     }
   };
   const onSubmit = async (data) => {
@@ -46,6 +58,15 @@ function App() {
           setToken(receivedToken);
           console.log(receivedToken);
           toast.success("Inicio de sesión exitoso");
+
+          // Guardar el estado de usuario logueado en el localStorage
+          localStorage.setItem("token", receivedToken);
+          setUsuarioLogueado(true);
+ /*          setHaIniciadoSesion(false); // Actualiza el estado de haIniciadoSesion
+
+
+ */
+
           setTimeout(() => {
             window.location.href = "/inicio";
           }, 4000);
@@ -59,11 +80,21 @@ function App() {
         }
       } catch (error) {
         toast.error("Error de red, vuelvalo a intentar más tarde:", error);
+        setTimeout(() => {
+          window.location.href = "/500";
+        }, 4000);
       }
     } else {
       toast.error("Por favor acepta el captcha");
     }
   };
+
+// Función para cerrar sesión del cliente
+/* const handleLogout = () => {
+  localStorage.removeItem("token");
+  setUsuarioLogueado(false);
+}; */
+
 
   const getInputBorderClasses = (error) => {
     if (error) {
@@ -119,9 +150,16 @@ function App() {
                         message: "El formato no es correcto",
                       },
                     })}
-                    className={`w-full text-black py-2 my-2 bg-transparent border-b outline-none focus:outline-none ${getInputBorderClasses(
+                    className={`w-full text-black py-2 my-2 bg-transparent border-b focus:border-2 outline-none focus:outline-none ${getInputBorderClasses(
                       errors.vchCorreo
                     )}`}
+                    onFocus={(e) => {
+                      e.target.classList.add("focus:border-blue-800"); // Agrega una clase para resaltar el campo cuando está enfocado
+                    }}
+                    onBlur={(e) => {
+                      e.target.classList.remove("focus:border-blue-800"); // Remueve la clase cuando pierde el foco
+                    }}
+
                   />
                   {errors.vchCorreo && (
                     <span className="text-red-500 text-sm mt-1">
@@ -147,9 +185,15 @@ function App() {
                             "La contraseña debe tener al menos 8 caracteres",
                         },
                       })}
-                      className={`w-full text-black py-2 my-2 bg-transparent border-b outline-none focus:outline-none ${getInputBorderClasses(
+                      className={`w-full text-black py-2 my-2 bg-transparent border-b focus:border-2 outline-none focus:outline-none ${getInputBorderClasses(
                         errors.vchPassword
                       )}`}
+                      onFocus={(e) => {
+                        e.target.classList.add("focus:border-blue-800"); // Agrega una clase para resaltar el campo cuando está enfocado
+                      }}
+                      onBlur={(e) => {
+                        e.target.classList.remove("focus:border-blue-800"); // Remueve la clase cuando pierde el foco
+                      }}
                     />
                     {errors.vchPassword && (
                       <span className="text-red-500 text-sm mt-1">
@@ -169,7 +213,9 @@ function App() {
                     <p className="text-sm">Recordar contraseña</p>
                   </div>
                   <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
-                    <Link to="/Recuperar">¿Olvidaste tu contraseña?</Link>
+{/*                     <Link to="/Recuperar">¿Olvidaste tu contraseña?</Link> */}
+                    <Link to="/opcion">¿Olvidaste tu contraseña?</Link>
+
                   </p>
                 </div>
                   <div className="justify-center items-center w-full flex flex-col my-5">
@@ -215,8 +261,9 @@ function App() {
         draggable 
         pauseOnHover 
       />
-
       <Fot />
+
+
     </>
   );
 }

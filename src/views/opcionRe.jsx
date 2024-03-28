@@ -12,7 +12,7 @@ function App() {
           <div className='flex bg-white h-20 sm:w-80 lg:w-1/2  mx-auto items-center justify-between rounded-md border-4 border-black text-base sm:text-sm lg:text-lg xl:text-xl px-4 font-bold'>Citas agendadas
           <button className='bg-aRey  border-2 border-black hover:bg-blue-900 text-black rounded-md  font-bold flex px-4 py-2
             '>
-            <Link to='/registrarseL'>Agregar</Link>
+            <Link to='/evento'>Agregar</Link>
             </button>
           </div>
           <div className='flex bg-white h-20 sm:w-80 lg:w-1/2 items-center justify-between rounded-md mx-auto border-4 border-black px-4 font-bold'>Modificar Citas

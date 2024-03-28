@@ -1,8 +1,6 @@
-import Fot from "../../components/Footer";
 import { useForm } from "react-hook-form";
-import { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { RegistroContext } from "./RegistroContext";
-
 
 const RDireccion = ({ onNext, onBack, onValidationChange }) => {
   const { state, dispatch } = useContext(RegistroContext);
@@ -20,6 +18,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
 
   // Definir onSubmit en el mismo ámbito que handleNextClick
   const onSubmit = (data) => {
+    console.log("datos almacenados", state);
     onNext();
   };
 
@@ -34,17 +33,17 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
 
   return (
     <>
-      <div className="my-28 text-center">
-        <div className="container ml-auto mr-auto flex items-center justify-center">
-          <div>
+      <div className="pt-24 text-center rounded-lg shadow-md overflow-hidden">
+        <div className="container ml-auto mr-auto">
+          <div className="bg-white px-12">
             <p className="sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4">
               Formulario de direccion del contacto
             </p>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4">
                 <label
                   htmlFor="codPostal"
-                  className="block text-sm font-medium text-gray-800 -translate-x-24"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Codigo Postal:
                 </label>
@@ -56,7 +55,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
                     handleInfoChange({ codPostal: e.target.value })
                   }
                   required
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                   placeholder="Codigo Postal"
                 />
               </div>
@@ -64,7 +63,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
               <div className="mb-4">
                 <label
                   htmlFor="ciudad"
-                  className="block text-sm font-medium text-gray-800 -translate-x-28"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Ciudad:
                 </label>
@@ -74,7 +73,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
                   name="ciudad"
                   onChange={(e) => handleInfoChange({ ciudad: e.target.value })}
                   required
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                   placeholder="Ciudad"
                 />
               </div>
@@ -82,7 +81,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
               <div className="mb-4">
                 <label
                   htmlFor="colonia"
-                  className="block text-sm font-medium text-gray-800 -translate-x-28"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Colonia:
                 </label>
@@ -94,7 +93,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
                     handleInfoChange({ colonia: e.target.value })
                   }
                   required
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                   placeholder="Colonia"
                 />
               </div>
@@ -102,7 +101,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
               <div className="mb-4">
                 <label
                   htmlFor="calle"
-                  className="block text-sm font-medium text-gray-800 -translate-x-28"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Calle:
                 </label>
@@ -113,14 +112,14 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
                   onChange={(e) => handleInfoChange({ calle: e.target.value })}
                   required
                   max="2004-12-31"
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                   placeholder="calle"
                 />
               </div>
               <div className="mb-4">
                 <label
                   htmlFor="numExterior"
-                  className="block text-sm font-medium text-gray-800 -translate-x-20"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Numero exterior:
                 </label>
@@ -133,14 +132,14 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
                   }
                   required
                   max="2004-12-31"
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                   placeholder="Numero exterior"
                 />
               </div>
               <div className="mb-4">
                 <label
                   htmlFor="numInterior"
-                  className="block text-sm font-medium text-gray-800 -translate-x-20"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Numero interior:
                 </label>
@@ -153,14 +152,14 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
                   }
                   required
                   max="2004-12-31"
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                   placeholder="Numero interior"
                 />
               </div>
               <div className="mb-4">
                 <label
                   htmlFor="estadp"
-                  className="block text-sm font-medium text-gray-800 -translate-x-28"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Estado:
                 </label>
@@ -171,29 +170,33 @@ const RDireccion = ({ onNext, onBack, onValidationChange }) => {
                   onChange={(e) => handleInfoChange({ estado: e.target.value })}
                   required
                   max="2004-12-31"
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                   placeholder="Estado"
                 />
               </div>
             </form>
-            <button
-              type="button"
-              onClick={onBack}
-              className="bg-gray-500 text-white p-2 mr-2 rounded-md"
-            >
-              Regresar
-            </button>
-            <button
-              type="submit"
-              className="bg-blue-700 text-white p-2 rounded-md"
-              disabled={Object.keys(errors).length > 0}
-            >
-              Enviar
-            </button>
+
+            <div className="grid grid-cols-2">
+              <button
+                type="button"
+                onClick={onBack}
+                className="bg-gray-500 border border-black hover:bg-gray-400 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"
+              >
+                Regresar
+              </button>
+              <button
+                type="submit"
+                className="bg-blue-700 border border-black hover:bg-blue-600 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"
+                disabled={Object.keys(errors).length > 0}
+              >
+                Enviar
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <Fot />
+       {/* Agrega esto para imprimir el estado actual */}
+    <pre>{JSON.stringify(state, null, 2)}</pre>
     </>
   );
 };

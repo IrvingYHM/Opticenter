@@ -103,7 +103,7 @@ function App() {
               className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"
             >
               {" "}
-              Gestionar Cita{" "}
+              Cita{" "}
             </Link>
             <Link
               to="/inicioS"
@@ -172,9 +172,9 @@ function App() {
           <div className="hidden md:flex items-center gap-4 ml-4 md:ml-32 -translate-x-16">
             <Link
               to="/gestionarCi"
-              className="bg-azulOp hover:bg-blue-900 text-black rounded-md px-3 py-1 font-bold flex text-center"
+              className="bg-azulOp hover:bg-blue-900 text-black rounded-md px-4 py-2 font-bold flex text-center"
             >
-              Gestionar Cita
+            Cita
             </Link>
             <Link
               to="/inicioS"

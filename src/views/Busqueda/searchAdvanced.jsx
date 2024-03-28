@@ -32,17 +32,20 @@ const SearchAdvanced = () => {
   }, []);
 
   const buscar = () => {
-    const resultadosFiltrados = lentesData.filter((item) => {
-      return (
-        (nombre === "" ||
-          item.nombre.toLowerCase().includes(nombre.toLowerCase())) &&
-        (categoria === "all" || item.categoria === categoria) &&
-        (genero === "all" || item.genero === genero) &&
-        (marca === "all" || item.marca === marca)
-      );
-    });
-
-    setResultados(resultadosFiltrados);
+    fetch(`http://localhost:3000/productos/Buscar_productos?busqueda=${nombre}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al buscar productos");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setResultados(data);
+      })
+      .catch((error) => {
+        console.error(error);
+        setResultados([]);
+      });
   };
 
   const mostrarResultados = () => {
@@ -53,16 +56,13 @@ const SearchAdvanced = () => {
     return resultados.map((item) => (
       <div
         key={item.nombre}
-        className="w-3/4 p-4 flex flex-wrap bg-white border border-gray-300 mb-4">
-        <img
-          src={item.imagen}
-          alt={item.nombre}
-          className="mr-4 max-w-16"
-        />
+        className="w-3/4 p-4 flex flex-wrap bg-white border border-gray-300 mb-4"
+      >
+        <img src={item.imagen} alt={item.nombre} className="mr-4 max-w-16" />
         <div className="flex-grow">
           <label className="block mb-2">
             <strong>Nombre: </strong>
-            {item.nombre}
+            {item.vchNombreProducto}
           </label>
           <label className="block mb-2">
             <strong>Categoria: </strong>
@@ -73,7 +73,7 @@ const SearchAdvanced = () => {
             {item.genero}
           </label>
           <label className="block mb-2">
-            <strong>Precio: </strong>${item.precio}
+            <strong>Precio: </strong>${item.Precio}
           </label>
           <label className="block mb-2">
             <strong>Marca: </strong>
@@ -86,7 +86,6 @@ const SearchAdvanced = () => {
         </div>
       </div>
     ));
-
   };
 
   return (
