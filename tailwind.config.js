@@ -10,7 +10,7 @@ export default {
       },
 
       spacing: {
-        22: "88px",
+        "5/8":"38px"
       },
 
       borderWidth: {

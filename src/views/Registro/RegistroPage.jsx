@@ -28,28 +28,32 @@ const RegistroPage = () => {
 
   return (
     <RegistroProvider>
-      <div className="bg-black">
-        <div className="bg-slate-200">
-          <div className="flex justify-center my-8">
-          {[1, 2, 3, 4].map((step) => (
-            <div key={step} className="flex items-center">
-              <div className={`h-10 w-10 flex justify-center items-center rounded-full border-4 ${step === currentPage ? 'border-blue-500' : 'border-gray-300'} text-lg font-semibold ${step < currentPage ? 'text-blue-500' : 'text-gray-500'} mr-4`}>{step}</div>
-              {step < 4 && <div className={`h-2 w-16 bg-${step < currentPage ? 'blue' : 'gray'}-500`} />}
+      <div className="py-10">
+        <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="bg-slate-200">
+            <div className="flex justify-center -mb-20 py-3">
+              {[1, 2, 3, 4].map((step) => (
+                <div key={step} className="flex items-center">
+                  <div className={`h-10 w-10 flex justify-center items-center rounded-full border-4 ${step === currentPage ? 'border-blue-500' : 'border-gray-300'} text-lg font-semibold ${step < currentPage ? 'text-blue-500' : 'text-gray-500'}`}>{step}</div>
+                  {step < 4 && <div className={`h-2 w-16 bg-${step < currentPage ? 'blue' : 'gray'}-500`} />}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        {currentPage === 1 && (
-          <InfoPersonal onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
-        )}
-        {currentPage === 2 && (
-          <RCorreo onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
-        )}
-        {currentPage === 3 && (
-          <RContraseña onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
-        )}
-        {currentPage === 4 && (
-          <RDireccion onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
-        )}
+          </div>
+          <div className="">
+            {currentPage === 1 && (
+              <InfoPersonal onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
+            )}
+            {currentPage === 2 && (
+              <RCorreo onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
+            )}
+            {currentPage === 3 && (
+              <RContraseña onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
+            )}
+            {currentPage === 4 && (
+              <RDireccion onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
+            )}
+          </div>
         </div>
       </div>
       <Fot/>
