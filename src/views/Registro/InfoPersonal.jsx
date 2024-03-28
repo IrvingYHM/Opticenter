@@ -55,18 +55,21 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
 
   return (
     <>
-      <div className="my-28 text-center">
-        <div className="container ml-auto mr-auto flex items-center justify-center">
-          <div>
+      <div className="pt-24 text-center rounded-lg shadow-md overflow-hidden">
+        <div className="container ml-auto mr-auto">
+          <div className="bg-white px-12">
             <p className="sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4">
               Formulario de informacion personal
             </p>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="grid grid-cols-1"
+            >
               <div className="mb-4">
                 <label
                   htmlFor="nombre"
-                  className="block text-sm font-medium text-gray-800 -translate-x-32"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Nombre:
                 </label>
@@ -74,6 +77,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                   type="text"
                   id="nombre"
                   name="nombre"
+                  placeholder="Nombre"
                   onChange={(e) => {
                     const value = e.target.value.replace(/[0-9]/g, ""); // Eliminar números de la entrada
                     handleInfoChange({ nombre: value }); // Actualizar el estado con el valor limpio
@@ -99,11 +103,11 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                         "Solo se permiten letras de la A a la Z y espacios",
                     },
                   })}
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
               {errors.nombre && (
-                <span className="text-red-500 text-sm mt-1">
+                <span className="text-red-500 text-base -mt-3 mb-2">*
                   {errors.nombre.message}
                 </span>
               )}
@@ -111,7 +115,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
               <div className="mb-4">
                 <label
                   htmlFor="apPaterno"
-                  className="block text-sm font-medium text-gray-800 -translate-x-24"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Apellido Paterno:
                 </label>
@@ -119,6 +123,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                   type="text"
                   id="apPaterno"
                   name="apPaterno"
+                  placeholder="Apellido Paterno"
                   onChange={(e) => {
                     const value = e.target.value.replace(/[0-9]/g, ""); // Eliminar números de la entrada
                     handleInfoChange({ apPaterno: value }); // Actualizar el estado con el valor limpio
@@ -136,7 +141,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                     },
                     minLength: {
                       value: 3,
-                      message: "El nombre debe tener al menos 3 caracteres",
+                      message: "El apellido debe tener al menos 3 caracteres",
                     },
                     pattern: {
                       value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/, // Permite letras y espacios en blanco
@@ -144,11 +149,11 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                         "Solo se permiten letras de la A a la Z y espacios",
                     },
                   })}
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
               {errors.apPaterno && (
-                <span className="text-red-500 text-sm mt-1">
+                <span className="text-red-500 text-base -mt-3 mb-2">*
                   {errors.apPaterno.message}
                 </span>
               )}
@@ -156,7 +161,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
               <div className="mb-4">
                 <label
                   htmlFor="apMaterno"
-                  className="block text-sm font-medium text-gray-800 -translate-x-24"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Apellido Materno:
                 </label>
@@ -164,6 +169,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                   type="text"
                   id="apMaterno"
                   name="apMaterno"
+                  placeholder="Apellido Materno"
                   onChange={(e) => {
                     const value = e.target.value.replace(/[0-9]/g, ""); // Eliminar números de la entrada
                     handleInfoChange({ apMaterno: value }); // Actualizar el estado con el valor limpio
@@ -181,7 +187,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                     },
                     minLength: {
                       value: 3,
-                      message: "El nombre debe tener al menos 3 caracteres",
+                      message: "El apellido debe tener al menos 3 caracteres",
                     },
                     pattern: {
                       value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/, // Permite letras y espacios en blanco
@@ -189,11 +195,11 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                         "Solo se permiten letras de la A a la Z y espacios",
                     },
                   })}
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
               {errors.apMaterno && (
-                <span className="text-red-500 text-sm mt-1">
+                <span className="text-red-500 text-base -mt-3 mb-2">*
                   {errors.apMaterno.message}
                 </span>
               )}
@@ -201,9 +207,9 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
               <div className="mb-4">
                 <label
                   htmlFor="fechaNacim"
-                  className="block text-sm font-medium text-gray-800 -translate-x-20"
+                  className="block text-gray-800 text-left font-bold"
                 >
-                  Fecha de nacimiento
+                  Fecha de nacimiento:
                 </label>
                 <input
                   type="date"
@@ -217,19 +223,18 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                   {...register("fechaNacim", {
                     required: "El campo es requerido",
                   })}
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
               {errors.fechaNacim && (
-                <span className="text-red-500 text-sm mt-1">
+                <span className="text-red-500 text-base -mt-3 mb-2">*
                   {errors.fechaNacim.message}
                 </span>
               )}
-              <br />
-              
+
               <button
                 type="submit"
-                className="bg-blue-700 border border-black hover:bg-blue-600 text-white rounded-lg font-bold flex px-4 py-2 justify-center mx-auto items-center"
+                className="bg-blue-700 border border-black hover:bg-blue-600 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"
                 disabled={Object.keys(errors).length > 0}
               >
                 Siguiente

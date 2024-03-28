@@ -38,12 +38,12 @@ function ScrollButton() {
   };
 
   return (
-    <div className="fixed bottom-4 left-2 flex flex- justify-center mb-20">
+    <div className="fixed -bottom-[72px] left-2 flex flex- justify-center mb-20">
       <div className="flex flex-col items-center">
         <button
           className={`${
             showScrollTop ? "flex" : "hidden"
-          } bg-gray-700 hover:bg-gray-600 text-white rounded-full border-1 border-white translate-y-22`}
+          } bg-gray-700 hover:bg-gray-600 text-white rounded-full border-1 border-white`}
           onClick={scrollTop}
         >
           <IoIosArrowUp className="h-12 w-12 pb-1" />
@@ -51,7 +51,7 @@ function ScrollButton() {
         <button
           className={`${
             showScrollBottom ? "flex" : "hidden"
-          } bg-gray-700 hover:bg-gray-600 text-white rounded-full border-1 border-white translate-y-22`}
+          } bg-gray-700 hover:bg-gray-600 text-white rounded-full border-1 border-white`}
           onClick={scrollBottom}
         >
           <IoIosArrowDown className="h-12 w-12 pt-1" />

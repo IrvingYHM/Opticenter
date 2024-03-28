@@ -37,18 +37,21 @@ const RCorreo = ({ onNext, onBack, onValidationChange }) => {
 
   return (
     <>
-      <div className="my-28 text-center">
-        <div className="container ml-auto mr-auto flex items-center justify-center">
-          <div>
+      <div className="pt-24 text-center rounded-lg shadow-md overflow-hidden">
+        <div className="container ml-auto mr-auto">
+          <div className="bg-white px-12">
             <p className="sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4">
               Formulario de correo electrónico del contacto
             </p>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="grid grid-cols-1"
+            >
               <div className="mb-4">
                 <label
                   htmlFor="correo"
-                  className="block text-sm font-medium text-gray-800 -translate-x-20"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Correo electrónico:
                 </label>
@@ -69,20 +72,20 @@ const RCorreo = ({ onNext, onBack, onValidationChange }) => {
                       message: "El formato de correo electrónico no es válido",
                     },
                   })}
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                   placeholder="Correo Electrónico"
                 />
               </div>
               {errors.correo && (
-                <span className="text-red-500 text-sm mt-1">
-                  {errors.correo.message}
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.correo.message}
                 </span>
               )}
 
               <div className="mb-4">
                 <label
                   htmlFor="telefono"
-                  className="block text-sm font-medium text-gray-800 -translate-x-20"
+                  className="block text-gray-800 text-left font-bold"
                 >
                   Número de teléfono:
                 </label>
@@ -108,46 +111,39 @@ const RCorreo = ({ onNext, onBack, onValidationChange }) => {
                     },
                     minLength: {
                       value: 10,
-                      message:
-                        "El número de teléfono debe tener al menos 10 dígitos",
+                      message: "El teléfono debe tener al menos 10 dígitos",
                     },
                     pattern: {
                       value: /^[0-9]+$/,
                       message: "Solo se permiten números",
                     },
                   })}
-                  className="mt-1 p-2 border rounded-md w-72 text-center"
+                  className="mt-1 p-2 border rounded-md w-full"
                   placeholder="Número de teléfono"
                 />
               </div>
               {errors.telefono && (
-                <span className="text-red-500 text-sm mt-1">
-                  {errors.telefono.message}
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.telefono.message}
                 </span>
               )}
 
-              {/* <button
-                style={{ backgroundColor: "green", color: "white" }}
-                className="bg-green-700 border-2 border-black hover:bg-green-400 text-white rounded-md font-bold flex px-4 py-2 justify-center mx-auto items-center"
-                type="submit"
-              >
-                Guardar
-              </button> */}
-              <br />
-              <button
-                type="button"
-                onClick={onBack}
-                className="bg-gray-500 text-white p-2 mr-2 rounded-md"
-              >
-                Regresar
-              </button>
-              <button
-                type="submit"
-                className="bg-blue-700 text-white p-2 rounded-md"
-                disabled={Object.keys(errors).length > 0}
-              >
-                Siguiente
-              </button>
+              <div className="grid grid-cols-2">
+                <button
+                  type="button"
+                  onClick={onBack}
+                  className="bg-gray-500 border border-black hover:bg-gray-400 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"
+                >
+                  Regresar
+                </button>
+                <button
+                  type="submit"
+                  className="bg-blue-700 border border-black hover:bg-blue-600 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"
+                  disabled={Object.keys(errors).length > 0}
+                >
+                  Siguiente
+                </button>
+              </div>
             </form>
           </div>
         </div>
