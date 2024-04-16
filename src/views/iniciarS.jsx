@@ -62,14 +62,11 @@ function App() {
           // Guardar el estado de usuario logueado en el localStorage
           localStorage.setItem("token", receivedToken);
           setUsuarioLogueado(true);
- /*          setHaIniciadoSesion(false); // Actualiza el estado de haIniciadoSesion
-
-
- */
+          /*setHaIniciadoSesion(false); // Actualiza el estado de haIniciadoSesion */
 
           setTimeout(() => {
             window.location.href = "/inicio";
-          }, 4000);
+          }, 5000);
         } else {
           setIntentosFallidos(intentosFallidos + 1);
           if (intentosFallidos >= 2) {
