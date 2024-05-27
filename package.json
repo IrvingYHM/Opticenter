@@ -19,7 +19,7 @@
     "react-icons": "^4.12.0",
     "react-password-checklist": "^1.5.1",
     "react-router-dom": "^6.17.0",
-    "react-slick": "^0.29.0",
+    "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
     "zxcvbn": "^4.4.2"
   },
