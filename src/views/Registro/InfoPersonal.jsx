@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import React, { useContext, useState, useEffect } from "react";
 import { RegistroContext } from "./RegistroContext";
 
-function InfoPersonal({ onNext, onBack, onValidationChange }) {
+function InfoPersonal({ onNext, onBack, onValidationChange, setMaxWidth }) {
   const { state, dispatch } = useContext(RegistroContext);
   const [isValid, setIsValid] = useState(false); // Estado local de validación
 
@@ -19,6 +19,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
   } = useForm();
 
   useEffect(() => {
+    setMaxWidth("md"); //Tamaño maximo del formulario
     const isValid = Object.keys(errors).length === 0;
     setIsValid(isValid);
     // Verificar si onValidationChange está definida antes de llamarla
@@ -52,9 +53,6 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
       onNext(); // Pasar al siguiente paso si el formulario es válido
     }
   };
-
-
-
 
   return (
     <>

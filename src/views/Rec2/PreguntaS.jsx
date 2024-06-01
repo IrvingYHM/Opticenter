@@ -1,6 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import CodigoRecuperacion from "./RecuperacionCodigo";
+
+
+
+// Función para decodificar JWT
+/* function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+  return JSON.parse(jsonPayload);
+} */
 
 const FormularioPregunta = ({ handleBack }) => {
   const [correoEncontrado, setCorreoEncontrado] = useState(false);
@@ -8,6 +26,17 @@ const FormularioPregunta = ({ handleBack }) => {
   const [respuestaCorrecta, setRespuestaCorrecta] = useState("");
   const [procesando, setProcesando] = useState(false);
   const [mostrarCodigoRecuperacion, setMostrarCodigoRecuperacion] = useState(false);
+  
+/*   const [clienteId, setClienteId] = useState(null);
+
+
+    useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decoded = parseJwt(token);
+      setClienteId(decoded.clienteId);
+    }
+  }, []); */
 
   const onSubmit = async (data) => {
     try {
@@ -23,7 +52,8 @@ const FormularioPregunta = ({ handleBack }) => {
       const responseData = await response.json();
 
       if (response.ok) {
-        toast.success("Este correo sí existe", {
+
+        toast.success("Este correo sí existe.", {
           onClose: () => {
             setTimeout(() => {
               setCorreoEncontrado(true);
@@ -87,6 +117,8 @@ const FormularioPregunta = ({ handleBack }) => {
     }
   };
 
+  
+
   const enviarCodigoRecuperacion = async () => {
     try {
       const response = await fetch("http://localhost:3000/clientes/enviar_codigo", {
@@ -141,6 +173,8 @@ const FormularioPregunta = ({ handleBack }) => {
     newUserCode[index] = digit;
     setUserCode(newUserCode);
   }; */
+
+
 
   return (
     <>

@@ -1,29 +1,27 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import  { createContext, useState, useContext } from "react";
+export const AuthContext = createContext();
 
-// Creamos el contexto de autenticación
-const AuthContext = createContext();
-
-// Creamos un hook personalizado para acceder al contexto
-export const useAuth = () => useContext(AuthContext);
-
-// Creamos el proveedor del contexto
 export const AuthProvider = ({ children }) => {
-  const [usuarioLogueado, setUsuarioLogueado] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Función para iniciar sesión
+  
   const login = () => {
-    setUsuarioLogueado(true);
+    // Lógica para iniciar sesión...
+    setIsAuthenticated(true);
   };
 
-  // Función para cerrar sesión
+  console.log("Valor de usuarioLogueado en AuthContext:", isAuthenticated);
+   
   const logout = () => {
-    setUsuarioLogueado(false);
+    // Lógica para cerrar sesión...
+    setIsAuthenticated(false);
   };
 
-  // Proporcionamos el contexto y las funciones a los componentes hijos
   return (
-    <AuthContext.Provider value={{ usuarioLogueado, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);

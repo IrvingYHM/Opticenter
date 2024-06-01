@@ -10,21 +10,15 @@ function App() {
         </div>
         <div className='space-y-4 '>
           <div className='flex bg-white h-20 sm:w-80 lg:w-1/2  mx-auto items-center justify-between rounded-md border-4 border-black text-base sm:text-sm lg:text-lg xl:text-xl px-4 font-bold'>Citas agendadas
-          <button className='bg-aRey  border-2 border-black hover:bg-blue-900 text-black rounded-md  font-bold flex px-4 py-2
-            '>
-            <Link to='/evento'>Agregar</Link>
-            </button>
+            <Link className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' to='/evento'>Agregar</Link>
           </div>
           <div className='flex bg-white h-20 sm:w-80 lg:w-1/2 items-center justify-between rounded-md mx-auto border-4 border-black px-4 font-bold'>Modificar Citas
-          <button className='bg-aRey  border-2 border-black hover:bg-blue-900 text-black rounded-md  font-bold flex px-4 py-2'>
-          <Link to='/RegistroCorr'>Agregar</Link>
-            </button>
+          <Link className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' to='/RegistroCorr'>Agregar</Link>
+
           </div>
           <div className='flex bg-white h-20 sm:w-80 lg:w-1/2 items-center justify-between rounded-md mx-auto border-4 border-black px-4 font-bold'>
             Eliminar Cita
-            <button className='bg-aRey  border-2 border-black hover:bg-blue-900 text-black rounded-md  font-bold flex px-4 py-2'>
-            <Link to='/Contraseña'>Agregar</Link>
-            </button>
+            <Link className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' to='/Contraseña'>Agregar</Link>
           </div>
         </div>
       </div>
