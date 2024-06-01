@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import PasswordChecklist from "react-password-checklist";
 
-const RContraseña = ({ onNext, onBack, onValidationChange }) => {
+const RContraseña = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
   const { state, dispatch } = useContext(RegistroContext);
   const [isValid, setIsValid] = useState(false); // Estado local de validación
   const [showPassword, setShowPassword] = useState(false); // Estado local para mostrar/ocultar la contraseña
@@ -16,7 +16,7 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
   const [passwordChecklistValid, setPasswordChecklistValid] = useState(false); // Estado local para validar el checklist de la contraseña
 
   const handleInfoChange = (info) => {
-    dispatch({ type: "UPDATE_CONTRASEÑA", payload:  info });
+    dispatch({ type: "UPDATE_CONTRASEÑA", payload: info });
   };
 
   const {
@@ -29,15 +29,15 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
   const onSubmit = async (data) => {
     // Verificar si hay errores en los campos
     if (Object.keys(errors).length === 0) {
-      const infoCompleta = { ...state.info,...state.correo, ...data };
+      const infoCompleta = { ...state.info, ...state.correo, ...data };
       handleInfoChange(infoCompleta);
       try {
-        console.log("contraseña", vchPassword)
+        /* console.log("contraseña", vchPassword) */
         const response = await enviarDatosAPI(
           infoCompleta,
           state.correo // Agrega el correo al llamar a la función enviarDatosAPI
         );
-        console.log("Respuesta de la API:", response);
+        /* console.log("Respuesta de la API:", response); */
         onNext();
       } catch (error) {
         console.error("Error al enviar los datos a la API:", error);
@@ -49,6 +49,7 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
   };
 
   useEffect(() => {
+    setMaxWidth("md"); //Tamaño maximo del formulario
     const isValid = Object.keys(errors).length === 0 && passwordChecklistValid; // Verificar la validez del checklist de la contraseña
     setIsValid(isValid);
     // Verificar si onValidationChange está definida antes de llamarla
@@ -59,8 +60,8 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
 
   const enviarDatosAPI = async (info, correo) => {
     try {
-      console.log("Datos a enviar al backend:", info);
-      console.log(vchPassword)
+      /* console.log("Datos a enviar al backend:", info);
+      console.log(vchPassword) */
       const response = await fetch("http://localhost:3000/clientes/", {
         method: "POST",
         headers: {
@@ -73,19 +74,18 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
         }),
       });
       const responseData = await response.json();
-  
+
       dispatch({
         type: "UPDATE_INFO_PERSONAL",
         payload: info,
       });
-  
+
       return responseData;
     } catch (error) {
       console.error("Error al enviar los datos a la API:", error);
       throw error;
     }
   };
-  
 
   /*   const enviarDatosAPI = async () => {
     try {
@@ -110,7 +110,7 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
 
   return (
     <>
-{/*       <pre>{JSON.stringify(state, null, 2)}</pre> */}
+      {/*       <pre>{JSON.stringify(state, null, 2)}</pre> */}
 
       <div className="pt-24 text-center rounded-lg shadow-md overflow-hidden">
         <div className="container ml-auto mr-auto">
@@ -139,12 +139,10 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
                   value={vchPassword}
                   onChange={(e) => {
                     setPassword(e.target.value);
-                    console.log("Contraseña:", e.target.value); // Mostrar la contraseña en la consola
                     handleInfoChange({ vchPassword: e.target.value });
                   }}
                   required
                   maxLength={16}
-                  
                   className="mt-1 p-2 border rounded-md w-full"
                 />
 
@@ -240,14 +238,18 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
                   <option disabled value="">
                     Selecciona la pregunta secreta
                   </option>
-                  <option value="¿Cuál es tu color favorito?">¿Cuál es tu color favorito?</option>
+                  <option value="¿Cuál es tu color favorito?">
+                    ¿Cuál es tu color favorito?
+                  </option>
                   <option value="¿Cuál es el nombre de tu mejor amigo?">
                     ¿Cuál es el nombre de tu mejor amigo?
                   </option>
                   <option value="¿Cuál es el nombre de tu mascota?">
                     ¿Cuál es el nombre de tu mascota?
                   </option>
-                  <option value="¿Cuál es tu comida favorita?">¿Cuál es tu comida favorita?</option>
+                  <option value="¿Cuál es tu comida favorita?">
+                    ¿Cuál es tu comida favorita?
+                  </option>
                 </select>
               </div>
               <div>

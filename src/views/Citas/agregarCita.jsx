@@ -5,6 +5,8 @@ import es from 'date-fns/locale/es'; // Importa el idioma español
 
 const AgregarCita = () => {
   const [selectedDate, setSelectedDate] = useState(null);
+  const buttonClasses = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline";
+
   
   return (
     <div className="py-20">
@@ -35,7 +37,7 @@ const AgregarCita = () => {
             <input type="text" />
           </div>
           <div className='flex items-center'>
-        <button className='bg-blue-400 rounded flex items-center'>Crear cita</button>
+        <button className={buttonClasses}>Crear cita</button>
         </div>
         </form>
 

@@ -3,8 +3,7 @@ import Fot from "../components/Footer";
 function App() {
   return (
     <>
-      <div className="flex-center my-28 min-h-screen flex justify-center items-center">
-        <div className="max-w-3xl mx-auto px-4">
+      <div className="bg-gray-200 flex-center min-h-screen flex justify-center pt-24 pb-10 items-center">
           <div className="bg-white shadow-md rounded-lg p-8 max-w-4xl w-full">
             <h3 className="text-center text-black font-bold text-xl mb-4">
               Términos y condiciones de OptiCenter
@@ -344,7 +343,6 @@ function App() {
               <li>Por número de teléfono: 7711231054</li>
             </ul>
           </div>
-        </div>
       </div>
       <Fot />
     </>

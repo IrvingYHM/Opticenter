@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { RegistroContext } from './RegistroContext';
 import { info } from 'autoprefixer';
 
-const RCorreo = ({ onNext, onBack, onValidationChange }) => {
+const RCorreo = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
   const { state, dispatch } = useContext(RegistroContext);
   const [isValid, setIsValid] = useState(false); // Estado local de validación
 
@@ -23,7 +23,7 @@ const RCorreo = ({ onNext, onBack, onValidationChange }) => {
       const infoCompleta = { ...state.info, ...data };
       handleInfoChange(infoCompleta);
       try {
-/*         const response = await enviarDatosAPI(infoCompleta);
+        /*         const response = await enviarDatosAPI(infoCompleta);
         console.log("Respuesta de la API:", response); */
         onNext();
       } catch (error) {
@@ -35,6 +35,7 @@ const RCorreo = ({ onNext, onBack, onValidationChange }) => {
     }
   };
   useEffect(() => {
+    setMaxWidth("md"); //Tamaño maximo del formulario
     const isValid = Object.keys(errors).length === 0;
     setIsValid(isValid);
     // Verificar si onValidationChange está definida antes de llamarla
@@ -43,7 +44,7 @@ const RCorreo = ({ onNext, onBack, onValidationChange }) => {
     }
   }, [errors, onValidationChange]);
 
-/*   const enviarDatosAPI = async (info) => {
+  /*   const enviarDatosAPI = async (info) => {
     try {
       console.log("Datos a enviar al backend:", info);
     
@@ -93,7 +94,9 @@ const RCorreo = ({ onNext, onBack, onValidationChange }) => {
                   type="email"
                   id="vchCorreo"
                   name="vchCorreo"
-                  onChange={(e) => handleInfoChange({ vchCorreo: e.target.value })}
+                  onChange={(e) =>
+                    handleInfoChange({ vchCorreo: e.target.value })
+                  }
                   required
                   {...register("vchCorreo", {
                     required: {
@@ -181,7 +184,6 @@ const RCorreo = ({ onNext, onBack, onValidationChange }) => {
             </form>
           </div>
         </div>
-
       </div>
     </>
   );

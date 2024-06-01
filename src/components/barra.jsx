@@ -143,13 +143,13 @@ function App() {
               {" "}
               Lentes{" "}
             </Link>
-            <Link
+            {/* <Link
               to="/lentesS"
               className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"
             >
               {" "}
               Lentes solares{" "}
-            </Link>
+            </Link> */}
             <Link
               to="/accesorios"
               className="hover:bg-blue-900 text-black rounded-md px-2 py-2 font-bold flex items-center"
@@ -250,10 +250,15 @@ function App() {
             {usuarioLogueado ? (
               <>
                 <p className="text-white"> {nombreUsuario}</p>
+                
                 {userType === "cliente" ? (
                   <Link to="/perfil" className="text-white">
                     Perfil Cliente
+                    
                   </Link>
+
+
+
                 ) : userType === "empleado" ? (
                   <Link to="/perfil" className="text-white">
                     Perfil Empleado

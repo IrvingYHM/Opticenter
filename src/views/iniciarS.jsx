@@ -1,5 +1,5 @@
 import Fot from "../components/Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import imagen from "../img/paisaje.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -9,8 +9,11 @@ import { toast, ToastContainer } from "react-toastify"; // Importa ToastContaine
 import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
+import { AuthContext } from "./AuthContext";
+
 
 function App() {
+  
   const [mostrarContra, setMostrarContra] = useState(false);
   const [intentosFallidos, setIntentosFallidos] = useState(0);
   const [token, setToken] = useState(null); // Estado para almacenar el token
@@ -18,7 +21,13 @@ function App() {
   const [usuarioLogueado, setUsuarioLogueado] = useState(false); // Estado para almacenar si el usuario está logueado
  /*  const [haIniciadoSesion, setHaIniciadoSesion] = useState(false); // Nueva variable de estado
  */
-  useEffect(() => {
+
+ const { login } = useContext(AuthContext);
+
+console.log(login);
+
+  
+useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setUsuarioLogueado(true);
@@ -61,6 +70,7 @@ function App() {
 
           // Guardar el estado de usuario logueado en el localStorage
           localStorage.setItem("token", receivedToken);
+          login();
           setUsuarioLogueado(true);
  /*          setHaIniciadoSesion(false); // Actualiza el estado de haIniciadoSesion
 
@@ -227,8 +237,7 @@ function App() {
                       />
                   </div>
                   <button
-                    style={{ backgroundColor: "black", color: "white" }}
-                    className="w-full bg-black text-white rounded-md p-4 text-center flex items-center justify-center"
+                    className=" mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md p-4 text-center flex items-center justify-center"
                     type="submit"
                     disabled={intentosFallidos >= 3}
                   >
@@ -262,7 +271,6 @@ function App() {
         pauseOnHover 
       />
       <Fot />
-
 
     </>
   );
