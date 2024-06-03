@@ -193,12 +193,14 @@ function Barra() {
       </div>
 
       <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-13">
-        <Busqueda
-          busqueda={busqueda}
-          setBusqueda={setBusqueda}
-          handleSearch={handleSearch}
-        />
-
+        <div className="flex items-center justify-center">
+          <Busqueda
+            busqueda={busqueda}
+            setBusqueda={setBusqueda}
+            handleSearch={handleSearch}
+          />
+        </div>
+        
         <div className="w-18 md:w-25 h-16 md:h-20 flex items-center space-x-5">
           <Link
             to="/inicio"

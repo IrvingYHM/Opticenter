@@ -69,7 +69,7 @@ function App() {
     <>
       <BrowserRouter>
         <Barra />
-        <BarraNavegacion />
+        {/* <BarraNavegacion /> */}
         
         <CartProvider>
           <AuthProvider>
