@@ -173,7 +173,7 @@ function Barra() {
             Accesorios
           </Link>
           <Link
-            to="/gestionarCi"
+            to="/Agendar-cita"
             className="hover:bg-blue-900 rounded-md font-bold flex items-center uppercase"
           >
             Agenda tu cita
