@@ -12,6 +12,7 @@ import { FaUser } from "react-icons/fa6";
 import { AiFillSetting } from "react-icons/ai";
 import ProductosEncontrados from "../../views/bus/ProductosEncontrados";
 import ImageUser from "../../img/user/user-01.png";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 // Función para decodificar JWT
 function parseJwt(token) {
@@ -120,7 +121,7 @@ function Barra() {
   };
 
   return (
-    <nav className="flex fixed items-center justify-between w-full top-0 bg-turquesa py-1 lg:text-xl">
+    <nav className="flex fixed items-center justify-between w-full top-0 bg-turquesa py-1 lg:text-xl z-50">
       <div className="w-18 md:w-25 h-16 md:h-20 flex items-center ml-2">
         <Link to="/" className="flex items-center">
           <img
@@ -173,9 +174,9 @@ function Barra() {
           </Link>
           <Link
             to="/gestionarCi"
-            className="hover:bg-blue-900 rounded-md font-bold flex items-center"
+            className="hover:bg-blue-900 rounded-md font-bold flex items-center uppercase"
           >
-            Cita
+            Agenda tu cita
           </Link>
           <Link
             to="/inicioS"
@@ -193,11 +194,13 @@ function Barra() {
       </div>
 
       <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-13">
-        <Busqueda
-          busqueda={busqueda}
-          setBusqueda={setBusqueda}
-          handleSearch={handleSearch}
-        />
+        <div className="flex items-center justify-center">
+          <Busqueda
+            busqueda={busqueda}
+            setBusqueda={setBusqueda}
+            handleSearch={handleSearch}
+          />
+        </div>
 
         <div className="w-18 md:w-25 h-16 md:h-20 flex items-center space-x-5">
           <Link
@@ -235,10 +238,11 @@ function Barra() {
 
         <div className="hidden md:flex items-center space-x-5 mx-5">
           <Link
-            to="/gestionarCi"
-            className="hover:bg-blue-900 text-white rounded-md font-bold flex whitespace-nowrap"
+            to="/Agendar-cita"
+            className="hover:text-blue-800 text-white rounded-md font-bold flex whitespace-nowrap uppercase"
           >
-            Cita
+            <FaRegCalendarAlt size={20} className="mr-1 mt-1" />
+            Agenda tu cita
           </Link>
           {usuarioLogueado ? (
             <div className="flex items-center gap-4" ref={menuPerfilRef}>
