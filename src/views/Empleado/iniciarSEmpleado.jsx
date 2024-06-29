@@ -1,6 +1,6 @@
 import Fot from "../../components/Footer";
 import { useState, useEffect } from "react";
-import imagen from "../../img/paisaje.jpg";
+import imagen from "../../img/pai.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -123,7 +123,7 @@ const handleLogout = () => {
                     className="w-full h-full object-cover sm:rounded-lg p-4"
                   />
                 </div>
-                <h3 className="text-3xl font-semibold"> Login </h3>
+                <h3 className="text-3xl font-semibold"> Login Empleado</h3>
               </div>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full flex flex-col">
@@ -205,9 +205,9 @@ const handleLogout = () => {
                     <input type="checkbox" className="w-4 h-4 mr-2" />
                     <p className="text-sm">Recordar contraseña</p>
                   </div>
-                  <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
+{/*                   <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
                     <Link to="/Recuperar">¿Olvidaste tu contraseña?</Link>
-                  </p>
+                  </p> */}
                 </div>
                   <div className="justify-center items-center w-full flex flex-col my-5">
                     <div className="recaptcha">
@@ -218,8 +218,7 @@ const handleLogout = () => {
                       />
                   </div>
                   <button
-                    style={{ backgroundColor: "black", color: "white" }}
-                    className="w-full bg-black text-white rounded-md p-4 text-center flex items-center justify-center"
+                    className=" mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md p-4 text-center flex items-center justify-center"
                     type="submit"
                     disabled={intentosFallidos >= 3}
                   >
@@ -229,14 +228,6 @@ const handleLogout = () => {
                   </button>
                 </div>
               </form>
-            </div>
-            <div className="flex items-center justify-center">
-              <p className="text-sm font-normal text-black">
-                ¿No tienes una cuenta?{" "}
-                <span className="font-semibold underline underline-offset-2 cursor-pointer">
-                  <Link to="/RegistroPage">Registrate gratis</Link>
-                </span>
-              </p>
             </div>
           </div>
         </div>

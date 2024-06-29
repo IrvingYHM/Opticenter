@@ -46,6 +46,7 @@ import Matematicas from './views/Calculadora/Mate';
 import Matematicas2 from './views/Calculadora/Matematicas';
 import Matematicas3 from './views/Respaldo/Mate';
 import Menu from './views/Perfil/Menu';
+import ClienteAd from './views/Admin/Clientes'
 
 
 
@@ -123,20 +124,19 @@ function App() {
             element={<IniciarS />}
           />
 
-          <Route path="/Login_Empleado" element={<IniciarSEmpleado />} />
-          <Route path="/inicio/terminosC" element={<TerminoC />} />
-          <Route path="/opcionesRe" element={<OpcionRe />} />
-          <Route path="/Recuperar" element={<Recuperar />} />
-          <Route path="/RegistroPage" element={<Registrarse />} />
-          <Route path="/Cambio" element={<Cambiar />} />
-          <Route path="/evento" element={<Evento />} />
-          <Route path="/inicio/AcercaDe" element={<AcercaDe/>}/>
-          {/* Agrega la ruta NotFound para manejar errores 404 */}
-          <Route path="*" element={<NotFound />} />
-          <Route path="500" element={<NotFound500 />} />
-          {/* Rutas para productos */}
-          <Route path="/Productos" element={<Productos />} />
-          <Route path="/ProductosAg" element={<AgregarProductos />} />
+              <Route path="/Login_Empleado" element={<IniciarSEmpleado />} />
+              <Route path="/inicio/terminosC" element={<TerminoC />} />
+              {/* <Route path="/opcionesRe" element={<OpcionRe />} /> */}
+              <Route path="/Recuperar" element={<Recuperar />} />
+              <Route path="/RegistroPage" element={<Registrarse />} />
+              <Route path="/Cambio" element={<Cambiar />} />
+              <Route path="/inicio/AcercaDe" element={<AcercaDe />} />
+              {/* Agrega la ruta NotFound para manejar errores 404 */}
+              <Route path="*" element={<NotFound />} />
+              <Route path="500" element={<NotFound500 />} />
+              {/* Rutas para productos */}
+              <Route path="/Productos" element={<Productos />} />
+              <Route path="/ProductosAg" element={<AgregarProductos />} />
 
           <Route
             path="/productos-encontrados"
