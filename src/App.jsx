@@ -137,6 +137,8 @@ function App() {
               {/* Rutas para productos */}
               <Route path="/Productos" element={<Productos />} />
               <Route path="/ProductosAg" element={<AgregarProductos />} />
+              {/*Rutas para clientesAdmin  */}
+              <Route path="/ClientesAd" element={<ClienteAd />} />
 
           <Route
             path="/productos-encontrados"
