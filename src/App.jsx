@@ -46,6 +46,7 @@ import Matematicas from './views/Calculadora/Mate';
 import Matematicas2 from './views/Calculadora/Matematicas';
 import Matematicas3 from './views/Respaldo/Mate';
 import Menu from './views/Perfil/Menu';
+import ClienteAd from './views/Admin/Clientes'
 
 
 
@@ -119,9 +120,13 @@ function App() {
             path="/carrito"
             element={<RutaProtegida element={<Carrito />} />}
           /> */}
-              <Route path="/inicio/avisoP" element={<AvisoP />} />
-              <Route path="/inicio/cookies" element={<Cookies />} />
-              <Route path="/inicioS" element={<IniciarS />} />
+
+          <Route path="/inicio/avisoP" element={<AvisoP />} />
+          <Route path="/inicio/cookies" element={<Cookies />} />
+          <Route
+            path="/inicioS"
+            element={<IniciarS />}
+          />
 
               <Route path="/Login_Empleado" element={<IniciarSEmpleado />} />
               <Route path="/inicio/terminosC" element={<TerminoC />} />
@@ -137,19 +142,25 @@ function App() {
               <Route path="/Productos" element={<Productos />} />
               <Route path="/ProductosAg" element={<AgregarProductos />} />
 
-              <Route
-                path="/productos-encontrados"
-                element={<ProductosEncontrados />}
-              />
+              {/*Rutas para clientesAdmin  */}
+              <Route path="/ClientesAd" element={<ClienteAd />} />
 
-              {/* RUta de matematicas */}
-              <Route path="/Matematicas" element={<Matematicas />} />
-              <Route path="/Mate" element={<Matematicas2 />} />
-              <Route path="/Mate3" element={<Matematicas3 />} />
+          <Route
+            path="/productos-encontrados"
+            element={<ProductosEncontrados />}
+          />
 
-              <Route path="/Opcion" element={<Opcion />} />
-            </Routes>
-          </AuthProvider>
+          {/* RUta de matematicas */}
+          <Route path="/Matematicas" element={<Matematicas/>}/>
+          <Route path="/Mate" element={<Matematicas2/>}/>
+          <Route path="/Mate3" element={<Matematicas3/>}/>
+
+
+
+          <Route path="/Opcion" element={<Opcion />} />
+        </Routes>
+        </AuthProvider>
+
         </CartProvider>
       </BrowserRouter>
     </>

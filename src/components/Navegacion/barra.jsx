@@ -216,21 +216,27 @@ function Barra() {
             <BiGlassesAlt size={20} className="mr-1" />
             Lentes
           </Link>
-          <Link
+{/*           <Link
             to="/accesorios"
             className=" hover:border-b-2 border-blue-700 font-bold flex items-center"
           >
             <AiOutlineAppstoreAdd size={20} className="mr-1" />
             Accesorios
-          </Link>
+          </Link> */}
 
           {usuarioLogueado && userType === "empleado" && (
-            <div>
+            <div className="flex space-x-4">
               <Link
                 to="/Productos"
-                className="hover:bg-blue-900 rounded-md font-bold flex items-center whitespace-nowrap"
+                className="hover:border-b-2 border-blue-700 font-bold flex items-center"
               >
-                Dar de alta producto
+                Productos
+              </Link>
+              <Link
+                to="/ClientesAd"
+                className="hover:border-b-2 border-blue-700 font-bold flex items-center"
+              >
+                Clientes
               </Link>
             </div>
           )}
@@ -265,7 +271,7 @@ function Barra() {
                   <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-10">
                     {/* Opciones del menú del perfil */}
                     <Link
-                      to="/configuracion-Perfil"
+                      to="/Menu"
                       className="px-4 py-2 flex columns-2 hover:bg-gray-200"
                     >
                       <FaUser size={24} className="mr-2" />
@@ -316,3 +322,16 @@ function Barra() {
 }
 
 export default Barra;
+
+
+
+
+
+
+
+
+
+
+
+
+

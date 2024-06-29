@@ -44,7 +44,7 @@ function App() {
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-white uppercase bg-gray-700 dark:bg-gray-700 dark:text-gray-400">
+            <thead className="text-xs text-white uppercase bg-blue-500 dark:bg-blue-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="p-4 text-center">
                   ID
@@ -79,36 +79,41 @@ function App() {
               {productos.map((producto) => (
                 <tr
                   key={producto.IdProducto}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                  className="bg-black border-b dark:bg-white dark:border-black hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
-                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <td className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white">
                     {producto.IdProducto}
                   </td>
                   <td
                     scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
                   >
                     {producto.vchNombreProducto}
                   </td>
                   <td
                     scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
                   >
                     {producto.vchNomImagen}
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <td 
+                    className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white">
+                  
                     {producto.vchDescripcion}
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {producto.Existencias}
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <td
+                    className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white">                  
                     {producto.Precio}
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <td
+                    className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white">                                    
                     {categorias[producto.IdCategoria] || 'Sin categoria'}
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <td
+                    className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white">                                                 
                     {marcas[producto.IdMarca] || 'Sin Marca'}
                   </td>
                   <td className="px-6 py-4 flex items-center">
