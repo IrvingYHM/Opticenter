@@ -41,7 +41,7 @@ function ImgInicio() {
   }, [currentIndex]);
 
   return (
-    <div className="max-w-[1368px] w-full m-auto relative group">
+    <div className="max-w-[1368px] w-full m-auto relative group z-0">
       <div
         style={{
           backgroundImage: `url(${slides[currentIndex]?.url})`,

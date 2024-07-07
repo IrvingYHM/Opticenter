@@ -1,93 +1,95 @@
 import "../style/app.css"; // Asegúrate de importar tus estilos CSS aquí
-import Fot from '../components/Footer';
-
+import Fot from "../components/Footer";
 
 function App() {
   return (
     <>
       <div className="bg-gray-200 min-h-screen flex justify-center pt-24 pb-10 items-center">
         <div className="bg-white shadow-md rounded-lg p-8 max-w-4xl w-full">
-          <div className="text-black text-base md:text-xl e pb-6">
+          <div className="text-black text-base md:text-xl pb-6">
             <h2 className="text-center text-black font-bold text-xl">
               Aviso de privacidad
             </h2>
             <p>
               <strong>¿Quiénes somos?</strong>
               <br />
-              OptiCenter Huejutla, mejor conocido como Said Valdivia Hernandez,
-              con domicilio en calle Velázquez Ibarra 51, colonia Centro, ciudad
+              OptiCenter Huejutla, conocido como Said Valdivia Hernandez, con
+              domicilio en calle Velázquez Ibarra 51, colonia Centro, ciudad
               Huejutla de Reyes, municipio o delegación Huejutla de Reyes, c.p.
               43000, en la entidad de Hidalgo, país México, es el responsable
-              del uso y protección de sus datos personales, y al respecto le
-              informamos lo siguiente:
+              del uso y protección de sus datos personales. A continuación, le
+              informamos cómo tratamos sus datos personales.
             </p>
             <p>
-              <strong>
-                ¿Para qué fines utilizaremos sus datos personales?
-              </strong>
-            </p>
-            <p>
-              De manera adicional, utilizaremos su información personal para las
-              siguientes finalidades secundarias que no son necesarias para el
-              servicio solicitado, pero que nos permiten y facilitan brindarle
-              una mejor atención:
+              <strong>¿Para qué fines utilizaremos sus datos personales?</strong>
+              <br />
+              Utilizaremos su información personal para las siguientes
+              finalidades que son necesarias para el servicio que solicita:
             </p>
             <ul>
-              <li>Para surgimiento de preferencias de usuario</li>
-              <li>Mercadotecnia o publicitaria</li>
-              <li>Prospección comercial</li>
+              <li>Procesar sus pedidos y compras de lentes y productos ópticos.</li>
+              <li>Gestionar pagos seguros a través de Mercado Pago.</li>
+              <li>Coordinar envíos a domicilio de sus compras, los cuales pueden tener un costo asociado.</li>
+              <li>Brindar atención al cliente y soporte técnico.</li>
             </ul>
             <p>
-              En caso de que no desee que sus datos personales se utilicen para
-              estos fines secundarios, indíquelo a continuación:
+              Utilizaremos su información personal para las siguientes
+              finalidades secundarias, las cuales no son necesarias para el
+              servicio solicitado, pero nos permiten y facilitan brindarle una
+              mejor atención:
+            </p>
+            <ul>
+              <li>Sugerencia de productos basada en sus preferencias de usuario.</li>
+              <li>Mercadotecnia o publicidad.</li>
+              <li>Prospección comercial.</li>
+            </ul>
+            <p>
+              Si no desea que sus datos personales se utilicen para estos fines
+              secundarios, indíquelo a continuación:
             </p>
             <p>
               No consiento que mis datos personales se utilicen para los
               siguientes fines:
               <br />
               <strong>
-                [ ] Para surgimiento de preferencias de usuario <br />
-                [ ] Mercadotecnia o publicitaria <br />[ ] Prospección comercial
+                [ ] Sugerencia de productos basada en mis preferencias <br />
+                [ ] Mercadotecnia o publicidad <br />[ ] Prospección comercial
               </strong>
               <br />
               La negativa para el uso de sus datos personales para estas
               finalidades no podrá ser un motivo para que le neguemos los
               servicios y productos que solicita o contrata con nosotros.
             </p>
-            <div>
-              <strong>
-                ¿Qué datos personales utilizaremos para estos fines
-              </strong>
+            <p>
+              <strong>¿Qué datos personales utilizaremos para estos fines?</strong>
               <br />
               Para llevar a cabo las finalidades descritas en el presente aviso
               privacidad, utilizaremos los siguientes datos personales:
-              <ul>
-                <li>Datos de identificación</li>
-                <li>Datos de contacto</li>
-              </ul>
-            </div>
+            </p>
+            <ul>
+              <li>Datos de identificación</li>
+              <li>Datos de contacto</li>
+              <li>Datos de pago</li>
+              <li>Datos de envío</li>
+            </ul>
 
             <p>
-              <strong>
-                ¿Cómo puede acceder, rectificar o cancelar sus datos personales,
-                u oponerse a su uso?{" "}
-              </strong>
+              <strong>¿Cómo puede acceder, rectificar o cancelar sus datos personales, u oponerse a su uso?</strong>
               <br />
               Usted tiene derecho a conocer qué datos personales tenemos de
               usted, para qué los utilizamos y las condiciones del uso que les
-              damos (Acceso). Asimismo, es su derecho solicitar la corrección de
-              su información personal en caso de que esté desactualizada, sea
-              inexacta o incompleta (Rectificación); que la eliminemos de
-              nuestros registros o bases de datos cuando considere que la misma
-              no está siendo utilizada adecuadamente (Cancelación); así como
-              oponerse al uso de sus datos personales para fines específicos
-              (Oposición). Estos derechos se conocen como derechos ARCO.
+              damos (Acceso). Asimismo, tiene derecho a solicitar la corrección
+              de su información personal en caso de que esté desactualizada, sea
+              inexacta o incompleta (Rectificación); a que eliminemos sus datos
+              de nuestros registros o bases de datos cuando considere que no
+              están siendo utilizados adecuadamente (Cancelación); y a oponerse
+              al uso de sus datos personales para fines específicos (Oposición).
+              Estos derechos se conocen como derechos ARCO.
             </p>
             <p>
               Para el ejercicio de cualquiera de los derechos ARCO, usted deberá
               presentar la solicitud respectiva a través del siguiente medio:{" "}
             </p>
-
             <ul>
               Llamando al número telefónico +52 7711231054 o a través del sitio
               web oficial: www.OptiCenter.com{" "}
@@ -118,12 +120,8 @@ function App() {
               <ul>d) Número telefónico: +52 7711231054</ul>
             </div>
 
-            <>
-              <br />
-              <strong>
-                Usted puede revocar su consentimiento para el uso de sus datos
-                personales
-              </strong>
+            <p>
+              <strong>Usted puede revocar su consentimiento para el uso de sus datos personales</strong>
               <br />
               Usted puede revocar el consentimiento que, en su caso, nos haya
               otorgado para el tratamiento de sus datos personales. Sin embargo,
@@ -151,14 +149,10 @@ function App() {
                 Llamando al número telefónico +52 7711231054 o a través del
                 sitio web oficial: www.OptiCenter.com
               </ul>
-            </>
+            </p>
 
-            <>
-              <br />
-              <strong>
-                ¿Cómo puede limitar el uso o divulgación de su información
-                personal?{" "}
-              </strong>
+            <p>
+              <strong>¿Cómo puede limitar el uso o divulgación de su información personal?</strong>
               <br />
               Con objeto de que usted pueda limitar el uso y divulgación de su
               información personal, le ofrecemos los siguientes medios:
@@ -171,12 +165,10 @@ function App() {
                 Registro Público para Evitar Publicidad, para mayor información
                 consulte el portal de internet de la PROFECO
               </ul>
-            </>
-            <>
-              <br />
-              <strong>
-                El uso de tecnologías de rastreo en nuestro portal de internet{" "}
-              </strong>
+            </p>
+
+            <p>
+              <strong>El uso de tecnologías de rastreo en nuestro portal de internet</strong>
               <br />
               Le informamos que en nuestra página de internet utilizamos
               cookies, web beacons u otras tecnologías, a través de las cuales
@@ -201,12 +193,10 @@ function App() {
                 tecnologías, consulte el siguiente medio:
               </p>
               <ul>Opciones de cookies </ul>
-            </>
-            <>
-              <br />
-              <strong>
-                ¿Cómo puede conocer los cambios en este aviso de privacidad?{" "}
-              </strong>
+            </p>
+
+            <p>
+              <strong>¿Cómo puede conocer los cambios en este aviso de privacidad?</strong>
               <br />
               El presente aviso de privacidad puede sufrir modificaciones,
               cambios o actualizaciones derivadas de nuevos requerimientos
@@ -215,31 +205,53 @@ function App() {
               cambios en nuestro modelo de negocio, o por otras causas.
               <p>
                 Nos comprometemos a mantenerlo informado sobre los cambios que
-                pueda sufrir el presente aviso de privacidad, a través de:
-                Página de Internet.{" "}
+                pueda sufrir el presente aviso de privacidad, a través de:{" "}
               </p>
+              <ul>
+                Llamando al número telefónico +52 7711231054 o a través del
+                sitio web oficial: www.OptiCenter.com{" "}
+              </ul>
               <p>
                 El procedimiento a través del cual se llevarán a cabo las
                 notificaciones sobre cambios o actualizaciones al presente aviso
-                de privacidad es el siguiente:{" "}
+                de privacidad es el siguiente:
               </p>
-              <ul>Notificación anticipada y descripción de los cambios</ul>
-            </>
-            <p>
-              <br />
-              <strong>
-                Su consentimiento para el tratamiento de sus datos personales{" "}
-              </strong>
-              <br />
-              Consiento que mis datos personales sean tratados de conformidad
-              con los términos y condiciones informados en el presente aviso de
-              privacidad.
+              <ul>
+                Llamando al número telefónico +52 7711231054 o a través del
+                sitio web oficial: www.OptiCenter.com{" "}
+              </ul>
             </p>
-            <p>[ ] Última actualización: 22/09/2023 </p>
+
+            <p>
+              <strong>¿Cómo protegemos sus datos personales?</strong>
+              <br />
+              Implementamos medidas de seguridad técnicas, administrativas y
+              físicas para proteger sus datos personales contra daño, pérdida,
+              alteración, destrucción o el uso, acceso o tratamiento no
+              autorizado.
+            </p>
+
+            <p>
+              <strong>¿Cómo puede contactarnos?</strong>
+              <br />
+              Si tiene alguna pregunta o comentario sobre el presente aviso de
+              privacidad, puede contactarnos a través de los siguientes medios:
+              <ul>
+                Llamando al número telefónico +52 7711231054 o a través del
+                sitio web oficial: www.OptiCenter.com{" "}
+              </ul>
+            </p>
+
+            <p>
+              <strong>Consentimiento</strong>
+              <br />
+              He leído y consiento que mis datos personales sean tratados de
+              conformidad con los términos y condiciones informados en el
+              presente aviso de privacidad.
+            </p>
           </div>
         </div>
       </div>
-
       <Fot />
     </>
   );
