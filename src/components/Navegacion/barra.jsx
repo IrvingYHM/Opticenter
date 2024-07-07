@@ -238,6 +238,12 @@ function Barra() {
               >
                 Clientes
               </Link>
+              <Link
+                to="/EmpleadoAd"
+                className="hover:border-b-2 border-blue-700 font-bold flex items-center"
+              >
+                Empleados
+              </Link>
             </div>
           )}
         </div>

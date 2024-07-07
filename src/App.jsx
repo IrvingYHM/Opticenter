@@ -11,7 +11,7 @@ import Accesorios from "../src/views/accesorios"
 import AvisoP from "./views/avisoP";
 import Cookies from "./views/cookies";
 import IniciarS from "./views/iniciarS";
-import IniciarSEmpleado from "./views/Empleado/iniciarSEmpleado";
+import IniciarSEmpleado from "./views/Admin/Empleados/iniciarSEmpleado";
 import TerminoC from "./views/terminosC";
 import GestionarC from "./views/opcionRe";
 import Carrito from "./views/Lente/carrito";
@@ -46,7 +46,10 @@ import Matematicas from './views/Calculadora/Mate';
 import Matematicas2 from './views/Calculadora/Matematicas';
 import Matematicas3 from './views/Respaldo/Mate';
 import Menu from './views/Perfil/Menu';
-import ClienteAd from './views/Admin/Clientes'
+import ClienteAd from './views/Admin/Clientes/Clientes';
+import EmpleadoAd from './views/Admin/Empleados/Empleados';
+import AgEmpleado from './views/Admin/Empleados/AgreEmpleados';
+
 
 
 
@@ -137,9 +140,11 @@ function App() {
               {/* Rutas para productos */}
               <Route path="/Productos" element={<Productos />} />
               <Route path="/ProductosAg" element={<AgregarProductos />} />
-              {/*Rutas para clientesAdmin  */}
+              {/*Rutas para Admin  */}
               <Route path="/ClientesAd" element={<ClienteAd />} />
-
+              <Route path="/EmpleadoAd" element={<EmpleadoAd />} />
+              <Route path="/AgEmpleado" element={<AgEmpleado/>} />
+              
           <Route
             path="/productos-encontrados"
             element={<ProductosEncontrados />}

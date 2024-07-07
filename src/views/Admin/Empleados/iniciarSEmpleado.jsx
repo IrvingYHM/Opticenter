@@ -1,6 +1,6 @@
-import Fot from "../../components/Footer";
+import Fot from "../../../components/Footer";
 import { useState, useEffect } from "react";
-import imagen from "../../img/pai.jpg";
+import imagen from "../../../img/pai.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
