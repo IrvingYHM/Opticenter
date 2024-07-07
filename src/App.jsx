@@ -48,7 +48,7 @@ import Matematicas3 from './views/Respaldo/Mate';
 import Menu from './views/Perfil/Menu';
 import ClienteAd from './views/Admin/Clientes/Clientes';
 import EmpleadoAd from './views/Admin/Empleados/Empleados';
-import AgEmpleado from './views/Admin/Empleados/AgreEmpleados';
+import AgEmpleado from './views/Admin/Empleados/Registro/RegistroPage';
 
 
 

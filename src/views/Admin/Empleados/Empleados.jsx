@@ -83,7 +83,7 @@ function App() {
                   </td>
                   <td 
                   className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white">                  
-                    {`${empleado.vchNomCliente} ${empleado.vchAPaterno} ${empleado.vchAMaterno}`}
+                    {`${empleado.vchNombre} ${empleado.vchAPaterno} ${empleado.vchAMaterno}`}
                   </td>
                   <td 
                   className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white">                                    
