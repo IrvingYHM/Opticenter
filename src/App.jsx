@@ -30,9 +30,9 @@ import AgendarCita from "./views/Citas/crearCita";
 import Barra from "./components/Navegacion/barra";
 
 //Seccion productos del administrador
-import Productos from "./views/productos/productos";
+import Productos from "./views/Admin/productos/productos";
 import ProductosEncontrados from "./views/bus/ProductosEncontrados";
-import AgregarProductos from './views/productos/agregarProductos';
+import AgregarProductos from './views/Admin/productos/agregarProductos';
 
 //import Piepa from './components/foother';
 import Opcion from "./views/Rec2/Opcion";
