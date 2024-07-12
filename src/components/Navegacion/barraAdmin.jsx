@@ -130,13 +130,13 @@ function Barra() {
             alt="logo"
           />
         </Link>
-        <div className="md:hidden">
+{/*         <div className="md:hidden">
           <Busqueda
             busqueda={busqueda}
             setBusqueda={setBusqueda}
             handleSearch={handleSearch}
           />
-        </div>
+        </div> */}
         <img
           className="w-16 h-16 cursor-pointer md:hidden ml-auto"
           src={burgerMenu}
@@ -192,15 +192,15 @@ function Barra() {
           </Link>
         </div>
       </div>
-    
-      <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-13">
-        <div className="flex items-center justify-center">
+
+      <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-60">
+{/*         <div className="flex items-center justify-center">
           <Busqueda
             busqueda={busqueda}
             setBusqueda={setBusqueda}
             handleSearch={handleSearch}
           />
-        </div>
+        </div> */}
 
         <div className="w-18 md:w-25 h-16 md:h-20 flex items-center space-x-5">
           <Link
@@ -256,13 +256,13 @@ function Barra() {
         </div>
 
         <div className="hidden md:flex items-center space-x-5 mx-5">
-          <Link
+{/*           <Link
             to="/Agendar-cita"
-            className="hover:text-blue-800 text-white rounded-md font-bold flex whitespace-nowrap "
+            className="hover:text-blue-800 text-white rounded-md font-bold flex whitespace-nowrap uppercase"
           >
             <FaRegCalendarAlt size={20} className="mr-1 mt-1" />
             Agenda tu cita
-          </Link>
+          </Link> */}
           {usuarioLogueado ? (
             <div className="flex items-center gap-4" ref={menuPerfilRef}>
               <div className="relative">
@@ -291,7 +291,7 @@ function Barra() {
                       {nombreUsuario}
                     </Link>
                     <Link
-                      to="/opcionesConfig"
+                      to=""
                       className="w-full px-4 py-2 hover:bg-gray-200 flex columns-2"
                     >
                       <AiFillSetting size={24} className="mr-2" />

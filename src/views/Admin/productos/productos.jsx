@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link} from "react-router-dom";
+import Fot from "../../../components/Footer";
+import Barra from "../../../components/Navegacion/barra";
 
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
 
   return (
     <>
+    <Barra/>
       <ToastContainer />
       <div className="flex-center my-32">
         <h1 className="sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4 text-center">
@@ -79,7 +82,7 @@ function App() {
               {productos.map((producto) => (
                 <tr
                   key={producto.IdProducto}
-                  className="bg-black border-b dark:bg-white dark:border-black hover:bg-gray-50 dark:hover:bg-gray-600"
+                  className="bg-black border-b dark:bg-white dark:border-black hover:bg-gray-50 dark:hover:bg-gray-300"
                 >
                   <td className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white">
                     {producto.IdProducto}
@@ -101,7 +104,7 @@ function App() {
                   
                     {producto.vchDescripcion}
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <td className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white">
                     {producto.Existencias}
                   </td>
                   <td
@@ -148,6 +151,7 @@ function App() {
             </Link>
         </div>
       </div>
+      <Fot/>
     </>
   );
 }

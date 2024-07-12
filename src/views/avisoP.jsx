@@ -1,9 +1,11 @@
 import "../style/app.css"; // Asegúrate de importar tus estilos CSS aquí
 import Fot from "../components/Footer";
+import Barra from '../components/Navegacion/barra'
 
 function App() {
   return (
     <>
+    <Barra/>
       <div className="bg-gray-200 min-h-screen flex justify-center pt-24 pb-10 items-center">
         <div className="bg-white shadow-md rounded-lg p-8 max-w-4xl w-full">
           <div className="text-black text-base md:text-xl pb-6">

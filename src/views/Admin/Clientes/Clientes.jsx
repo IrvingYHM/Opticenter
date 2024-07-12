@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import BarraAd from "../../components/Navegacion/barraAdmin";
-
+import Fot from "../../../components/Footer";
+import BarraAd from "../../../components/Navegacion/barra";
 
 function App() {
   const [clientes, setClientes] = useState([]);
@@ -33,7 +33,7 @@ function App() {
           Clientes
         </h1>
 
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative mx-10 overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-white uppercase bg-blue-500 dark:bg-blue-700 dark:text-gray-400">
               <tr>
@@ -136,6 +136,8 @@ function App() {
           </Link> */}
         </div>
       </div>
+      <Fot/>
+
     </>
   );
 }

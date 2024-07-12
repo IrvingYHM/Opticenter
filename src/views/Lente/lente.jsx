@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 /* import lentes from "../../img/lentes2.png"; */
 import { obtenerProductos } from "./Api";
 import { Link } from "react-router-dom";
+import Barra from "../../components/Navegacion/barra";
 
 
 const Lentes = () => {
@@ -37,6 +38,7 @@ const Lentes = () => {
 
   return (
     <div className="flex-center">
+    <Barra/>
       <div className="my-32">
         <div className="flex justify-center">
           <div className="p-4 flex items-center flex-col  sm:flex-row ">

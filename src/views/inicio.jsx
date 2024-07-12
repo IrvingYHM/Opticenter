@@ -5,6 +5,7 @@ import Fot from "../components/Footer";
 import imagen from "../img/Venta.png";
 import imagen2 from "../img/lentes2.png";
 import Scrool from '../components/scroll';
+import Barra from "../components/Navegacion/barra";
 
 
 function App() {
@@ -42,6 +43,8 @@ function App() {
   return (
     <>
 {/*       <Navbar /> */}
+
+  <Barra/>
       <script
         src="//code.tidio.co/lr3byfcdvywtakcwkxqmh0yvvnggymum.js"
         async
