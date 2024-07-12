@@ -19,6 +19,7 @@ import Carrito from "./views/Lente/carrito";
 //Esta barra es temporal
 import BarraNavegacion from "./components/Navegacion/barraResponsiva";
 
+
 /* import Carrito from "../src/components/err/NotFound"; */
 /* import OpcionRe from "./views/Citas/opcionRe"; */
 import NotFound from "./components/err/NotFound";
@@ -39,6 +40,10 @@ import Opcion from "./views/Rec2/Opcion";
 import { CartProvider } from "./views/Lente/context/cart";
 
 import DetalleProducto from "./views/Lente/DetalleProducto";
+import Opciones from './views/opcionRe';
+import VerDireccion from './views/Perfil/verDireccion'
+import CambiarContraseñaPerfil from './views/Perfil/CambiarContra'
+
 
 import { AuthProvider } from "./views/AuthContext";
 import AcercaDe from './views/Footer/AcercaDe'
@@ -144,6 +149,9 @@ function App() {
               {/* Rutas para productos */}
               <Route path="/Productos" element={<Productos />} />
               <Route path="/ProductosAg" element={<AgregarProductos />} />
+              <Route path="/opcionesConfig" element={<Opciones/>}/>
+              <Route path='/VerDireccion' element={<VerDireccion/>}/>
+              <Route path='/CambiarContraseñaPerfil' element={<CambiarContraseñaPerfil/>}/>
 
               {/*Rutas para Admin  */}
               <Route path="/ClientesAd" element={<ClienteAd />} />

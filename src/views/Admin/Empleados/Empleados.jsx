@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import Fot from "../../../components/Footer";
+import BarraAd from "../../../components/Navegacion/barra";
 
 function App() {
   const [empleado, setEmpleado] = useState([]);
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <>
+    <BarraAd/>
       <ToastContainer />
       <div className="flex-center my-32">
         <h1 className="sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4 text-center">

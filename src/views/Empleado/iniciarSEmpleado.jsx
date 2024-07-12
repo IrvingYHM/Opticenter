@@ -1,6 +1,6 @@
-import Fot from "../components/Footer";
-import { useState, useEffect, useContext } from "react";
-import imagen from "../img/paisaje.jpg";
+import Fot from "../../components/Footer";
+import { useState, useEffect } from "react";
+import imagen from "../../img/pai.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -9,30 +9,18 @@ import { toast, ToastContainer } from "react-toastify"; // Importa ToastContaine
 import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
-import { AuthContext } from "./AuthContext";
-/* import Barra from '../components/barra' */
-
 
 function App() {
-  
   const [mostrarContra, setMostrarContra] = useState(false);
   const [intentosFallidos, setIntentosFallidos] = useState(0);
   const [token, setToken] = useState(null); // Estado para almacenar el token
 /*   const [usuarioLogueado, setUsuarioLogueado] = useState(false); */
   const [usuarioLogueado, setUsuarioLogueado] = useState(false); // Estado para almacenar si el usuario está logueado
- /*  const [haIniciadoSesion, setHaIniciadoSesion] = useState(false); // Nueva variable de estado
- */
 
- const { login } = useContext(AuthContext);
-
-console.log(login);
-
-  
-useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setUsuarioLogueado(true);
-/*       setHaIniciadoSesion(true); */
     }
   }, []);
 
@@ -54,7 +42,7 @@ useEffect(() => {
     if (captcha.current.getValue()) {
       console.log("El usuario no es un robot");
       try {
-        const response = await fetch("http://localhost:3000/auth/login", {
+        const response = await fetch("http://localhost:3000/empleados/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -71,12 +59,10 @@ useEffect(() => {
 
           // Guardar el estado de usuario logueado en el localStorage
           localStorage.setItem("token", receivedToken);
-          login();
           setUsuarioLogueado(true);
- /*          setHaIniciadoSesion(false); // Actualiza el estado de haIniciadoSesion
 
 
- */
+
 
           setTimeout(() => {
             window.location.href = "/inicio";
@@ -86,26 +72,22 @@ useEffect(() => {
           if (intentosFallidos >= 2) {
             toast.error("Máximo de intentos fallidos alcanzado");
           } else {
-            toast.error("Error al iniciar sesión");
+            toast.error("Error al iniciar sesión correo/contraseña incorrecta");
           }
         }
       } catch (error) {
         toast.error("Error de red, vuelvalo a intentar más tarde:", error);
-        setTimeout(() => {
-          window.location.href = "/500";
-        }, 4000);
       }
     } else {
       toast.error("Por favor acepta el captcha");
     }
   };
 
-// Función para cerrar sesión del cliente
-/* const handleLogout = () => {
+  // Función para cerrar sesión del empleado
+const handleLogout = () => {
   localStorage.removeItem("token");
   setUsuarioLogueado(false);
-}; */
-
+};
 
   const getInputBorderClasses = (error) => {
     if (error) {
@@ -117,7 +99,6 @@ useEffect(() => {
 
   return (
     <>
-{/*     <Barra/> */}
       {/* Agrega el ToastContainer aquí */}
       <div className="flex-center my-8">
         <div className="w-full h-22 flex items-start flex-col sm:flex-row">
@@ -142,7 +123,7 @@ useEffect(() => {
                     className="w-full h-full object-cover sm:rounded-lg p-4"
                   />
                 </div>
-                <h3 className="text-3xl font-semibold"> Login </h3>
+                <h3 className="text-3xl font-semibold"> Login Empleado</h3>
               </div>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full flex flex-col">
@@ -224,11 +205,9 @@ useEffect(() => {
                     <input type="checkbox" className="w-4 h-4 mr-2" />
                     <p className="text-sm">Recordar contraseña</p>
                   </div>
-                  <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
-{/*                     <Link to="/Recuperar">¿Olvidaste tu contraseña?</Link> */}
-                    <Link to="/opcion">¿Olvidaste tu contraseña?</Link>
-
-                  </p>
+{/*                   <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
+                    <Link to="/Recuperar">¿Olvidaste tu contraseña?</Link>
+                  </p> */}
                 </div>
                   <div className="justify-center items-center w-full flex flex-col my-5">
                     <div className="recaptcha">
@@ -250,14 +229,6 @@ useEffect(() => {
                 </div>
               </form>
             </div>
-            <div className="flex items-center justify-center">
-              <p className="text-sm font-normal text-black">
-                ¿No tienes una cuenta?{" "}
-                <span className="font-semibold underline underline-offset-2 cursor-pointer">
-                  <Link to="/RegistroPage">Registrate gratis</Link>
-                </span>
-              </p>
-            </div>
           </div>
         </div>
       </div>
@@ -272,8 +243,8 @@ useEffect(() => {
         draggable 
         pauseOnHover 
       />
-      <Fot />
 
+      <Fot />
     </>
   );
 }
