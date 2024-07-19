@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Inicio from "./views/inicio";
 import Lentes from "../src/views/Lente/inicio";
 import LenteS from "./views/lentesS";
+import InicioAd from "./views/Admin/inicioadmin"
 
 /* import Accesorios from "./views/accesorios"; */
 import Accesorios from "../src/views/accesorios"
@@ -15,6 +16,7 @@ import IniciarSEmpleado from "./views/Admin/Empleados/iniciarSEmpleado";
 import TerminoC from "./views/terminosC";
 import GestionarC from "./views/Citas/opcionRe";
 import Carrito from "./views/Lente/carrito";
+
 
 //Esta barra es temporal
 import BarraNavegacion from "./components/Navegacion/barraResponsiva";
@@ -34,6 +36,11 @@ import Barra from "./components/Navegacion/barra";
 import Productos from "./views/Admin/productos/productos";
 import ProductosEncontrados from "./views/bus/ProductosEncontrados";
 import AgregarProductos from './views/Admin/productos/agregarProductos';
+<<<<<<< HEAD
+=======
+import ModificarProducto from './views/Admin/productos/modificarProducto';
+
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
 
 //import Piepa from './components/foother';
 import Opcion from "./views/Rec2/Opcion";
@@ -147,8 +154,14 @@ function App() {
               <Route path="*" element={<NotFound />} />
               <Route path="500" element={<NotFound500 />} />
               {/* Rutas para productos */}
+
+              <Route path="/" element={<App />} />
               <Route path="/Productos" element={<Productos />} />
               <Route path="/ProductosAg" element={<AgregarProductos />} />
+<<<<<<< HEAD
+=======
+              <Route path="/ModificarProducto/:id" element={<ModificarProducto/>} />
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
               <Route path="/opcionesConfig" element={<Opciones/>}/>
               <Route path='/VerDireccion' element={<VerDireccion/>}/>
               <Route path='/CambiarContraseñaPerfil' element={<CambiarContraseñaPerfil/>}/>
@@ -157,6 +170,12 @@ function App() {
               <Route path="/ClientesAd" element={<ClienteAd />} />
               <Route path="/EmpleadoAd" element={<EmpleadoAd />} />
               <Route path="/AgEmpleado" element={<AgEmpleado/>} />
+<<<<<<< HEAD
+=======
+              <Route path="/inicioAd" element={<InicioAd/>} />
+
+              
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
               
           <Route
             path="/productos-encontrados"

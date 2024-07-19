@@ -193,7 +193,11 @@ function Barra() {
         </div>
       </div>
 
+<<<<<<< HEAD
       <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-60">
+=======
+      <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-36"> {/* quitar si esque los quiero a un lado */}
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
 {/*         <div className="flex items-center justify-center">
           <Busqueda
             busqueda={busqueda}
@@ -204,18 +208,30 @@ function Barra() {
 
         <div className="w-18 md:w-25 h-16 md:h-20 flex items-center space-x-5">
           <Link
+<<<<<<< HEAD
             to="/inicio"
+=======
+            to="/inicioAd"
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
             className=" hover:border-b-2 border-blue-700 font-bold flex items-center"
           >
             <AiOutlineHome size={20} className="mr-1" /> Inicio
           </Link>
+<<<<<<< HEAD
           <Link
+=======
+{/*           <Link
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
             to="/lentes"
             className=" hover:border-b-2 border-blue-700 font-bold flex items-center"
           >
             <BiGlassesAlt size={20} className="mr-1" />
             Lentes
+<<<<<<< HEAD
           </Link>
+=======
+          </Link> */}
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
           {/*           <Link
             to="/accesorios"
             className=" hover:border-b-2 border-blue-700 font-bold flex items-center"
@@ -244,6 +260,21 @@ function Barra() {
               >
                 Empleados
               </Link>
+<<<<<<< HEAD
+=======
+              <Link
+                to="/EmpleadoAd"
+                className="hover:border-b-2 border-blue-700 font-bold flex items-center"
+              >
+                Reportes
+              </Link>
+              <Link
+                to="/EmpleadoAd"
+                className="hover:border-b-2 border-blue-700 font-bold flex items-center"
+              >
+                Administracion de citas
+              </Link>
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
 {/*               <Link
                 to="/Dashboard"
                 className="hover:border-b-2 border-blue-700 font-bold flex items-center"
@@ -325,9 +356,15 @@ function Barra() {
             </>
           )}
 
+<<<<<<< HEAD
           <Link to="/carrito">
             <FaShoppingCart size={30} className="rounded-md" alt="carrito" />
           </Link>
+=======
+{/*           <Link to="/carrito">
+            <FaShoppingCart size={30} className="rounded-md" alt="carrito" />
+          </Link> */}
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
         </div>
       </div>
     </nav>

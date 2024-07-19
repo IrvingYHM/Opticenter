@@ -296,7 +296,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
                     {...register("Referencia")}
                     onChange={handleReferenciaChange}
                   />
-                  <div className="text-gray-500 text-sm -mt-1 flex justify-end">
+                  <div className="text-gray-500 text-sm -mt-1 flex justify-end bg-">
                     {referenciaLength}/128
                   </div>
                 </div>

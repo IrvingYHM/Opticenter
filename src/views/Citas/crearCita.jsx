@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify"; 
 import {
   format,
   startOfMonth,
@@ -12,13 +13,53 @@ import {
   addDays,
 } from "date-fns";
 import { es } from "date-fns/locale";
-import useFetchHorarios from "./horarios";
+import axios from "axios";
+import useFetchHorarios from "./horariosDisp";
+
+// Función para decodificar JWT
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
+}
 
 const CrearCita = () => {
-  const { horarios, loading, error } = useFetchHorarios();
   const [mesActual, setMesActual] = useState(new Date());
   const [selectFecha, setSelectFecha] = useState(null);
   const [selectHora, setSelectHora] = useState("");
+  const [idCliente, setIdCliente] = useState("");
+  const [idTipoCita, setIdTipoCita] = useState("");
+  const [costo, setCosto] = useState("");
+  const { horarios, loading, error } = useFetchHorarios(
+    selectFecha ? format(selectFecha, "yyyy-MM-dd") : null
+  );
+
+  // Datos de los tipos de citas
+  const tiposCita = [
+    { id: 1, nombre: "Examen de vista", costo: 100 },
+    { id: 2, nombre: "Ajuste de Gafas", costo: 150 },
+    { id: 3, nombre: "Examen de Lentes de Contacto", costo: 120 },
+    { id: 4, nombre: "Examen de Salud Ocular", costo: 160 },
+  ];
+
+  useEffect(() => {
+    // Verificar el tipo de usuario al cargar la página
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = parseJwt(token);
+      setIdCliente(decodedToken.clienteId);
+    }
+  }, []);
 
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -38,15 +79,70 @@ const CrearCita = () => {
     setMesActual(subMonths(mesActual, 1));
   };
 
-  const handleSubmit = () => {
-    if (selectFecha && selectHora) {
-      alert(
-        `Cita agendada para el ${format(selectFecha, "dd/MM/yyyy", {
-          locale: es,
-        })} a las ${selectHora}`
-      );
+  const handleTipoCitaChange = (e) => {
+    const tipoCitaSeleccionada = tiposCita.find(
+      (tipo) => tipo.id === parseInt(e.target.value)
+    );
+    if (tipoCitaSeleccionada) {
+      setIdTipoCita(tipoCitaSeleccionada.id);
+      setCosto(tipoCitaSeleccionada.costo);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (selectFecha && selectHora && idCliente && idTipoCita && costo) {
+      try {
+        // Crear la cita
+        const citaResponse = await axios.post("http://localhost:3000/cita", {
+          Fecha: format(selectFecha, "yyyy-MM-dd"),
+          Hora: selectHora,
+          IdCliente: idCliente,
+          IdTipoCita: idTipoCita,
+          Costo: costo,
+          IdEstadoCita: 1,
+        });
+
+        if (citaResponse.status === 201) {
+          // Reservar el horario
+          try {
+            const reservaResponse = await axios.post(
+              "http://localhost:3000/horarios/reservar",
+              {
+                Fecha: format(selectFecha, "yyyy-MM-dd"),
+                Hora: selectHora,
+              }
+            );
+
+            if (reservaResponse.status === 200) {
+              toast.success("Cita agendada y horario reservado exitosamente");
+            } else {
+              toast.error(
+                "Cita agendada, pero hubo un problema al reservar el horario"
+              );
+            }
+          } catch (reservaError) {
+              toast.error(
+                `Cita agendada, pero hubo un problema al reservar el horario: ${reservaError.message}`
+              );
+          }
+        } else {
+          toast.error("Hubo un problema al agendar la cita");
+        }
+      } catch (error) {
+        if (error.response) {
+          if (error.response.status === 409) {
+            toast.error("La hora y fecha seleccionada ya están ocupadas");
+          } else if (error.response.data && error.response.data.message) {
+            toast.error(`Error: ${error.response.data.message}`);
+          } else {
+            toast.error("Hubo un problema al agendar la cita");
+          }
+        } else {
+          toast.error(`Error: ${error.message}`);
+        }
+      }
     } else {
-      alert("Por favor, selecciona una fecha y una hora.");
+      toast.error("Por favor, completa todos los campos");
     }
   };
 
@@ -70,10 +166,7 @@ const CrearCita = () => {
     return (
       <div className="grid grid-cols-7 gap-2 text-center mt-4">
         {daysOfWeek.map((day) => (
-          <div
-            key={day}
-            className="text-sm lg:text-lg font-semibold"
-          >
+          <div key={day} className="text-sm lg:text-lg font-semibold">
             {day}
           </div>
         ))}
@@ -123,13 +216,6 @@ const CrearCita = () => {
     return <div>{rows}</div>;
   };
 
-  // Filtrar horarios disponibles según el día seleccionado
-  const horariosDelDia = selectFecha
-    ? horarios.filter(
-        (horario) => new Date(selectFecha).getDay() === horario.Dia
-      )
-    : [];
-
   return (
     <div className="flex flex-col items-center mt-28 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <div className="px-4 bg-white rounded-xl shadow-md space-y-2 w-full max-w-md lg:max-w-lg xl:max-w-xl">
@@ -138,29 +224,77 @@ const CrearCita = () => {
         {renderCells()}
       </div>
       <div className="px-6 mt-6 space-y-4 w-full max-w-xs md:max-w-md">
-        <div>
-          <label
-            htmlFor="hourSelect"
-            className="block text-lg lg:text-xl font-medium mb-2"
-          >
-            Horas disponibles:
-          </label>
-          <select
-            id="hourSelect"
-            value={selectHora}
-            onChange={(e) => setSelectHora(e.target.value)}
-            className="block w-full p-2 border border-gray-300 rounded-lg text-lg lg:text-xl"
-          >
-            <option value="" disabled>
-              Selecciona una hora
-            </option>
-            {horariosDelDia.map((horario, index) => (
-              <option key={index} value={horario.Hora}>
-                {horario.Hora}
-              </option>
-            ))}
-          </select>
-        </div>
+        {selectFecha && (
+          <>
+            <div>
+              <label
+                htmlFor="hourSelect"
+                className="block text-lg lg:text-xl font-medium mb-2"
+              >
+                Horas disponibles:
+              </label>
+              <select
+                id="hourSelect"
+                value={selectHora}
+                onChange={(e) => setSelectHora(e.target.value)}
+                className="block w-full p-2 border border-gray-300 rounded-lg text-lg lg:text-xl"
+              >
+                <option value="" disabled>
+                  Selecciona una hora
+                </option>
+                {horarios
+                  .filter(
+                    (horario) =>
+                      horario.Fecha === format(selectFecha, "yyyy-MM-dd")
+                  )
+                  .map((horario) => (
+                    <option key={horario.IdHorarios} value={horario.Hora}>
+                      {horario.Hora}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div>
+              <label
+                htmlFor="idTipoCita"
+                className="block text-lg lg:text-xl font-medium text-gray-700 mb-2"
+              >
+                Tipo de Cita:
+              </label>
+              <select
+                id="idTipoCita"
+                value={idTipoCita}
+                onChange={handleTipoCitaChange}
+                className="block w-full p-2 lg:p-3 border border-gray-300 rounded-lg text-lg lg:text-xl"
+              >
+                <option value="" disabled>
+                  Selecciona un tipo de cita
+                </option>
+                {tiposCita.map((tipo) => (
+                  <option key={tipo.id} value={tipo.id}>
+                    {tipo.nombre}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label
+                htmlFor="costo"
+                className="block text-lg lg:text-xl font-medium text-gray-700 mb-2"
+              >
+                Costo:
+              </label>
+              <input
+                type="text"
+                id="costo"
+                value={costo}
+                onChange={(e) => setCosto(e.target.value)}
+                className="block w-full p-2 lg:p-3 border border-gray-300 rounded-lg text-lg lg:text-xl"
+                readOnly
+              />
+            </div>
+          </>
+        )}
         <div className="flex justify-center mt-4">
           <button
             onClick={handleSubmit}
@@ -170,6 +304,17 @@ const CrearCita = () => {
           </button>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
