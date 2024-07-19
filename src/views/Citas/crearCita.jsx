@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import {
   format,
   startOfMonth,
@@ -13,7 +14,24 @@ import {
 } from "date-fns";
 import { es } from "date-fns/locale";
 import axios from "axios";
-import useFetchHorarios from "./horarios";
+import useFetchHorarios from "./horariosDisp";
+
+// Función para decodificar JWT
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
+}
 
 // Función para decodificar JWT
 function parseJwt(token) {
@@ -33,14 +51,15 @@ function parseJwt(token) {
 }
 
 const CrearCita = () => {
-  const { horarios, loading, error } = useFetchHorarios();
   const [mesActual, setMesActual] = useState(new Date());
   const [selectFecha, setSelectFecha] = useState(null);
   const [selectHora, setSelectHora] = useState("");
   const [idCliente, setIdCliente] = useState("");
   const [idTipoCita, setIdTipoCita] = useState("");
   const [costo, setCosto] = useState("");
-
+  const { horarios, loading, error } = useFetchHorarios(
+    selectFecha ? format(selectFecha, "yyyy-MM-dd") : null
+  );
   // Datos de los tipos de citas
   const tiposCita = [
     { id: 1, nombre: "Examen de vista", costo: 100 },
@@ -89,8 +108,9 @@ const CrearCita = () => {
   const handleSubmit = async () => {
     if (selectFecha && selectHora && idCliente && idTipoCita && costo) {
       try {
-        const response = await axios.post("http://localhost:3000/cita", {
-          Fecha: format(selectFecha, "yyyy-MM-dd"), // Formato de fecha compatible con la base de datos
+        // Crear la cita
+        const citaResponse = await axios.post("http://localhost:3000/cita", {
+          Fecha: format(selectFecha, "yyyy-MM-dd"),
           Hora: selectHora,
           IdCliente: idCliente,
           IdTipoCita: idTipoCita,
@@ -98,26 +118,47 @@ const CrearCita = () => {
           IdEstadoCita: 1,
         });
 
-        if (response.status === 201) {
-          alert("Cita agendada exitosamente.");
+        if (citaResponse.status === 201) {
+          // Reservar el horario
+          try {
+            const reservaResponse = await axios.post(
+              "http://localhost:3000/horarios/reservar",
+              {
+                Fecha: format(selectFecha, "yyyy-MM-dd"),
+                Hora: selectHora,
+              }
+            );
+
+            if (reservaResponse.status === 200) {
+              toast.success("Cita agendada y horario reservado exitosamente");
+            } else {
+              toast.error(
+                "Cita agendada, pero hubo un problema al reservar el horario"
+              );
+            }
+          } catch (reservaError) {
+              toast.error(
+                `Cita agendada, pero hubo un problema al reservar el horario: ${reservaError.message}`
+              );
+          }
         } else {
-          alert("Hubo un problema al agendar la cita.");
+          toast.error("Hubo un problema al agendar la cita");
         }
       } catch (error) {
         if (error.response) {
           if (error.response.status === 409) {
-            alert("La hora y fecha seleccionada ya están ocupadas.");
+            toast.error("La hora y fecha seleccionada ya están ocupadas");
           } else if (error.response.data && error.response.data.message) {
-            alert(`Error: ${error.response.data.message}`);
+            toast.error(`Error: ${error.response.data.message}`);
           } else {
-            alert("Hubo un problema al agendar la cita.");
+            toast.error("Hubo un problema al agendar la cita");
           }
         } else {
-          alert(`Error: ${error.message}`);
+          toast.error(`Error: ${error.message}`);
         }
       }
     } else {
-      alert("Por favor, completa todos los campos.");
+      toast.error("Por favor, completa todos los campos");
     }
   };
 
@@ -191,13 +232,6 @@ const CrearCita = () => {
     return <div>{rows}</div>;
   };
 
-  // Filtrar horarios disponibles según el día seleccionado
-  const horariosDelDia = selectFecha
-    ? horarios.filter(
-        (horario) => new Date(selectFecha).getDay() === horario.Dia
-      )
-    : [];
-
   return (
     <div className="flex flex-col items-center mt-28 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <div className="px-4 bg-white rounded-xl shadow-md space-y-2 w-full max-w-md lg:max-w-lg xl:max-w-xl">
@@ -224,11 +258,16 @@ const CrearCita = () => {
                 <option value="" disabled>
                   Selecciona una hora
                 </option>
-                {horariosDelDia.map((horario, index) => (
-                  <option key={index} value={horario.Hora}>
-                    {horario.Hora}
-                  </option>
-                ))}
+                {horarios
+                  .filter(
+                    (horario) =>
+                      horario.Fecha === format(selectFecha, "yyyy-MM-dd")
+                  )
+                  .map((horario) => (
+                    <option key={horario.IdHorarios} value={horario.Hora}>
+                      {horario.Hora}
+                    </option>
+                  ))}
               </select>
             </div>
             <div>
@@ -281,6 +320,17 @@ const CrearCita = () => {
           </button>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
