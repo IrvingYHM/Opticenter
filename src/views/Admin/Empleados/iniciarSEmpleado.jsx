@@ -9,6 +9,7 @@ import { toast, ToastContainer } from "react-toastify"; // Importa ToastContaine
 import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
+import Barra from "../../../components/Navegacion/barraAdmin";
 
 function App() {
   const [mostrarContra, setMostrarContra] = useState(false);
@@ -100,6 +101,7 @@ const handleLogout = () => {
   return (
     <>
       {/* Agrega el ToastContainer aquí */}
+      <Barra/>
       <div className="flex-center my-8">
         <div className="w-full h-22 flex items-start flex-col sm:flex-row">
           <div className="sm:block relative w-1/2  h-full  flex flex-col">

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"; // Importa useHistory para manejar la redirección
+import { Link, useNavigate } from "react-router-dom"; // Importa useHistory para manejar la redirección
 import { useForm } from "react-hook-form";
 import React, { useContext, useState, useEffect } from "react";
 import { RegistroContext } from "./RegistroContext";
@@ -302,7 +302,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2">
+              <div className="grid grid-cols-3">
                 <button
                   type="button"
                   onClick={onBack}
@@ -310,6 +310,12 @@ const RDireccion = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
                 >
                   Regresar
                 </button>
+                <Link
+                  to="/inicio"
+                  className="bg-yellow-400 border border-black hover:bg-yellow-500 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"
+                >
+                  Omitir
+                </Link>
                 <button
                   type="submit"
                   className="bg-blue-700 border border-black hover:bg-blue-600 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"

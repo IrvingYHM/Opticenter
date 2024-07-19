@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import React, { useContext, useState, useEffect } from "react";
 import { RegistroContext } from "./RegistroContext";
 
+
 function InfoPersonal({ onNext, onBack, onValidationChange, setMaxWidth }) {
   const { state, dispatch } = useContext(RegistroContext);
   const [isValid, setIsValid] = useState(false); // Estado local de validación
@@ -55,9 +56,12 @@ function InfoPersonal({ onNext, onBack, onValidationChange, setMaxWidth }) {
   };
 
   return (
+    
     <>
       <div className="pt-24 text-center rounded-lg shadow-md overflow-hidden">
+
         <div className="container ml-auto mr-auto">
+          
           <div className="bg-white px-12">
             <p className="sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4">
               Formulario de informacion personal

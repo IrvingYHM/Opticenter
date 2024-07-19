@@ -1,8 +1,10 @@
 import Fot from "../../components/Footer";
+import Barra from "../../components/Navegacion/barra";
 
 function AcercaDe() {
   return (
     <>
+    <Barra/>
       <div className="min-h-screen flex flex-col items-center justify-center pt-24 pb-10 bg-gray-100">
         <div className="grid grid-cols-1 gap-8 max-w-6xl w-full px-8">
           {/* Misión */}

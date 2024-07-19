@@ -4,6 +4,7 @@ import CodigoRecuperacion from "./RecuperacionCodigo";
 
 
 
+
 // Función para decodificar JWT
 /* function parseJwt(token) {
   var base64Url = token.split(".")[1];
@@ -178,6 +179,7 @@ const FormularioPregunta = ({ handleBack }) => {
 
   return (
     <>
+
       <ToastContainer
         position="top-center"
         autoClose={2000}

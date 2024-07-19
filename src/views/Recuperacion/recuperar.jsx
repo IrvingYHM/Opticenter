@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CambioContrasena from "../Rec2/cambioCon";
 import RecuperacionCodigo from "../Rec2/RecuperacionCodigo";
 import QuestionForm from "./RecuperacionPregunta"; // Importa el nuevo componente
+import Barra from "../../components/Navegacion/barra";
 
 function Recuperar() {
   const {
@@ -82,6 +83,7 @@ function Recuperar() {
 
   return (
     <>
+    <Barra/>
       {!correoExistente && (
         <div className="my-28 text-center">
           <div className="container ml-auto mr-auto flex items-center justify-center">
