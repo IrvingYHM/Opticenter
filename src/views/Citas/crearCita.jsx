@@ -43,6 +43,9 @@ const CrearCita = () => {
   const { horarios, loading, error } = useFetchHorarios(
     selectFecha ? format(selectFecha, "yyyy-MM-dd") : null
   );
+  const { horarios, loading, error } = useFetchHorarios(
+    selectFecha ? format(selectFecha, "yyyy-MM-dd") : null
+  );
   // Datos de los tipos de citas
   const tiposCita = [
     { id: 1, nombre: "Examen de vista", costo: 100 },
@@ -94,6 +97,9 @@ const CrearCita = () => {
         // Crear la cita
         const citaResponse = await axios.post("http://localhost:3000/cita", {
           Fecha: format(selectFecha, "yyyy-MM-dd"),
+        // Crear la cita
+        const citaResponse = await axios.post("http://localhost:3000/cita", {
+          Fecha: format(selectFecha, "yyyy-MM-dd"),
           Hora: selectHora,
           IdCliente: idCliente,
           IdTipoCita: idTipoCita,
@@ -124,23 +130,52 @@ const CrearCita = () => {
                 `Cita agendada, pero hubo un problema al reservar el horario: ${reservaError.message}`
               );
           }
+        if (citaResponse.status === 201) {
+          // Reservar el horario
+          try {
+            const reservaResponse = await axios.post(
+              "http://localhost:3000/horarios/reservar",
+              {
+                Fecha: format(selectFecha, "yyyy-MM-dd"),
+                Hora: selectHora,
+              }
+            );
+
+            if (reservaResponse.status === 200) {
+              toast.success("Cita agendada y horario reservado exitosamente");
+            } else {
+              toast.error(
+                "Cita agendada, pero hubo un problema al reservar el horario"
+              );
+            }
+          } catch (reservaError) {
+              toast.error(
+                `Cita agendada, pero hubo un problema al reservar el horario: ${reservaError.message}`
+              );
+          }
         } else {
+          toast.error("Hubo un problema al agendar la cita");
           toast.error("Hubo un problema al agendar la cita");
         }
       } catch (error) {
         if (error.response) {
           if (error.response.status === 409) {
             toast.error("La hora y fecha seleccionada ya están ocupadas");
+            toast.error("La hora y fecha seleccionada ya están ocupadas");
           } else if (error.response.data && error.response.data.message) {
             toast.error(`Error: ${error.response.data.message}`);
+            toast.error(`Error: ${error.response.data.message}`);
           } else {
+            toast.error("Hubo un problema al agendar la cita");
             toast.error("Hubo un problema al agendar la cita");
           }
         } else {
           toast.error(`Error: ${error.message}`);
+          toast.error(`Error: ${error.message}`);
         }
       }
     } else {
+      toast.error("Por favor, completa todos los campos");
       toast.error("Por favor, completa todos los campos");
     }
   };
@@ -251,6 +286,16 @@ const CrearCita = () => {
                       {horario.Hora}
                     </option>
                   ))}
+                {horarios
+                  .filter(
+                    (horario) =>
+                      horario.Fecha === format(selectFecha, "yyyy-MM-dd")
+                  )
+                  .map((horario) => (
+                    <option key={horario.IdHorarios} value={horario.Hora}>
+                      {horario.Hora}
+                    </option>
+                  ))}
               </select>
             </div>
             <div>
@@ -303,6 +348,17 @@ const CrearCita = () => {
           </button>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <ToastContainer
         position="top-center"
         autoClose={5000}

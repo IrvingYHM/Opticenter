@@ -3,7 +3,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import Fot from "../../../components/Footer";
-import Barra from "../../../components/Navegacion/barraAdmin";
+import Barra from "../../../components/Navegacion/barra";
+
 
 function App() {
   const [productos, setProductos] = useState([]);
