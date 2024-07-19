@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Inicio from "./views/inicio";
 import Lentes from "../src/views/Lente/inicio";
 import LenteS from "./views/lentesS";
+import InicioAd from "./views/Admin/inicioadmin"
 
 /* import Accesorios from "./views/accesorios"; */
 import Accesorios from "../src/views/accesorios"
@@ -15,6 +16,7 @@ import IniciarSEmpleado from "./views/Admin/Empleados/iniciarSEmpleado";
 import TerminoC from "./views/terminosC";
 import GestionarC from "./views/Citas/opcionRe";
 import Carrito from "./views/Lente/carrito";
+
 
 //Esta barra es temporal
 import BarraNavegacion from "./components/Navegacion/barraResponsiva";
@@ -157,6 +159,9 @@ function App() {
               <Route path="/ClientesAd" element={<ClienteAd />} />
               <Route path="/EmpleadoAd" element={<EmpleadoAd />} />
               <Route path="/AgEmpleado" element={<AgEmpleado/>} />
+              <Route path="/inicioAd" element={<InicioAd/>} />
+
+              
               
           <Route
             path="/productos-encontrados"

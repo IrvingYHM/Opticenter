@@ -193,7 +193,7 @@ function Barra() {
         </div>
       </div>
 
-      <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-60">
+      <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-36"> {/* quitar si esque los quiero a un lado */}
 {/*         <div className="flex items-center justify-center">
           <Busqueda
             busqueda={busqueda}
@@ -204,18 +204,18 @@ function Barra() {
 
         <div className="w-18 md:w-25 h-16 md:h-20 flex items-center space-x-5">
           <Link
-            to="/inicio"
+            to="/inicioAd"
             className=" hover:border-b-2 border-blue-700 font-bold flex items-center"
           >
             <AiOutlineHome size={20} className="mr-1" /> Inicio
           </Link>
-          <Link
+{/*           <Link
             to="/lentes"
             className=" hover:border-b-2 border-blue-700 font-bold flex items-center"
           >
             <BiGlassesAlt size={20} className="mr-1" />
             Lentes
-          </Link>
+          </Link> */}
           {/*           <Link
             to="/accesorios"
             className=" hover:border-b-2 border-blue-700 font-bold flex items-center"
@@ -243,6 +243,18 @@ function Barra() {
                 className="hover:border-b-2 border-blue-700 font-bold flex items-center"
               >
                 Empleados
+              </Link>
+              <Link
+                to="/EmpleadoAd"
+                className="hover:border-b-2 border-blue-700 font-bold flex items-center"
+              >
+                Reportes
+              </Link>
+              <Link
+                to="/EmpleadoAd"
+                className="hover:border-b-2 border-blue-700 font-bold flex items-center"
+              >
+                Administracion de citas
               </Link>
 {/*               <Link
                 to="/Dashboard"
@@ -325,9 +337,9 @@ function Barra() {
             </>
           )}
 
-          <Link to="/carrito">
+{/*           <Link to="/carrito">
             <FaShoppingCart size={30} className="rounded-md" alt="carrito" />
-          </Link>
+          </Link> */}
         </div>
       </div>
     </nav>
