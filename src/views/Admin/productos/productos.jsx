@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link} from "react-router-dom";
 import Fot from "../../../components/Footer";
-import Barra from "../../../components/Navegacion/barra";
+import Barra from "../../../components/Navegacion/barraAdmin";
 
 
 function App() {
