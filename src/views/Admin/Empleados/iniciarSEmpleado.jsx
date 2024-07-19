@@ -1,6 +1,6 @@
-import Fot from "../../components/Footer";
+import Fot from "../../../components/Footer";
 import { useState, useEffect } from "react";
-import imagen from "../../img/pai.jpg";
+import imagen from "../../../img/pai.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -65,7 +65,7 @@ function App() {
 
 
           setTimeout(() => {
-            window.location.href = "/inicio";
+            window.location.href = "/inicioAd";
           }, 4000);
         } else {
           setIntentosFallidos(intentosFallidos + 1);
@@ -201,10 +201,10 @@ const handleLogout = () => {
                   </div>
                 </div>
                 <div className="w-full flex items-center justify-between">
-                  <div className="w-full flex items-center">
+{/*                   <div className="w-full flex items-center">
                     <input type="checkbox" className="w-4 h-4 mr-2" />
                     <p className="text-sm">Recordar contraseña</p>
-                  </div>
+                  </div> */}
 {/*                   <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
                     <Link to="/Recuperar">¿Olvidaste tu contraseña?</Link>
                   </p> */}

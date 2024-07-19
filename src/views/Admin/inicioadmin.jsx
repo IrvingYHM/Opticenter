@@ -1,11 +1,11 @@
 import { useState } from "react";
 /* import Navbar from "../components/BarraNavegacion"; */
-import Slider from "../home/slider";
-import Fot from "../components/Footer";
-import imagen from "../img/Venta.png";
-import imagen2 from "../img/lentes2.png";
-import Scrool from '../components/scroll';
-import Barra from "../components/Navegacion/barra";
+import Slider from "../../home/slider";
+import Fot from "../../components/Footer";
+import imagen from "../../img/Venta.png";
+import imagen2 from "../../img/lentes2.png";
+import Scrool from '../../components/scroll';
+import Barra from "../../components/Navegacion/barraAdmin";
 
 
 function App() {

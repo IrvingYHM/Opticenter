@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
 import { AuthContext } from "./AuthContext";
+/* import Barra from '../components/barra' */
 
 
 function App() {
@@ -116,6 +117,7 @@ useEffect(() => {
 
   return (
     <>
+{/*     <Barra/> */}
       {/* Agrega el ToastContainer aquí */}
       <div className="flex-center my-8">
         <div className="w-full h-22 flex items-start flex-col sm:flex-row">

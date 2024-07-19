@@ -6,6 +6,7 @@ import { CartContext } from "./context/cart";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom"; // Importa useHistory para manejar la redirección
+import Barra from "../../components/Navegacion/barra";
 
 
 function parseJwt(token) {
@@ -262,6 +263,7 @@ const DetalleProducto = () => {
 
   return (
     <div>
+      <Barra/>
       {mostrarDetalles && (
         <div className="container mx-auto px-6 py-20">
           <div className="md:flex md:items-center">

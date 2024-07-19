@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify"; 
+import { toast, ToastContainer } from "react-toastify";
 import {
   format,
   startOfMonth,
@@ -33,6 +33,23 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
+// Función para decodificar JWT
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
+}
+
 const CrearCita = () => {
   const [mesActual, setMesActual] = useState(new Date());
   const [selectFecha, setSelectFecha] = useState(null);
@@ -43,7 +60,6 @@ const CrearCita = () => {
   const { horarios, loading, error } = useFetchHorarios(
     selectFecha ? format(selectFecha, "yyyy-MM-dd") : null
   );
-
   // Datos de los tipos de citas
   const tiposCita = [
     { id: 1, nombre: "Examen de vista", costo: 100 },
