@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 >>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
 import Fot from "../../../components/Footer";
-import Barra from "../../../components/Navegacion/barra";
+import Barra from "../../../components/Navegacion/barraAdmin";
 
 
 function App() {
