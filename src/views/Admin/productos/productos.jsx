@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Fot from "../../../components/Footer";
 import Barra from "../../../components/Navegacion/barra";
 
-function App() {
+function ProductsList() {
   const [productos, setProductos] = useState([]);
   const [categorias, setCategorias] = useState({});
   const [marcas, setMarcas] = useState({});
@@ -35,6 +35,24 @@ function App() {
       });
   }, []);
 
+  const handleDeactivate = (id) => {
+    fetch(`http://localhost:3000/productos/desactivar/${id}`, {
+      method: "PUT"
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al desactivar el producto");
+        }
+        toast.success("Producto desactivado con éxito");
+        setProductos(prevProductos => prevProductos.map(producto => 
+          producto.IdProducto === id ? { ...producto, activo: false, Existencias: 0 } : producto
+        ));
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Error al desactivar el producto");
+      });
+  };
 
   return (
     <>
@@ -63,22 +81,16 @@ function App() {
               <h2 className="text-xl font-bold mb-2">{producto.vchNombreProducto}</h2>
               <p className="text-gray-600 mb-2">{producto.vchDescripcion}</p>
               <p className="text-gray-800 font-semibold mb-2">Precio: ${producto.Precio}</p>
-              <p className="text-gray-600 mb-2">Existencias: {producto.Existencias}</p>
+              <p className="text-gray-600 mb-2">Existencias: {producto.Existencias > 0 ? producto.Existencias : 'Agotado'}</p>
               <p className="text-gray-600 mb-2">Categoría: {categorias[producto.IdCategoria] || 'Sin categoría'}</p>
               <p className="text-gray-600 mb-4">Marca: {marcas[producto.IdMarca] || 'Sin marca'}</p>
               <div className="flex justify-between items-center">
                 <Link
                   to={`/ModificarProducto/${producto.IdProducto}`}
                   className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mt-4"
-
                 >
                   Editar
                 </Link>
-                <button
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mt-4"
-              >
-                Desactivar Producto
-              </button>
               </div>
             </div>
           ))}
@@ -89,4 +101,4 @@ function App() {
   );
 }
 
-export default App;
+export default ProductsList;
