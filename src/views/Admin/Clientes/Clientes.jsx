@@ -2,8 +2,18 @@ import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
+import Fot from "../../../components/Footer";
+import BarraAd from "../../../components/Navegacion/barra";
+=======
+<<<<<<<< HEAD:src/views/Admin/Clientes.jsx
+import BarraAd from "../../components/Navegacion/barraAdmin";
+
+========
 import Fot from "../../../components/Footer";
 import BarraAd from "../../../components/Navegacion/barraAdmin";
+>>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d:src/views/Admin/Clientes/Clientes.jsx
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
 
 function App() {
   const [clientes, setClientes] = useState([]);

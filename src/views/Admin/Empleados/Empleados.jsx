@@ -3,7 +3,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import Fot from "../../../components/Footer";
+<<<<<<< HEAD
+import BarraAd from "../../../components/Navegacion/barra";
+=======
 import BarraAd from "../../../components/Navegacion/barraAdmin";
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
 
 function App() {
   const [empleado, setEmpleado] = useState([]);

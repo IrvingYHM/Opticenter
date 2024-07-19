@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+import React from "react";
+import Fot from '../../components/Footer';
+
+function App() {
+  return (
+    <div>
+      <h1>Ver direccion</h1>
+    <Fot/>
+
+=======
 import React, { useState, useEffect } from "react";
 import Fot from "../../components/Footer";
 
@@ -189,8 +200,13 @@ function VerEditarDireccion() {
         </div>
       </div>
       <Fot />
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
     </div>
   );
 }
 
+<<<<<<< HEAD
+export default App;
+=======
 export default VerEditarDireccion;
+>>>>>>> 9aab8472febf2c120072cf55a622eb3e0f45f15d
