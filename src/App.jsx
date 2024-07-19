@@ -36,6 +36,8 @@ import Barra from "./components/Navegacion/barra";
 import Productos from "./views/Admin/productos/productos";
 import ProductosEncontrados from "./views/bus/ProductosEncontrados";
 import AgregarProductos from './views/Admin/productos/agregarProductos';
+import ModificarProducto from './views/Admin/productos/modificarProducto';
+
 
 //import Piepa from './components/foother';
 import Opcion from "./views/Rec2/Opcion";
@@ -149,8 +151,11 @@ function App() {
               <Route path="*" element={<NotFound />} />
               <Route path="500" element={<NotFound500 />} />
               {/* Rutas para productos */}
+
+              <Route path="/" element={<App />} />
               <Route path="/Productos" element={<Productos />} />
               <Route path="/ProductosAg" element={<AgregarProductos />} />
+              <Route path="/ModificarProducto/:id" element={<ModificarProducto/>} />
               <Route path="/opcionesConfig" element={<Opciones/>}/>
               <Route path='/VerDireccion' element={<VerDireccion/>}/>
               <Route path='/CambiarContraseñaPerfil' element={<CambiarContraseñaPerfil/>}/>
