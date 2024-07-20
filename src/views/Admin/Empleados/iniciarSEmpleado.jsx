@@ -9,7 +9,7 @@ import { toast, ToastContainer } from "react-toastify"; // Importa ToastContaine
 import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
-import Barra from "../../../components/Navegacion/barraAdmin";
+import Barra from "../../../components/Navegacion/barra";
 
 function App() {
   const [mostrarContra, setMostrarContra] = useState(false);

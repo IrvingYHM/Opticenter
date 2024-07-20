@@ -149,17 +149,17 @@ function Barra() {
         {/* Agregar clase 'block' o 'hidden' dependiendo del estado de visibilidad del menú */}
         <div className="flex flex-col items-center mt-4">
           <Link
-            to="/inicio"
+            to="/inicioAd"
             className="hover:bg-blue-900 rounded-md font-bold flex items-center"
           >
             <AiOutlineHome size={20} className="mr-1" /> Inicio
           </Link>
-          <Link
+{/*           <Link
             to="/lentes"
             className="hover:bg-blue-900 rounded-md font-bold flex items-center"
           >
             Lentes
-          </Link>
+          </Link> */}
           <Link
             to="/lentesS"
             className="hover:bg-blue-900 rounded-md font-bold flex items-center"

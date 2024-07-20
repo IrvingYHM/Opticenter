@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Fot from "../../components/Footer";
+import Barra from "../../components/Navegacion/barra";
 
 function VerEditarDireccion() {
   const [direccioncli, setDireccioncli] = useState({});
@@ -57,6 +58,7 @@ function VerEditarDireccion() {
 
   return (
     <div>
+      <Barra/>
       <div className="py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <div className="bg-white overflow-hidden shadow rounded-lg">

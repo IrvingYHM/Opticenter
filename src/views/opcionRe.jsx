@@ -1,9 +1,11 @@
 import Fot from '../components/Footer';
 import { Link } from 'react-router-dom';
+import Barra from "../components/Navegacion/barra";
 
 function App() {
   return (
     <div>
+      <Barra/>
       <div className='my-24 text-center'>
         <div className='container ml-auto mr-auto flex items-center justify-center'>
           <p className='sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4'>Configuracion</p>
