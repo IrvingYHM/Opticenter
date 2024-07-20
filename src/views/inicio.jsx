@@ -53,7 +53,6 @@ function App() {
         <div className="my-32 ">
           <Slider />
           <br />
-
           
           <div className="flex flex-col md:flex-row">
             <div className="max-w-sm rounded overflow-hidden shadow-lg mx-8">
