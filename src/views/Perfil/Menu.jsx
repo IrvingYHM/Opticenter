@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 /* import bcrypt from "bcryptjs"; */
+import Barra from "../../components/Navegacion/barra";
+import Fot from "../../components/Footer";
 
 // Función para decodificar JWT
 function parseJwt(token) {
@@ -104,7 +106,9 @@ function ProfileCard() {
   }
 
   return (
+    <div>
     <div className="flex flex-col justify-center items-center py-24">
+      <Barra/>
       <div className="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-white bg-clip-border shadow-3xl shadow-shadow-500 p-3">
         <div className="mt-2 mb-8 w-full">
           <h4 className="px-2 text-xl text-center font-bold text-navy-700">
@@ -224,6 +228,9 @@ function ProfileCard() {
           </button>
         )}
       </div>
+
+    </div>
+    <Fot/>
     </div>
   );
 }

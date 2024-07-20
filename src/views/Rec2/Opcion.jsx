@@ -3,6 +3,7 @@ import Fot from "../../components/Footer";
 import imagen from "../../img/contra.jpg";
 import FormularioPregunta from "./PreguntaS";
 import FormularioCodigo from "./recuperar";
+import Barra from "../../components/Navegacion/barra";
 
 const Opcion = () => {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
@@ -20,6 +21,7 @@ const Opcion = () => {
 
   return (
     <>
+    <Barra/>
       <div className="flex items-center justify-center py-28">
       <div className="relative flex w-22 max-w-[48rem] flex-row rounded-xl bg-white text-gray-700 shadow-md border border-black ">
 

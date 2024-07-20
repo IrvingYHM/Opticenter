@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Inicio from "./views/inicio";
 import Lentes from "../src/views/Lente/inicio";
 import LenteS from "./views/lentesS";
-import InicioAd from "./views/Admin/inicioadmin"
+import InicioAd from "../src/views/Admin/inicioadmin";
 
 /* import Accesorios from "./views/accesorios"; */
 import Accesorios from "../src/views/accesorios"
@@ -31,7 +31,6 @@ import Registrarse from "./views/Registro/RegistroPage";
 import Cambiar from "./views/Recuperacion/cambioCon";
 import AgendarCita from "./views/Citas/crearCita";
 import Barra from "./components/Navegacion/barra";
-
 //Seccion productos del administrador
 import Productos from "./views/Admin/productos/productos";
 import ProductosEncontrados from "./views/bus/ProductosEncontrados";
@@ -41,13 +40,12 @@ import EditarProducto from './views/Admin/productos/modificarProducto'
 //import Piepa from './components/foother';
 import Opcion from "./views/Rec2/Opcion";
 import { CartProvider } from "./views/Lente/context/cart";
+/* import inicioAd from './views/Admin/inicioadmin'; */
 
 import DetalleProducto from "./views/Lente/DetalleProducto";
 import Opciones from './views/opcionRe';
 import VerDireccion from './views/Perfil/verDireccion'
 import CambiarContraseñaPerfil from './views/Perfil/CambiarContra'
-
-
 import { AuthProvider } from "./views/AuthContext";
 import AcercaDe from './views/Footer/AcercaDe'
 import Matematicas from './views/Calculadora/Mate';
@@ -76,7 +74,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Barra />
+{/*         <Barra /> */}
         {/* <BarraNavegacion /> */}
 
         <CartProvider>
@@ -84,6 +82,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Inicio />} />
               <Route path="/inicio" element={<Inicio />} />
+              <Route path="/inicioAd" element={<InicioAd/>} />
               <Route path="/Menu" element={<Menu />} />
 
               <Route path="/lentes" element={<Lentes />} />
@@ -163,6 +162,7 @@ function App() {
               <Route path="/ClientesAd" element={<ClienteAd />} />
               <Route path="/EmpleadoAd" element={<EmpleadoAd />} />
               <Route path="/AgEmpleado" element={<AgEmpleado/>} />
+              <Route path="/inicioAd" element={<inicioAd />} />
               <Route path="/editarEmpleado/:id" element={<EditarEmpleado />} />
               
           <Route
@@ -174,6 +174,8 @@ function App() {
           <Route path="/Matematicas" element={<Matematicas/>}/>
           <Route path="/Mate" element={<Matematicas2/>}/>
           <Route path="/Mate3" element={<Matematicas3/>}/>
+
+
 
 
 

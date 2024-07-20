@@ -5,6 +5,7 @@ import InfoPersonal from "./InfoPersonal";
 import RCorreo from "./RCorreo";
 import RContraseña from "./RContraseña";
 import RDireccion from "./RDireccion";
+import Barra from "../../components/Navegacion/barra";
 
 const RegistroPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,6 +30,7 @@ const RegistroPage = () => {
 
   return (
     <RegistroProvider>
+      <Barra/>
       <div className="py-24">
         <div className={`max-w-${maxWidth} mx-auto bg-white rounded-xl shadow-lg overflow-hidden`}>
           <div className="bg-slate-200">

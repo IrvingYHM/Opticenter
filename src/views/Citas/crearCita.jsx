@@ -16,7 +16,7 @@ import {
 import { es } from "date-fns/locale";
 import axios from "axios";
 import useFetchHorarios from "./horariosDisp";
-
+import Barra from "../../components/Navegacion/barra";
 // Función para decodificar JWT
 function parseJwt(token) {
   var base64Url = token.split(".")[1];
@@ -236,6 +236,7 @@ const CrearCita = () => {
 
   return (
     <div className="flex flex-col items-center mt-28 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <Barra/>
       <div className="px-4 bg-white rounded-xl shadow-md space-y-2 w-full max-w-md lg:max-w-lg xl:max-w-xl">
         {renderHeader()}
         {renderDays()}
