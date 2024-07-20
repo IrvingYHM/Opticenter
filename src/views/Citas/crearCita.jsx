@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify"; 
+import { useNavigate } from "react-router-dom"; 
+import { toast, ToastContainer } from "react-toastify";
 import {
   format,
   startOfMonth,
@@ -40,9 +41,11 @@ const CrearCita = () => {
   const [idCliente, setIdCliente] = useState("");
   const [idTipoCita, setIdTipoCita] = useState("");
   const [costo, setCosto] = useState("");
+  const [descripcionT, setDescripcionT] = useState("");
   const { horarios, loading, error } = useFetchHorarios(
     selectFecha ? format(selectFecha, "yyyy-MM-dd") : null
-  );
+  );  
+  const navigate = useNavigate();
 
   // Datos de los tipos de citas
   const tiposCita = [
@@ -50,6 +53,7 @@ const CrearCita = () => {
     { id: 2, nombre: "Ajuste de Gafas", costo: 150 },
     { id: 3, nombre: "Examen de Lentes de Contacto", costo: 120 },
     { id: 4, nombre: "Examen de Salud Ocular", costo: 160 },
+    { id: 5, nombre: "Otro", costo: 180 },
   ];
 
   useEffect(() => {
@@ -86,11 +90,21 @@ const CrearCita = () => {
     if (tipoCitaSeleccionada) {
       setIdTipoCita(tipoCitaSeleccionada.id);
       setCosto(tipoCitaSeleccionada.costo);
+      if (tipoCitaSeleccionada.id !== 5) {
+        setDescripcionT(""); // Resetea el campo "Otro" si no está seleccionado
+      }
     }
   };
 
   const handleSubmit = async () => {
-    if (selectFecha && selectHora && idCliente && idTipoCita && costo) {
+    if (
+      selectFecha &&
+      selectHora &&
+      idCliente &&
+      idTipoCita &&
+      costo &&
+      (idTipoCita !== 5 || (idTipoCita === 5 && descripcionT))
+    ) {
       try {
         // Crear la cita
         const citaResponse = await axios.post("http://localhost:3000/cita", {
@@ -100,6 +114,7 @@ const CrearCita = () => {
           IdTipoCita: idTipoCita,
           Costo: costo,
           IdEstadoCita: 1,
+          DescripcionT: idTipoCita === 5 ? descripcionT : null,
         });
 
         if (citaResponse.status === 201) {
@@ -115,15 +130,18 @@ const CrearCita = () => {
 
             if (reservaResponse.status === 200) {
               toast.success("Cita agendada y horario reservado exitosamente");
+              setTimeout(() => {
+                navigate("/inicio"); // Redirige al usuario a la página de inicio de sesión
+              }, 5000);
             } else {
               toast.error(
                 "Cita agendada, pero hubo un problema al reservar el horario"
               );
             }
           } catch (reservaError) {
-              toast.error(
-                `Cita agendada, pero hubo un problema al reservar el horario: ${reservaError.message}`
-              );
+            toast.error(
+              `Cita agendada, pero hubo un problema al reservar el horario: ${reservaError.message}`
+            );
           }
         } else {
           toast.error("Hubo un problema al agendar la cita");
@@ -278,6 +296,23 @@ const CrearCita = () => {
                 ))}
               </select>
             </div>
+            {idTipoCita === 5 && (
+              <div>
+                <label
+                  htmlFor="descripcionT"
+                  className="block text-lg lg:text-xl font-medium text-gray-700 mb-2"
+                >
+                  Describe el tipo de tratamiento:
+                </label>
+                <input
+                  type="text"
+                  id="descripcionT"
+                  value={descripcionT}
+                  onChange={(e) => setDescripcionT(e.target.value)}
+                  className="block w-full p-2 lg:p-3 border border-gray-300 rounded-lg text-lg lg:text-xl"
+                />
+              </div>
+            )}
             <div>
               <label
                 htmlFor="costo"

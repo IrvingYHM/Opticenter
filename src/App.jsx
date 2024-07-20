@@ -35,6 +35,7 @@ import Barra from "./components/Navegacion/barra";
 import Productos from "./views/Admin/productos/productos";
 import ProductosEncontrados from "./views/bus/ProductosEncontrados";
 import AgregarProductos from './views/Admin/productos/agregarProductos';
+import EditarProducto from './views/Admin/productos/modificarProducto'
 
 //import Piepa from './components/foother';
 import Opcion from "./views/Rec2/Opcion";
@@ -54,10 +55,7 @@ import Menu from './views/Perfil/Menu';
 import ClienteAd from './views/Admin/Clientes/Clientes';
 import EmpleadoAd from './views/Admin/Empleados/Empleados';
 import AgEmpleado from './views/Admin/Empleados/Registro/RegistroPage';
-
-// administrador
-
-
+import EditarEmpleado from './views/Admin/Empleados/editarEmpleado';
 
 
 
@@ -155,6 +153,7 @@ function App() {
               <Route path="/" element={<App />} />
               <Route path="/Productos" element={<Productos />} />
               <Route path="/ProductosAg" element={<AgregarProductos />} />
+              <Route path="/ModificarProducto/:id" element={<EditarProducto />} />
               <Route path="/opcionesConfig" element={<Opciones/>}/>
               <Route path='/VerDireccion' element={<VerDireccion/>}/>
               <Route path='/CambiarContraseñaPerfil' element={<CambiarContraseñaPerfil/>}/>
@@ -164,7 +163,7 @@ function App() {
               <Route path="/EmpleadoAd" element={<EmpleadoAd />} />
               <Route path="/AgEmpleado" element={<AgEmpleado/>} />
               <Route path="/inicioAd" element={<inicioAd />} />
-              
+              <Route path="/editarEmpleado/:id" element={<EditarEmpleado />} />
               
           <Route
             path="/productos-encontrados"
