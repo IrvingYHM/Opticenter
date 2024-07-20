@@ -7,14 +7,14 @@ export default {
         danger: "#FFD099",
         turquesa: "#19BDFD",
         aRey: "#1446F5",
+        azulOp: "#6786F6",
       },
-
-      spacing: {
-        "5/8":"38px"
+      spacing:{
+/*         22:"88px", */
+        "5/8":"38px",
       },
-
-      borderWidth: {
-        1: "1px",
+      translate: {
+        90: "22.5rem",
       },
     },
   },

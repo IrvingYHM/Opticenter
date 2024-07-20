@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { FaCookieBite } from "react-icons/fa";
 import poli from "../img/politica.png";
 
+/* import { useCart } from "../views/Lente/hooks/useCart"; */
+
 export default function Footer() {
+/*   const { cart } = useCart(); */
+
   return (
     <footer className="bg-turquesa">
       <div className="w-full max-w-screen-xl p-4 py-6 mx-auto lg:p-8">
@@ -20,11 +24,23 @@ export default function Footer() {
           </div>
           <div className="mb-6 md:mb-0 md:flex md:items-center"></div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+            {/* TEXTO FOOTER */}
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-600 uppercase">
-                síguenos
+              <h2 className="mb-6 text-lg font-bold uppercase">
+                Sobre nosotros
               </h2>
-              <ul className="font-medium text-gray-900">
+              <Link
+                to="/inicio/AcercaDe"
+                className="hover:underline -translate-x-1 font-medium space-y-2"
+              >
+                Acerca de
+              </Link>
+            </div>
+
+            <div>
+              <h2 className="mb-6 text-lg font-bold uppercase">síguenos</h2>
+              <a href=""></a>
+              <ul className="font-medium">
                 <li className="mb-4">
                   <a
                     href="https://www.facebook.com/profile.php?id=100076763264003"
@@ -36,12 +52,11 @@ export default function Footer() {
                   </a>
                 </li>
               </ul>
+{/*               <div>{JSON.stringify(cart, null, 2)}</div> */}
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-200 uppercase">
-                Legal
-              </h2>
-              <ul className="font-medium text-gray-300 space-y-2">
+              <h2 className="mb-6 text-lg font-bold uppercase">Legal</h2>
+              <ul className="font-medium space-y-2">
                 <li className="mb-4 flex items-center">
                   <img
                     className="-translate-x-2"

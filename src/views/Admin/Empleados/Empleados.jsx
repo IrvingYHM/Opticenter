@@ -30,6 +30,7 @@ function App() {
     fetchEmpleados();
   }, []);
 
+      // Manejar baja del empleado
   const handleDeactivate = () => {
     fetch(`http://localhost:3000/empleados/empleado/${id}/baja`, {
       method: "PUT",

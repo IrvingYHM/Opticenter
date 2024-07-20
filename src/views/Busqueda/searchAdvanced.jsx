@@ -32,17 +32,20 @@ const SearchAdvanced = () => {
   }, []);
 
   const buscar = () => {
-    const resultadosFiltrados = lentesData.filter((item) => {
-      return (
-        (nombre === "" ||
-          item.nombre.toLowerCase().includes(nombre.toLowerCase())) &&
-        (categoria === "all" || item.categoria === categoria) &&
-        (genero === "all" || item.genero === genero) &&
-        (marca === "all" || item.marca === marca)
-      );
-    });
-
-    setResultados(resultadosFiltrados);
+    fetch(`http://localhost:3000/productos/Buscar_productos?busqueda=${nombre}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al buscar productos");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setResultados(data);
+      })
+      .catch((error) => {
+        console.error(error);
+        setResultados([]);
+      });
   };
 
   const mostrarResultados = () => {
@@ -50,56 +53,46 @@ const SearchAdvanced = () => {
       return <p>No se encontraron resultados.</p>;
     }
 
-    return (
-      <div className="ml-2 flex">
-        <div className="flex flex-wrap">
-          {resultados.map((item) => (
-            <div
-              key={item.nombre}
-              className="mx-4 mb-4 ml-10 bg-green-700 w-1/3 p-4 border border-gray-800"
-            >
-              <img
-                src={item.imagen}
-                alt={item.nombre}
-                className="mr-4 max-w-16"
-              />
-              <div className="flex-grow">
-                <label className="block mb-2">
-                  <strong>Nombre: </strong>
-                  {item.nombre}
-                </label>
-                <label className="block mb-2">
-                  <strong>Categoria: </strong>
-                  {item.categoria}
-                </label>
-                <label className="block mb-2">
-                  <strong>Género: </strong>
-                  {item.genero}
-                </label>
-                <label className="block mb-2">
-                  <strong>Precio: </strong>${item.precio}
-                </label>
-                <label className="block mb-2">
-                  <strong>Marca: </strong>
-                  {item.marca}
-                </label>
-                <label className="block mb-2">
-                  <strong>Graduación: </strong>
-                  {item.graduacion}
-                </label>
-              </div>
-            </div>
-          ))}
+    return resultados.map((item) => (
+      <div
+        key={item.nombre}
+        className="w-3/4 p-4 flex flex-wrap bg-white border border-gray-300 mb-4"
+      >
+        <img src={item.imagen} alt={item.nombre} className="mr-4 max-w-16" />
+        <div className="flex-grow">
+          <label className="block mb-2">
+            <strong>Nombre: </strong>
+            {item.vchNombreProducto}
+          </label>
+          <label className="block mb-2">
+            <strong>Categoria: </strong>
+            {item.categoria}
+          </label>
+          <label className="block mb-2">
+            <strong>Género: </strong>
+            {item.genero}
+          </label>
+          <label className="block mb-2">
+            <strong>Precio: </strong>${item.Precio}
+          </label>
+          <label className="block mb-2">
+            <strong>Marca: </strong>
+            {item.marca}
+          </label>
+          <label className="block mb-2">
+            <strong>Graduación: </strong>
+            {item.graduacion}
+          </label>
         </div>
       </div>
-    );
+    ));
   };
 
   return (
     <div className="flex">
-      <div className="w-1/4 p-4 bg-gray-300">
+      <div className="w-1/4 p-4">
         <label className="block mb-2" htmlFor="name">
-          <strong>Nombre:</strong>
+          Nombre:
         </label>
         <input
           type="text"
@@ -111,7 +104,7 @@ const SearchAdvanced = () => {
         />
 
         <label className="block mb-2" htmlFor="category">
-          <strong>Categoría:</strong>
+          Categoría:
         </label>
         <select
           className="capitalize w-full border p-2 mb-4"
@@ -127,7 +120,7 @@ const SearchAdvanced = () => {
         </select>
 
         <label className="block mb-2" htmlFor="genero">
-          <strong>Género:</strong>
+          Género:
         </label>
         <select
           className="capitalize w-full border p-2 mb-4"
@@ -143,7 +136,7 @@ const SearchAdvanced = () => {
         </select>
 
         <label className="block mb-2" htmlFor="marca">
-          <strong>Marca:</strong>
+          Marca:
         </label>
         <select
           className="capitalize w-full border p-2 mb-4"
@@ -158,10 +151,7 @@ const SearchAdvanced = () => {
           ))}
         </select>
 
-        <button
-          onClick={buscar}
-          className="bg-blue-500 text-white p-2 rounded-lg"
-        >
+        <button onClick={buscar} className="bg-blue-500 text-white p-2">
           Buscar
         </button>
       </div>

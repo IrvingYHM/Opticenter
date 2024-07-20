@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import React, { useContext, useState, useEffect } from "react";
 import { RegistroContext } from "./RegistroContext";
 
-function InfoPersonal({ onNext, onBack, onValidationChange }) {
+function InfoPersonal({ onNext, onBack, onValidationChange, setMaxWidth }) {
   const { state, dispatch } = useContext(RegistroContext);
   const [isValid, setIsValid] = useState(false); // Estado local de validación
 
@@ -19,6 +19,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
   } = useForm();
 
   useEffect(() => {
+    setMaxWidth("md"); //Tamaño maximo del formulario
     const isValid = Object.keys(errors).length === 0;
     setIsValid(isValid);
     // Verificar si onValidationChange está definida antes de llamarla
@@ -48,10 +49,10 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
       alert("Debes tener al menos 18 años para registrarte.");
       return; // Detener la función aquí si hay un error
     } else {
+      handleInfoChange(data); // Envía todo el objeto data
       onNext(); // Pasar al siguiente paso si el formulario es válido
     }
   };
-
 
   return (
     <>
@@ -75,12 +76,12 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                 </label>
                 <input
                   type="text"
-                  id="nombre"
-                  name="nombre"
+                  id="vchNomCliente"
+                  name="vchNomCliente"
                   placeholder="Nombre"
                   onChange={(e) => {
                     const value = e.target.value.replace(/[0-9]/g, ""); // Eliminar números de la entrada
-                    handleInfoChange({ nombre: value }); // Actualizar el estado con el valor limpio
+                    handleInfoChange({ vchNomCliente: value }); // Actualizar el estado con el valor limpio
                   }}
                   onKeyDown={(e) => {
                     if (!/[A-Za-zÀ-ÖØ-öø-ÿ\s]/.test(e.key)) {
@@ -88,7 +89,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                     }
                   }}
                   required
-                  {...register("nombre", {
+                  {...register("vchNomCliente", {
                     required: {
                       value: true,
                       message: "El campo es requerido",
@@ -106,9 +107,9 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                   className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
-              {errors.nombre && (
-                <span className="text-red-500 text-base -mt-3 mb-2">*
-                  {errors.nombre.message}
+              {errors.vchNomCliente && (
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.vchNomCliente.message}
                 </span>
               )}
 
@@ -121,12 +122,12 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                 </label>
                 <input
                   type="text"
-                  id="apPaterno"
-                  name="apPaterno"
+                  id="vchAPaterno"
+                  name="vchAPaterno"
                   placeholder="Apellido Paterno"
                   onChange={(e) => {
                     const value = e.target.value.replace(/[0-9]/g, ""); // Eliminar números de la entrada
-                    handleInfoChange({ apPaterno: value }); // Actualizar el estado con el valor limpio
+                    handleInfoChange({ vchAPaterno: value }); // Actualizar el estado con el valor limpio
                   }}
                   onKeyDown={(e) => {
                     if (!/[A-Za-zÀ-ÖØ-öø-ÿ\s]/.test(e.key)) {
@@ -134,7 +135,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                     }
                   }}
                   required
-                  {...register("apPaterno", {
+                  {...register("vchAPaterno", {
                     required: {
                       value: true,
                       message: "El campo es requerido",
@@ -152,9 +153,9 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                   className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
-              {errors.apPaterno && (
-                <span className="text-red-500 text-base -mt-3 mb-2">*
-                  {errors.apPaterno.message}
+              {errors.vchAPaterno && (
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.vchAPaterno.message}
                 </span>
               )}
 
@@ -167,12 +168,12 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                 </label>
                 <input
                   type="text"
-                  id="apMaterno"
-                  name="apMaterno"
+                  id="vchAMaterno"
+                  name="vchAMaterno"
                   placeholder="Apellido Materno"
                   onChange={(e) => {
                     const value = e.target.value.replace(/[0-9]/g, ""); // Eliminar números de la entrada
-                    handleInfoChange({ apMaterno: value }); // Actualizar el estado con el valor limpio
+                    handleInfoChange({ vchAMaterno: value }); // Actualizar el estado con el valor limpio
                   }}
                   onKeyDown={(e) => {
                     if (!/[A-Za-zÀ-ÖØ-öø-ÿ\s]/.test(e.key)) {
@@ -180,7 +181,7 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                     }
                   }}
                   required
-                  {...register("apMaterno", {
+                  {...register("vchAMaterno", {
                     required: {
                       value: true,
                       message: "El campo es requerido",
@@ -198,9 +199,39 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                   className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
-              {errors.apMaterno && (
-                <span className="text-red-500 text-base -mt-3 mb-2">*
-                  {errors.apMaterno.message}
+              {errors.vchAMaterno && (
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.vchAMaterno.message}
+                </span>
+              )}
+
+              <div className="mb-4">
+                <label
+                  htmlFor="sexo"
+                  className="block text-gray-800 text-left font-bold"
+                >
+                  Sexo:
+                </label>
+                <select
+                  id="chrSexo"
+                  name="chrSexo"
+                  onChange={(e) =>
+                    handleInfoChange({ chrSexo: e.target.value })
+                  }
+                  required
+                  {...register("chrSexo", {
+                    required: "El campo es requerido",
+                  })}
+                  className="mt-1 p-2 border rounded-md w-full"
+                >
+                  <option value="">Seleccionar</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Femenino">Femenino</option>
+                </select>
+              </div>
+              {errors.chrSexo && (
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.chrSexo.message}
                 </span>
               )}
 
@@ -213,22 +244,22 @@ function InfoPersonal({ onNext, onBack, onValidationChange }) {
                 </label>
                 <input
                   type="date"
-                  id="fechaNacim"
-                  name="fechaNacim"
+                  id="dtFechaNacimiento"
+                  name="dtFechaNacimiento"
                   max={new Date().toISOString().split("T")[0]} // Restringe la fecha máxima a la fecha actual
                   onChange={(e) =>
-                    handleInfoChange({ fechaNacim: e.target.value })
+                    handleInfoChange({ dtFechaNacimiento: e.target.value })
                   }
                   required
-                  {...register("fechaNacim", {
+                  {...register("dtFechaNacimiento", {
                     required: "El campo es requerido",
                   })}
                   className="mt-1 p-2 border rounded-md w-full"
                 />
               </div>
-              {errors.fechaNacim && (
-                <span className="text-red-500 text-base -mt-3 mb-2">*
-                  {errors.fechaNacim.message}
+              {errors.dtFechaNacimiento && (
+                <span className="text-red-500 text-base -mt-3 mb-2">
+                  *{errors.dtFechaNacimiento.message}
                 </span>
               )}
 

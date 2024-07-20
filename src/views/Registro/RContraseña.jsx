@@ -1,22 +1,22 @@
 import { useForm } from "react-hook-form";
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { RegistroContext } from "./RegistroContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import PasswordChecklist from "react-password-checklist";
 
-const RContraseña = ({ onNext, onBack, onValidationChange }) => {
+const RContraseña = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
   const { state, dispatch } = useContext(RegistroContext);
   const [isValid, setIsValid] = useState(false); // Estado local de validación
   const [showPassword, setShowPassword] = useState(false); // Estado local para mostrar/ocultar la contraseña
   const [showConfirPass, setShowConfirPass] = useState(false);
 
-  const [password, setPassword] = useState("");
+  const [vchPassword, setPassword] = useState("");
   const [passwordConf, setPasswordConf] = useState("");
   const [passwordChecklistValid, setPasswordChecklistValid] = useState(false); // Estado local para validar el checklist de la contraseña
 
   const handleInfoChange = (info) => {
-    dispatch({ type: "UPDATE_RCONTRASEÑA", payload: info });
+    dispatch({ type: "UPDATE_CONTRASEÑA", payload: info });
   };
 
   const {
@@ -26,13 +26,30 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
     watch,
   } = useForm(); // Agrega 'watch' a la desestructuración
 
-  const onSubmit = (data) => {
-    console.log(data);
-    onNext();
-    // Aquí puedes manejar la lógica de envío del formulario
+  const onSubmit = async (data) => {
+    // Verificar si hay errores en los campos
+    if (Object.keys(errors).length === 0) {
+      const infoCompleta = { ...state.info, ...state.correo, ...data };
+      handleInfoChange(infoCompleta);
+      try {
+        /* console.log("contraseña", vchPassword) */
+        const response = await enviarDatosAPI(
+          infoCompleta,
+          state.correo // Agrega el correo al llamar a la función enviarDatosAPI
+        );
+        /* console.log("Respuesta de la API:", response); */
+        onNext();
+      } catch (error) {
+        console.error("Error al enviar los datos a la API:", error);
+        // Puedes manejar el error de la manera que prefieras
+      }
+    } else {
+      // Hay errores, no hacer nada o puedes mostrar mensajes de error adicionales si lo deseas
+    }
   };
 
   useEffect(() => {
+    setMaxWidth("md"); //Tamaño maximo del formulario
     const isValid = Object.keys(errors).length === 0 && passwordChecklistValid; // Verificar la validez del checklist de la contraseña
     setIsValid(isValid);
     // Verificar si onValidationChange está definida antes de llamarla
@@ -41,8 +58,60 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
     }
   }, [errors, onValidationChange, passwordChecklistValid]);
 
+  const enviarDatosAPI = async (info, correo) => {
+    try {
+      /* console.log("Datos a enviar al backend:", info);
+      console.log(vchPassword) */
+      const response = await fetch("http://localhost:3000/clientes/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...info,
+          contrasena: info.vchPassword, // Agrega la contraseña al cuerpo de la solicitud
+          correo: correo, // Agrega el correo al cuerpo de la solicitud
+        }),
+      });
+      const responseData = await response.json();
+
+      dispatch({
+        type: "UPDATE_INFO_PERSONAL",
+        payload: info,
+      });
+
+      return responseData;
+    } catch (error) {
+      console.error("Error al enviar los datos a la API:", error);
+      throw error;
+    }
+  };
+
+  /*   const enviarDatosAPI = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/clientes/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          infoPersonal: state.infoPersonal,
+          correo: state.correo,
+          contrasena: password, // Agrega la contraseña al cuerpo de la solicitud
+          confirContra: passwordConf, // Agrega la confirmación de la contraseña al cuerpo de la solicitud
+        }),
+      });
+      const data = await response.json();
+      console.log("Respuesta de la API:", data);
+    } catch (error) {
+      console.error("Error al enviar los datos a la API:", error);
+    }
+  }; */
+
   return (
     <>
+      {/*       <pre>{JSON.stringify(state, null, 2)}</pre> */}
+
       <div className="pt-24 text-center rounded-lg shadow-md overflow-hidden">
         <div className="container ml-auto mr-auto">
           <div className="bg-white px-12">
@@ -64,14 +133,19 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
 
                 <input
                   type={showPassword ? "text" : "password"}
-                  id="contraseña"
+                  id="vchPassword"
+                  name="vchPassword" // Cambia el atributo 'name' al nuevo nombre
                   placeholder="Ingrese una contraseña"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={vchPassword}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    handleInfoChange({ vchPassword: e.target.value });
+                  }}
                   required
                   maxLength={16}
                   className="mt-1 p-2 border rounded-md w-full"
                 />
+
                 <button
                   type="button"
                   className="absolute right-2 top-5/8 transform"
@@ -96,6 +170,7 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
                 <input
                   type={showConfirPass ? "text" : "password"}
                   id="confirContra"
+                  name="vchPasswordConf" // Cambia el atributo 'name' al nuevo nombre
                   placeholder="Ingresa nuevamente la contraseña"
                   value={passwordConf}
                   onChange={(e) => setPasswordConf(e.target.value)}
@@ -128,7 +203,7 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
                   "match",
                 ]}
                 minLength={8}
-                value={password}
+                value={vchPassword}
                 valueAgain={passwordConf}
                 onChange={(isValid) => setPasswordChecklistValid(isValid)} // Actualizar el estado de validación del checklist
                 messages={{
@@ -151,26 +226,30 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
                   Selecciona una pregunta secreta:
                 </label>
                 <select
-                  id="question"
+                  id="vchPreguntaSecreta"
                   required
                   onChange={(e) =>
-                    handleInfoChange({ question: e.target.value })
+                    handleInfoChange({ vchPreguntaSecreta: e.target.value })
                   }
-                  {...register("question")}
+                  {...register("vchPreguntaSecreta")}
                   defaultValue=""
                   className="mt-1 p-2 border rounded-md w-full"
                 >
                   <option disabled value="">
                     Selecciona la pregunta secreta
                   </option>
-                  <option value="color">¿Cuál es tu color favorito?</option>
-                  <option value="amigo">
+                  <option value="¿Cuál es tu color favorito?">
+                    ¿Cuál es tu color favorito?
+                  </option>
+                  <option value="¿Cuál es el nombre de tu mejor amigo?">
                     ¿Cuál es el nombre de tu mejor amigo?
                   </option>
-                  <option value="mascota">
+                  <option value="¿Cuál es el nombre de tu mascota?">
                     ¿Cuál es el nombre de tu mascota?
                   </option>
-                  <option value="comida">¿Cuál es tu comida favorita?</option>
+                  <option value="¿Cuál es tu comida favorita?">
+                    ¿Cuál es tu comida favorita?
+                  </option>
                 </select>
               </div>
               <div>
@@ -182,12 +261,12 @@ const RContraseña = ({ onNext, onBack, onValidationChange }) => {
                 </label>
                 <input
                   type="text"
-                  id="respuesta"
+                  id="vchRespuestaSecreta"
                   required
                   onChange={(e) =>
-                    handleInfoChange({ respuesta: e.target.value })
+                    handleInfoChange({ vchRespuestaSecreta: e.target.value })
                   }
-                  {...register("answer")}
+                  {...register("vchRespuestaSecreta")}
                   className="mt-1 p-2 border rounded-md w-full"
                   placeholder="Ingresa tu respuesta"
                 />

@@ -229,12 +229,12 @@ select {
 [type='submit'] {
   -webkit-appearance: button;
   /* 1 */
- /*  background-color: transparent; */
+/*   background-color: transparent; */
   /* 2 */
-  /* background-image: none;
+/*   background-image: none; */
   /* 2 */
-/* } */ */
-
+/* } */
+ */
 /*
 Use the modern Firefox focus style for all focusable elements.
 */

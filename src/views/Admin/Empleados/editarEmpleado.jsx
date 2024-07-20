@@ -19,6 +19,7 @@ function EditarEmpleado() {
     vchRespuestaSecreta: ""
   });
 
+  // Cargar datos del empleado al montar el componente
   useEffect(() => {
     if (id) {
       fetch(`http://localhost:3000/empleados/empleado/${id}`)
@@ -35,6 +36,7 @@ function EditarEmpleado() {
     }
   }, [id]);
 
+  // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEmpleado((prevEmpleado) => ({
@@ -43,6 +45,7 @@ function EditarEmpleado() {
     }));
   };
 
+  // Manejar envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch(`http://localhost:3000/empleados/empleado/${id}`, {
@@ -64,6 +67,7 @@ function EditarEmpleado() {
       });
   };
 
+  // Manejar baja del empleado
   const handleDeactivate = () => {
     fetch(`http://localhost:3000/empleados/empleado/${id}/baja`, {
       method: "PUT",
@@ -91,6 +95,8 @@ function EditarEmpleado() {
       <ToastContainer />
       <h2 className="text-2xl font-bold mb-4">Editar Empleado</h2>
       <form onSubmit={handleSubmit} className="w-full max-w-lg">
+    
+        {/* Campos del formulario */}
         <div className="mb-4">
           <label className="block text-gray-700">Nombre:</label>
           <input

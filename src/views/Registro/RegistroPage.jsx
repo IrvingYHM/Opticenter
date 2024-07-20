@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import Fot from "../../components/Footer";
 import { RegistroProvider } from "./RegistroContext";
 import InfoPersonal from "./InfoPersonal";
@@ -9,6 +9,7 @@ import RDireccion from "./RDireccion";
 const RegistroPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isCurrentPageValid, setIsCurrentPageValid] = useState(false);
+  const [maxWidth, setMaxWidth] = useState("md"); // Estado para almacenar maxWidth
 
   const handleNext = () => {
     if (isCurrentPageValid) {
@@ -28,8 +29,8 @@ const RegistroPage = () => {
 
   return (
     <RegistroProvider>
-      <div className="py-10">
-        <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+      <div className="py-24">
+        <div className={`max-w-${maxWidth} mx-auto bg-white rounded-xl shadow-lg overflow-hidden`}>
           <div className="bg-slate-200">
             <div className="flex justify-center -mb-20 py-3">
               {[1, 2, 3, 4].map((step) => (
@@ -42,16 +43,16 @@ const RegistroPage = () => {
           </div>
           <div className="">
             {currentPage === 1 && (
-              <InfoPersonal onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
+              <InfoPersonal onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} setMaxWidth={setMaxWidth} />
             )}
             {currentPage === 2 && (
-              <RCorreo onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
+              <RCorreo onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} setMaxWidth={setMaxWidth} />
             )}
             {currentPage === 3 && (
-              <RContraseña onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
+              <RContraseña onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} setMaxWidth={setMaxWidth} />
             )}
             {currentPage === 4 && (
-              <RDireccion onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} />
+              <RDireccion onNext={handleNext} onBack={handleBack} onValidationChange={handleValidationChange} setMaxWidth={setMaxWidth} />
             )}
           </div>
         </div>
