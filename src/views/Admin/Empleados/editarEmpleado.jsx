@@ -95,7 +95,6 @@ function EditarEmpleado() {
       <ToastContainer />
       <h2 className="text-2xl font-bold mb-4">Editar Empleado</h2>
       <form onSubmit={handleSubmit} className="w-full max-w-lg">
-    
         {/* Campos del formulario */}
         <div className="mb-4">
           <label className="block text-gray-700">Nombre:</label>
