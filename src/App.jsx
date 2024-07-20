@@ -56,7 +56,7 @@ import Menu from './views/Perfil/Menu';
 import ClienteAd from './views/Admin/Clientes/Clientes';
 import EmpleadoAd from './views/Admin/Empleados/Empleados';
 import AgEmpleado from './views/Admin/Empleados/Registro/RegistroPage';
-
+import EditarEmpleado from './views/Admin/Empleados/editarEmpleado';
 
 
 
@@ -161,6 +161,7 @@ function App() {
               <Route path="/ClientesAd" element={<ClienteAd />} />
               <Route path="/EmpleadoAd" element={<EmpleadoAd />} />
               <Route path="/AgEmpleado" element={<AgEmpleado/>} />
+              <Route path="/editarEmpleado/:id" element={<EditarEmpleado />} />
               
           <Route
             path="/productos-encontrados"
