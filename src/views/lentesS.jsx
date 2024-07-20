@@ -12,4 +12,5 @@ const LenteS = () => {
         </div>
     );
 }
+
 export default LenteS;
