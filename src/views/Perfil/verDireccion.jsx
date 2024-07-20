@@ -2,86 +2,107 @@ import React, { useState, useEffect } from "react";
 import Fot from "../../components/Footer";
 import Barra from "../../components/Navegacion/barra";
 
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
+}
+
 function VerEditarDireccion() {
   const [direccioncli, setDireccioncli] = useState({});
   const [editando, setEditando] = useState(false);
+  const [userType, setUserType] = useState(null);
+  const [clienteId, setClienteId] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/clientes/clientes/4/direccion")
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = parseJwt(token);
+      setUserType(decodedToken.userType);
+      setClienteId(decodedToken.clienteId);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (clienteId) {
+      fetch(`http://localhost:3000/clientes/clientes/${clienteId}/direccion`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener la dirección del cliente");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setDireccioncli(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [clienteId]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDireccioncli({ ...direccioncli, [name]: value });
+  };
+
+  const guardarCambios = () => {
+    fetch(`http://localhost:3000/clientes/actualizar/${clienteId}/direccion`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(direccioncli),
+    })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Error al obtener la dirección del cliente");
+          throw new Error("Error al actualizar la dirección del cliente");
         }
         return response.json();
       })
       .then((data) => {
-        // Suponemos que data es un objeto con los datos de la dirección del cliente
         setDireccioncli(data);
+        setEditando(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
-  // Función para manejar cambios en los campos de dirección
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDireccioncli({
-      ...direccioncli,
-      [name]: value,
-    });
-  };
-
-  // Función para guardar los cambios editados
-  const guardarCambios = () => {
-    fetch(`http://localhost:3000/clientes/clientes/4/direccion`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(direccioncli),
-    })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Error al actualizar la dirección del cliente");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      setDireccioncli(data);
-      setEditando(false); // Termina el modo de edición
-    })
-    .catch((error) => {
-      console.log(error);
-    });
   };
 
   return (
     <div>
-      <Barra/>
+      <Barra />
       <div className="py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <div className="bg-white overflow-hidden shadow rounded-lg">
             <div className="px-4 py-5 sm:px-6">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
+              <h3 className="text-lg font-bold text-center leading-6 ">
                 Dirección del Cliente
               </h3>
-              <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              <p className="text-center text-sm ">
                 Información actual de la dirección del cliente.
               </p>
             </div>
-            <div className="border-t border-gray-200">
+            <div className="border-t border-gray-200 text-center">
               <dl>
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">
-                    Calle y Número
-                  </dt>
+                  <dt className="text-sm font-bold ">Calle y Número</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                     {editando ? (
                       <input
                         type="text"
                         name="Calle"
-                        value={direccioncli.Calle}
+                        value={direccioncli.Calle || ""}
                         onChange={handleChange}
                         className="block w-full sm:text-sm border-gray-300 rounded-md"
                       />
@@ -90,15 +111,14 @@ function VerEditarDireccion() {
                     )}
                   </dd>
                 </div>
-
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Colonia</dt>
+                  <dt className="text-sm font-bold">Colonia</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                     {editando ? (
                       <input
                         type="text"
                         name="Colonia"
-                        value={direccioncli.Colonia}
+                        value={direccioncli.Colonia || ""}
                         onChange={handleChange}
                         className="block w-full sm:text-sm border-gray-300 rounded-md"
                       />
@@ -107,15 +127,14 @@ function VerEditarDireccion() {
                     )}
                   </dd>
                 </div>
-
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Ciudad</dt>
+                  <dt className="text-sm font-bold">Ciudad</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                     {editando ? (
                       <input
                         type="text"
                         name="Municipio"
-                        value={direccioncli.Municipio}
+                        value={direccioncli.Municipio || ""}
                         onChange={handleChange}
                         className="block w-full sm:text-sm border-gray-300 rounded-md"
                       />
@@ -124,15 +143,14 @@ function VerEditarDireccion() {
                     )}
                   </dd>
                 </div>
-
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Estado</dt>
+                  <dt className="text-sm font-bold">Estado</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                     {editando ? (
                       <input
                         type="text"
                         name="Estado"
-                        value={direccioncli.Estado}
+                        value={direccioncli.Estado || ""}
                         onChange={handleChange}
                         className="block w-full sm:text-sm border-gray-300 rounded-md"
                       />
@@ -141,17 +159,14 @@ function VerEditarDireccion() {
                     )}
                   </dd>
                 </div>
-
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">
-                    Código Postal
-                  </dt>
+                  <dt className="text-sm font-bold">Código Postal</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                     {editando ? (
                       <input
                         type="text"
                         name="CP"
-                        value={direccioncli.CP}
+                        value={direccioncli.CP || ""}
                         onChange={handleChange}
                         className="block w-full sm:text-sm border-gray-300 rounded-md"
                       />
