@@ -56,6 +56,7 @@ import ClienteAd from './views/Admin/Clientes/Clientes';
 import EmpleadoAd from './views/Admin/Empleados/Empleados';
 import AgEmpleado from './views/Admin/Empleados/Registro/RegistroPage';
 import EditarEmpleado from './views/Admin/Empleados/editarEmpleado';
+import CambiarContra from './views/Perfil/cambioCon'
 
 
 
@@ -157,6 +158,7 @@ function App() {
               <Route path="/opcionesConfig" element={<Opciones/>}/>
               <Route path='/VerDireccion' element={<VerDireccion/>}/>
               <Route path='/CambiarContraseñaPerfil' element={<CambiarContraseñaPerfil/>}/>
+              <Route path='/CambiarContra' element={<CambiarContra/>}/>
 
               {/*Rutas para Admin  */}
               <Route path="/ClientesAd" element={<ClienteAd />} />
