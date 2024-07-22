@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PasswordChecklist from "react-password-checklist";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import PasswordStrengthBar from "react-password-strength-bar";
@@ -7,15 +7,20 @@ import "react-toastify/dist/ReactToastify.css";
 import Fot from "../../components/Footer";
 import Barra from "../../components/Navegacion/barra";
 
-
-
-
-
-const CambioContrasena = () => { // Asegúrate de recibir el id del cliente como prop
+const CambioContrasena = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [clienteId, setClienteId] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = parseJwt(token);
+      setClienteId(decodedToken.clienteId);
+    }
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,7 +39,6 @@ const CambioContrasena = () => { // Asegúrate de recibir el id del cliente como
     }
   };
 
-
   function parseJwt(token) {
     var base64Url = token.split(".")[1];
     var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -47,25 +51,14 @@ const CambioContrasena = () => { // Asegúrate de recibir el id del cliente como
         })
         .join("")
     );
-  
+
     return JSON.parse(jsonPayload);
   }
 
   async function cambiarContraseña(nuevaContraseña) {
-    const [clienteId, setClienteId] = useState("");
-
-    useEffect(() => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        const decodedToken = parseJwt(token);
-        setClienteId(decodedToken.clienteId);
-      }
-    }, []);
-
-
     try {
       const response = await fetch(
-        `http://localhost:3000/clientes/${clienteId}/change-password`, // Modificado para incluir el id del cliente
+        `http://localhost:3000/clientes/${clienteId}/password`, // Modificado para incluir el id del cliente
         {
           method: "POST",
           headers: {

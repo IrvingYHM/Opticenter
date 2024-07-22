@@ -58,6 +58,8 @@ import AgEmpleado from './views/Admin/Empleados/Registro/RegistroPage';
 import EditarEmpleado from './views/Admin/Empleados/editarEmpleado';
 import CambiarContra from './views/Perfil/cambioCon'
 
+import Stripe from './views/Metodopago/stripe'
+
 
 
 
@@ -176,7 +178,8 @@ function App() {
           <Route path="/Matematicas" element={<Matematicas/>}/>
           <Route path="/Mate" element={<Matematicas2/>}/>
           <Route path="/Mate3" element={<Matematicas3/>}/>
-
+          
+          <Route path="/stripe" element={<Stripe/>}/>
 
 
 
