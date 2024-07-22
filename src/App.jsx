@@ -29,7 +29,11 @@ import NotFound500 from "./components/err/error500";
 import Recuperar from "./views/Recuperacion/recuperar";
 import Registrarse from "./views/Registro/RegistroPage";
 import Cambiar from "./views/Recuperacion/cambioCon";
+
 import AgendarCita from "./views/Citas/crearCita";
+import VerCitas from "./views/Perfil/verCitas";
+import ModificarCita from "./views/Perfil/modificarCita";
+
 import Barra from "./components/Navegacion/barra";
 //Seccion productos del administrador
 import Productos from "./views/Admin/productos/productos";
@@ -77,7 +81,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-{/*         <Barra /> */}
+        {/*         <Barra /> */}
         {/* <BarraNavegacion /> */}
 
         <CartProvider>
@@ -85,7 +89,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Inicio />} />
               <Route path="/inicio" element={<Inicio />} />
-              <Route path="/inicioAd" element={<InicioAd/>} />
+              <Route path="/inicioAd" element={<InicioAd />} />
               <Route path="/Menu" element={<Menu />} />
 
               <Route path="/lentes" element={<Lentes />} />
@@ -129,17 +133,22 @@ function App() {
                 path="/Agendar-cita"
                 element={<RutaProtegida element={<AgendarCita />} />}
               />
+              <Route
+                path="/ver-cita"
+                element={<RutaProtegida element={<VerCitas />} />}
+              />
+              <Route
+                path="/modificar-cita"
+                element={<RutaProtegida element={<ModificarCita/>} />}
+              />
               {/*           <Route
             path="/carrito"
             element={<RutaProtegida element={<Carrito />} />}
           /> */}
 
-          <Route path="/inicio/avisoP" element={<AvisoP />} />
-          <Route path="/inicio/cookies" element={<Cookies />} />
-          <Route
-            path="/inicioS"
-            element={<IniciarS />}
-          />
+              <Route path="/inicio/avisoP" element={<AvisoP />} />
+              <Route path="/inicio/cookies" element={<Cookies />} />
+              <Route path="/inicioS" element={<IniciarS />} />
 
               <Route path="/Login_Empleado" element={<IniciarSEmpleado />} />
               <Route path="/inicio/terminosC" element={<TerminoC />} />
@@ -165,14 +174,9 @@ function App() {
               {/*Rutas para Admin  */}
               <Route path="/ClientesAd" element={<ClienteAd />} />
               <Route path="/EmpleadoAd" element={<EmpleadoAd />} />
-              <Route path="/AgEmpleado" element={<AgEmpleado/>} />
+              <Route path="/AgEmpleado" element={<AgEmpleado />} />
               <Route path="/inicioAd" element={<inicioAd />} />
               <Route path="/editarEmpleado/:id" element={<EditarEmpleado />} />
-              
-          <Route
-            path="/productos-encontrados"
-            element={<ProductosEncontrados />}
-          />
 
           {/* RUta de matematicas */}
           <Route path="/Matematicas" element={<Matematicas/>}/>
@@ -181,13 +185,9 @@ function App() {
           
           <Route path="/stripe" element={<Stripe/>}/>
 
-
-
-
-          <Route path="/Opcion" element={<Opcion />} />
-        </Routes>
-        </AuthProvider>
-
+              <Route path="/Opcion" element={<Opcion />} />
+            </Routes>
+          </AuthProvider>
         </CartProvider>
       </BrowserRouter>
     </>
