@@ -55,13 +55,16 @@ useEffect(() => {
     if (captcha.current.getValue()) {
       console.log("El usuario no es un robot");
       try {
-        const response = await fetch("http://localhost:3000/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
+        const response = await fetch(
+          "https://backopt-production.up.railway.app/auth/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
 
         if (response.ok) {
           const responseData = await response.json();

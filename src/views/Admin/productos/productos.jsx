@@ -13,7 +13,7 @@ function ProductsList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/productos/Productos")
+    fetch("https://backopt-production.up.railway.app/productos/Productos")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los productos");
@@ -37,7 +37,7 @@ function ProductsList() {
   }, []);
 
   const handleDeactivate = (id) => {
-    fetch(`http://localhost:3000/productos/desactivar/${id}`, {
+    fetch(`https://backopt-production.up.railway.app/productos/desactivar/${id}`, {
       method: "PUT"
     })
       .then((response) => {

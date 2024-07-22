@@ -30,8 +30,8 @@ const RDireccion = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "ebc302487bmsh02cff3265862a58p15694ejsn32377e8b9560",
-        "X-RapidAPI-Host": "mexico-zip-codes3.p.rapidapi.com",
+        "X-RapidAPI-Key": "ab208a394dmshecc19b5975c352ep1c4760jsn6a72e2d27b21",
+        "X-RapidAPI-Host": "http://mexico-zip-codes3.p.rapidapi.com",
       },
     };
 
@@ -92,7 +92,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
     // Envía los datos al servidor
     try {
       const response = await fetch(
-        "http://localhost:3000/direcciones-clientes/",
+        "https://backopt-production.up.railway.app/direcciones-clientes/",
         {
           method: "POST",
           headers: {
