@@ -94,7 +94,7 @@ function Barra() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/productos/Buscar_productos?busqueda=${busqueda}`
+        `https://backopt-production.up.railway.app/productos/Buscar_productos?busqueda=${busqueda}`
       );
       const data = await response.json();
       if (data.length > 0) {
@@ -192,7 +192,7 @@ function Barra() {
           </Link>
         </div>
       </div>
-    
+
       <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-13">
         <div className="flex items-center justify-center">
           <Busqueda
@@ -244,7 +244,7 @@ function Barra() {
               >
                 Empleados
               </Link>
-{/*               <Link
+              {/*               <Link
                 to="/Dashboard"
                 className="hover:border-b-2 border-blue-700 font-bold flex items-center"
               >
@@ -296,6 +296,13 @@ function Barra() {
                     >
                       <AiFillSetting size={24} className="mr-2" />
                       Configuración
+                    </Link>
+                    <Link
+                      to="/ver-cita"
+                      className="w-full px-4 py-2 hover:bg-gray-200 flex columns-2"
+                    >
+                      <FaRegCalendarAlt size={24} className="mr-2" />
+                      Citas
                     </Link>
                     <button
                       onClick={handleLogout}

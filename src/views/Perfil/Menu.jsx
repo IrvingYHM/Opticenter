@@ -37,7 +37,7 @@ function ProfileCard() {
     const fetchProfileData = async (clienteId) => {
       try {
         const response = await fetch(
-          `http://localhost:3000/clientes/id/${clienteId}`
+          `https://backopt-production.up.railway.app/clientes/id/${clienteId}`
         );
         const data = await response.json();
         setProfileData(data);
@@ -69,7 +69,7 @@ function ProfileCard() {
     try {
       // Enviar la solicitud al servidor para actualizar el campo
       await fetch(
-        `http://localhost:3000/clientes/ids/${decodedToken.clienteId}`,
+        `https://backopt-production.up.railway.app/clientes/ids/${decodedToken.clienteId}`,
         {
           method: "PUT",
           headers: {
