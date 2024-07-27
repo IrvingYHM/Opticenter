@@ -40,7 +40,7 @@ const Carrito = () => {
       const fetchDetalleCarrito = async () => {
         try {
           const response = await fetch(
-            `http://localhost:3000/Carrito/uno?userId=${clienteId}`
+            `https://backopt-production.up.railway.app/Carrito/uno?userId=${clienteId}`
           );
           if (!response.ok) {
             throw new Error("Error al obtener el detalle del carrito");
