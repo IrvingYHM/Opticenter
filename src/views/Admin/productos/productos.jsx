@@ -13,7 +13,7 @@ function ProductsList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://backopt-production.up.railway.app/productos/Productos")
+    fetch("http://localhost:3000/productos/Productos")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los productos");
@@ -63,14 +63,7 @@ function ProductsList() {
         <h1 className="sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4 text-center">
           Productos
         </h1>
-        <div className="flex justify-end w-full mb-8">
-          <Link
-            className="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
-            to="/ProductosAg"
-          >
-            Dar de alta
-          </Link>
-        </div>
+
         <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {productos.map((producto) => (
             <div key={producto.IdProducto} className="bg-white shadow-md rounded-lg p-4">
@@ -95,6 +88,14 @@ function ProductsList() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="py-6 mb-8">
+          <Link
+            className="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
+            to="/ProductosAg"
+          >
+            Dar de alta
+          </Link>
         </div>
       </div>
       <Fot />
