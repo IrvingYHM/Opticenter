@@ -13,7 +13,7 @@ import { AiFillSetting } from "react-icons/ai";
 import ProductosEncontrados from "../../views/bus/ProductosEncontrados";
 import ImageUser from "../../img/user/user-01.png";
 import { FaRegCalendarAlt } from "react-icons/fa";
-
+import { RiLockPasswordLine } from "react-icons/ri";
 // Función para decodificar JWT
 function parseJwt(token) {
   var base64Url = token.split(".")[1];
@@ -38,6 +38,7 @@ function Barra() {
   const [usuarioLogueado, setUsuarioLogueado] = useState(false); // Estado para almacenar si el usuario está logueado
   const [userType, setUserType] = useState(null); // Estado para almacenar el tipo de usuario
   const [nombreUsuario, setNombreUsuario] = useState("");
+  //const [fotoUsuario, setfotoUsuario] = useState("");
   const [productosEncontrados, setProductosEncontrados] = useState([]);
   const navigate = useNavigate();
   const [menuPerfil, setMenuPerfil] = useState(false);
@@ -46,12 +47,16 @@ function Barra() {
     // Verificar el tipo de usuario al cargar la página
     const token = localStorage.getItem("token");
     let nombreUsuario = "";
+    //let fotoUsuario = "";
     if (token) {
       const decodedToken = parseJwt(token);
       setUserType(decodedToken.userType);
       nombreUsuario = decodedToken.nombre;
+      //fotoUsuario = decodedToken.foto
       setUsuarioLogueado(true);
       setNombreUsuario(decodedToken.nombre);
+      //setfotoUsuario(decodedToken.nombre);
+
     }
   }, []);
 
@@ -303,6 +308,13 @@ function Barra() {
                     >
                       <FaRegCalendarAlt size={24} className="mr-2" />
                       Citas
+                    </Link>
+                    <Link
+                      to="/Pedidos"
+                      className="w-full px-4 py-2 hover:bg-gray-200 flex columns-2"
+                    >
+                      <RiLockPasswordLine size={24} className="mr-2"/>
+                      Mis pedidos
                     </Link>
                     <button
                       onClick={handleLogout}

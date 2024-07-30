@@ -61,7 +61,8 @@ import EmpleadoAd from './views/Admin/Empleados/Empleados';
 import AgEmpleado from './views/Admin/Empleados/Registro/RegistroPage';
 import EditarEmpleado from './views/Admin/Empleados/editarEmpleado';
 import CambiarContra from './views/Perfil/cambioCon'
-
+import Pedidos from './views/Perfil/Pedidos';
+import PaginaSuccess from './views/Lente/SuccessPage'//cuando se realiza el pago de mercadopago
 import Stripe from './views/Metodopago/stripe'
 
 
@@ -170,7 +171,10 @@ function App() {
               <Route path='/VerDireccion' element={<VerDireccion/>}/>
               <Route path='/CambiarContraseñaPerfil' element={<CambiarContraseñaPerfil/>}/>
               <Route path='/CambiarContra' element={<CambiarContra/>}/>
-
+              <Route path='/Pedidos' element={<Pedidos/>}/>
+              <Route path='/PaginaSuccess' element={<PaginaSuccess/>}/>
+              
+              
               {/*Rutas para Admin  */}
               <Route path="/ClientesAd" element={<ClienteAd />} />
               <Route path="/EmpleadoAd" element={<EmpleadoAd />} />

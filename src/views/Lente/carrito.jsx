@@ -40,7 +40,7 @@ const Carrito = () => {
       const fetchDetalleCarrito = async () => {
         try {
           const response = await fetch(
-            `https://backopt-production.up.railway.app/Carrito/uno?userId=${clienteId}`
+            `http://localhost:3000/Carrito/uno?userId=${clienteId}`
           );
           if (!response.ok) {
             throw new Error("Error al obtener el detalle del carrito");
@@ -64,6 +64,16 @@ const Carrito = () => {
     setTotal(subtotal);
   }, [detalleCarrito]);
 
+/*   useEffect(() => {
+    if (detalleCarrito.length > 0) {
+      const interval = setInterval(() => {
+        eliminarCarritoDespuesCompra();
+      }, 1000); // 60000 ms = 60 segundos
+
+      return () => clearInterval(interval); // Cleanup on component unmount
+    }
+  }, [detalleCarrito]); */
+
 
   const handlePayment = async () => {
     try {
@@ -80,10 +90,13 @@ const Carrito = () => {
             currency_id: "MXN",
             quantity: detalle.Cantidad,
           })),
+          clienteId: clienteId, // Incluye clienteId en el cuerpo de la solicitud
         }),
       });
       const orderData = await orderResponse.json();
       window.location.href = orderData.init_point;
+      // Espera hasta que la compra esté completa y después eliminar el carrito
+      //await eliminarCarritoDespuesCompra();
 
 
       // Crear el pedido
@@ -147,7 +160,7 @@ const Carrito = () => {
       console.log(updateData);
   
       // Llamar a la función para eliminar el carrito después de la compra
-      await eliminarCarritoDespuesCompra();
+      //await eliminarCarritoDespuesCompra();
   
       // Resto del código para enviar información al backend y crear el pedido...
     } catch (error) {

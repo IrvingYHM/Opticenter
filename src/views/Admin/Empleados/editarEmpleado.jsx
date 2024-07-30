@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Fot from "../../../components/Footer";
+import Barra from "../../../components/Navegacion/barraAdmin";
 
 function EditarEmpleado() {
   const { id } = useParams();
@@ -91,7 +93,9 @@ function EditarEmpleado() {
   };
   
   return (
+    <div>
     <div className="flex flex-col items-center my-32">
+      <Barra/>
       <ToastContainer />
       <h2 className="text-2xl font-bold mb-4">Editar Empleado</h2>
       <form onSubmit={handleSubmit} className="w-full max-w-lg">
@@ -202,6 +206,9 @@ function EditarEmpleado() {
           </button>
         </div>
       </form>
+    </div>
+    <Fot/>
+
     </div>
   );
 }

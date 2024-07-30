@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Fot from "../../../components/Footer";
 import Barra from "../../../components/Navegacion/barraAdmin";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const CreateProductForm = () => {
   const [formData, setFormData] = useState({
     vchNombreProducto: '',
@@ -11,16 +12,29 @@ const CreateProductForm = () => {
     IdCategoria: '',
     IdMarca: '',
     Precio: '',
+    EnOferta: false,
+    PrecioOferta: '',
     image: null
   });
 
   const [previewImage, setPreviewImage] = useState(null);
 
+  const categories = [
+    { id: '1', name: 'Lentes de sol' },
+    { id: '2', name: 'Lentes graduados' },
+  ];
+
+  const brands = [
+    { id: '1', name: 'Casio' },
+    { id: '2', name: 'Ray-Ban' },
+    { id: '3', name: 'Oakley' }
+  ];
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     });
   };
 
@@ -51,6 +65,8 @@ const CreateProductForm = () => {
     form.append('IdCategoria', formData.IdCategoria);
     form.append('IdMarca', formData.IdMarca);
     form.append('Precio', formData.Precio);
+    form.append('EnOferta', formData.EnOferta);
+    form.append('PrecioOferta', formData.PrecioOferta);
     form.append('image', formData.image);
 
     try {
@@ -68,13 +84,15 @@ const CreateProductForm = () => {
         IdCategoria: '',
         IdMarca: '',
         Precio: '',
+        EnOferta: false,
+        PrecioOferta: '',
         image: null
       });
       setPreviewImage(null);
-      alert('Producto creado exitosamente');
+      toast.success('Producto creado exitosamente');
     } catch (error) {
       console.error(error);
-      alert('Error al crear el producto');
+      toast.error('Error al crear el producto');
     }
   };
 
@@ -116,23 +134,39 @@ const CreateProductForm = () => {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2">Categoría:</label>
-            <input
-              type="text"
+            <select
               name="IdCategoria"
               value={formData.IdCategoria}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-            />
+              className="mt-1 p-2 border rounded-md w-full"
+            >
+              <option disabled value="">
+                Selecciona la categoría
+              </option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2">Marca:</label>
-            <input
-              type="text"
+            <select
               name="IdMarca"
               value={formData.IdMarca}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-            />
+              className="mt-1 p-2 border rounded-md w-full"
+            >
+              <option disabled value="">
+                Selecciona la marca
+              </option>
+              {brands.map((brand) => (
+                <option key={brand.id} value={brand.id}>
+                  {brand.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2">Precio:</label>
@@ -142,6 +176,27 @@ const CreateProductForm = () => {
               value={formData.Precio}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            />
+          </div>
+          <div className="mb-4 flex items-center">
+            <label className="block text-gray-700 font-bold mb-2 mr-4">En Oferta:</label>
+            <input
+              type="checkbox"
+              name="EnOferta"
+              checked={formData.EnOferta}
+              onChange={handleChange}
+              className="w-6 h-6 form-checkbox text-blue-600"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">Precio de Oferta:</label>
+            <input
+              type="number"
+              name="PrecioOferta"
+              value={formData.PrecioOferta}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              disabled={!formData.EnOferta}
             />
           </div>
           <div className="mb-4">
@@ -167,6 +222,18 @@ const CreateProductForm = () => {
         </form>
       </div>
       <Fot />
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        limit={1}
+        className="toast-container"
+      />
     </div>
   );
 };
