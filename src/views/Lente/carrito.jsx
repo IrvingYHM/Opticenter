@@ -64,6 +64,16 @@ const Carrito = () => {
     setTotal(subtotal);
   }, [detalleCarrito]);
 
+/*   useEffect(() => {
+    if (detalleCarrito.length > 0) {
+      const interval = setInterval(() => {
+        eliminarCarritoDespuesCompra();
+      }, 1000); // 60000 ms = 60 segundos
+
+      return () => clearInterval(interval); // Cleanup on component unmount
+    }
+  }, [detalleCarrito]); */
+
 
   const handlePayment = async () => {
     try {
@@ -80,58 +90,57 @@ const Carrito = () => {
             currency_id: "MXN",
             quantity: detalle.Cantidad,
           })),
+          clienteId: clienteId, // Incluye clienteId en el cuerpo de la solicitud
         }),
       });
       const orderData = await orderResponse.json();
       window.location.href = orderData.init_point;
 
-
-      // Crear el pedido
-     /*  const pedidoResponse = await fetch("http://localhost:3000/pedido", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        IdCliente: clienteId,
-        Numero_Guia: 12345, // O el número que generes dinámicamente
-        TotalPe: total, // El total calculado del carrito
-        IdMetodoPago: 1, // El ID del método de pago seleccionado
-        IdEstado_Pedido: 1, // El ID del estado del pedido
-        IdEstado_Envio: 1, // El ID del estado de envío
-        IdDireccion: 1, // El ID de la dirección del cliente
-        IdPaqueteria: 1, // El ID de la paquetería
-        IdEmpleado: 1, // El ID del empleado
-      }),
-    });
-
-    if (!pedidoResponse.ok) {
-      throw new Error("Error al crear el pedido");
-    }
-
-    const pedidoData = await pedidoResponse.json();
-    const IdPedido = pedidoData.pedido.id;
-
-    // Crear los detalles del pedido
-    for (const detalle of detalleCarrito) {
-      await fetch("http://localhost:3000/detallepedido", {
+       // Espera hasta que la compra esté completa y después crea el pedido
+       const pedidoResponse = await fetch("http://localhost:3000/pedido/agregar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          IdProducto: detalle.producto.IdProducto,
-          IdGraduacion: detalle.IdGraduacion,
-          IdTratamiento: detalle.IdTratamiento,
-          Precio: detalle.Precio,
-          Descripcion: detalle.producto.vchDescripcion,
-          SubTotal: detalle.SubTotal,
-          Cantidad: detalle.Cantidad,
-          IdPedido: IdPedido,
+          IdCliente: clienteId,
+          TotalPe: total,
+          IdMetodoPago: 1,
+          IdEstado_Pedido: 1,
+          IdEstado_Envio: 1,
+          IdDireccion: 1,
+          IdPaqueteria: 1,
+          IdEmpleado: 1,
         }),
       });
-    } */
-  
+
+      if (!pedidoResponse.ok) {
+        throw new Error("Error al crear el pedido");
+      }
+
+      const pedidoData = await pedidoResponse.json();
+      const IdPedido = pedidoData.pedido.IdPedido;
+
+      // Crear los detalles del pedido
+      for (const detalle of detalleCarrito) {
+        await fetch("http://localhost:3000/detallePedido/crear", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            IdProducto: detalle.producto.IdProducto,
+            IdGraduacion: detalle.IdGraduacion,
+            IdTratamiento: detalle.IdTratamiento,
+            Precio: detalle.Precio,
+            Descripcion: detalle.producto.vchDescripcion,
+            SubTotal: detalle.SubTotal,
+            Cantidad: detalle.Cantidad,
+            IdPedido: IdPedido,
+          }),
+        });
+      }
+
       // Enviar la información de la compra al backend
       const updateResponse = await fetch(
         "http://localhost:3000/productos/update",
@@ -147,7 +156,7 @@ const Carrito = () => {
       console.log(updateData);
   
       // Llamar a la función para eliminar el carrito después de la compra
-      await eliminarCarritoDespuesCompra();
+      //await eliminarCarritoDespuesCompra();
   
       // Resto del código para enviar información al backend y crear el pedido...
     } catch (error) {

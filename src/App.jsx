@@ -60,6 +60,10 @@ import ClienteAd from './views/Admin/Clientes/Clientes';
 import EmpleadoAd from './views/Admin/Empleados/Empleados';
 import AgEmpleado from './views/Admin/Empleados/Registro/RegistroPage';
 import EditarEmpleado from './views/Admin/Empleados/editarEmpleado';
+import CambiarContra from './views/Perfil/cambioCon'
+import Pedidos from './views/Perfil/Pedidos';
+import PaginaSuccess from './views/Lente/SuccessPage'//cuando se realiza el pago de mercadopago
+import Stripe from './views/Metodopago/stripe'
 
 
 
@@ -162,17 +166,15 @@ function App() {
               <Route path="/" element={<App />} />
               <Route path="/Productos" element={<Productos />} />
               <Route path="/ProductosAg" element={<AgregarProductos />} />
-              <Route
-                path="/ModificarProducto/:id"
-                element={<EditarProducto />}
-              />
-              <Route path="/opcionesConfig" element={<Opciones />} />
-              <Route path="/VerDireccion" element={<VerDireccion />} />
-              <Route
-                path="/CambiarContraseñaPerfil"
-                element={<CambiarContraseñaPerfil />}
-              />
-
+              <Route path="/ModificarProducto/:id" element={<EditarProducto />} />
+              <Route path="/opcionesConfig" element={<Opciones/>}/>
+              <Route path='/VerDireccion' element={<VerDireccion/>}/>
+              <Route path='/CambiarContraseñaPerfil' element={<CambiarContraseñaPerfil/>}/>
+              <Route path='/CambiarContra' element={<CambiarContra/>}/>
+              <Route path='/Pedidos' element={<Pedidos/>}/>
+              <Route path='/PaginaSuccess' element={<PaginaSuccess/>}/>
+              
+              
               {/*Rutas para Admin  */}
               <Route path="/ClientesAd" element={<ClienteAd />} />
               <Route path="/EmpleadoAd" element={<EmpleadoAd />} />
@@ -180,15 +182,12 @@ function App() {
               <Route path="/inicioAd" element={<inicioAd />} />
               <Route path="/editarEmpleado/:id" element={<EditarEmpleado />} />
 
-              <Route
-                path="/productos-encontrados"
-                element={<ProductosEncontrados />}
-              />
-
-              {/* RUta de matematicas */}
-              <Route path="/Matematicas" element={<Matematicas />} />
-              <Route path="/Mate" element={<Matematicas2 />} />
-              <Route path="/Mate3" element={<Matematicas3 />} />
+          {/* RUta de matematicas */}
+          <Route path="/Matematicas" element={<Matematicas/>}/>
+          <Route path="/Mate" element={<Matematicas2/>}/>
+          <Route path="/Mate3" element={<Matematicas3/>}/>
+          
+          <Route path="/stripe" element={<Stripe/>}/>
 
               <Route path="/Opcion" element={<Opcion />} />
             </Routes>

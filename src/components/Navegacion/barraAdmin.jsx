@@ -82,7 +82,14 @@ function Barra() {
     localStorage.removeItem("token");
     setUserType(null);
     setUsuarioLogueado(false); // Actualizar estado de usuario logueado
+    
+    // Redirigir al inicio y recargar la página
+    window.location.href = "/";
   };
+
+
+
+
 
   const handleSearch = async () => {
     // Verificar si se ha ingresado algo en el campo de búsqueda

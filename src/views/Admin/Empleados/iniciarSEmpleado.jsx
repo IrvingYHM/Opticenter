@@ -66,7 +66,7 @@ function App() {
 
 
           setTimeout(() => {
-            window.location.href = "/inicio";
+            window.location.href = "/inicioAd";
           }, 4000);
         } else {
           setIntentosFallidos(intentosFallidos + 1);
