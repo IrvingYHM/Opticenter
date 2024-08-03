@@ -42,7 +42,7 @@ function App() {
 
     try {
       const response = await fetch(
-        `https://backopt-production.up.railway.app/clientes/clientes/${clienteId}/password`,
+        `http://localhost:3000/clientes/clientes/${clienteId}/password`,
         {
           method: "POST",
           headers: {

@@ -12,7 +12,7 @@ const CodigoRecuperacion = ({ handleBack }) => {
 
   const verificarCodigo = async (codigo) => {
     try {
-      const response = await fetch("https://backopt-production.up.railway.app/clientes/Verificacion_codigo", {
+      const response = await fetch("http://localhost:3000/clientes/Verificacion_codigo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

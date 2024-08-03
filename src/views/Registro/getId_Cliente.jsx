@@ -3,7 +3,7 @@
 const fetchIdCliente = async (email) => {
   try {
     const response = await fetch(
-      `https://backopt-production.up.railway.app/clientes/?email=${email}`
+      `http://localhost:3000/clientes/?email=${email}`
     );
     const data = await response.json();
     if (data) {

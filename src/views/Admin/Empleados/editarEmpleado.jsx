@@ -24,7 +24,7 @@ function EditarEmpleado() {
   // Cargar datos del empleado al montar el componente
   useEffect(() => {
     if (id) {
-      fetch(`https://backopt-production.up.railway.app/empleados/empleado/${id}`)
+      fetch(`http://localhost:3000/empleados/empleado/${id}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Error al obtener el empleado");
@@ -50,7 +50,7 @@ function EditarEmpleado() {
   // Manejar envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`https://backopt-production.up.railway.app/empleados/empleado/${id}`, {
+    fetch(`http://localhost:3000/empleados/empleado/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -71,7 +71,7 @@ function EditarEmpleado() {
 
   // Manejar baja del empleado
   const handleDeactivate = () => {
-    fetch(`https://backopt-production.up.railway.app/empleados/empleado/${id}/baja`, {
+    fetch(`http://localhost:3000/empleados/empleado/${id}/baja`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
