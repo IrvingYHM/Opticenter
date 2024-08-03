@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import {
   format,
@@ -15,7 +15,7 @@ import {
 } from "date-fns";
 import { es } from "date-fns/locale";
 import axios from "axios";
-import useFetchHorarios from "./horariosDisp";
+import useFetchHorarios from "../Citas/horariosDisp";
 import Barra from "../../components/Navegacion/barra";
 import Fot from "../../components/Footer";
 
@@ -36,7 +36,7 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
-const CrearCita = () => {
+const ModificarCita = () => {
   const [mesActual, setMesActual] = useState(new Date());
   const [selectFecha, setSelectFecha] = useState(null);
   const [selectHora, setSelectHora] = useState("");
@@ -46,7 +46,7 @@ const CrearCita = () => {
   const [descripcionT, setDescripcionT] = useState("");
   const { horarios, loading, error } = useFetchHorarios(
     selectFecha ? format(selectFecha, "yyyy-MM-dd") : null
-  );  
+  );
   const navigate = useNavigate();
   const [descripcionTLength, setDescripcionTLength] = useState(0);
 
@@ -242,114 +242,95 @@ const CrearCita = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center mt-28 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col items-center mt-28 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pb-6">
         <Barra />
-        <h1 className="text-3xl font-bold mb-6 text-center">Agendar cita</h1>
-        <div className="px-4 py-4 bg-white rounded-xl shadow-md space-y-2 w-full max-w-md lg:max-w-lg xl:max-w-xl">
-          {renderHeader()}
-          {renderDays()}
-          {renderCells()}
-        </div>
-        <div className="px-6 my-6 space-y-4 w-full max-w-xs md:max-w-md">
-          {selectFecha && (
-            <>
-              <div>
-                <label
-                  htmlFor="hourSelect"
-                  className="block text-lg lg:text-xl font-medium mb-2"
-                >
-                  Horas disponibles:
-                </label>
-                <select
-                  id="hourSelect"
-                  value={selectHora}
-                  onChange={(e) => setSelectHora(e.target.value)}
-                  className="block w-full p-2 border border-gray-300 rounded-lg text-lg lg:text-xl"
-                >
-                  <option value="" disabled>
-                    Selecciona una hora
-                  </option>
-                  {horarios
-                    .filter(
-                      (horario) =>
-                        horario.Fecha === format(selectFecha, "yyyy-MM-dd")
-                    )
-                    .map((horario) => (
-                      <option key={horario.IdHorarios} value={horario.Hora}>
-                        {horario.Hora}
-                      </option>
-                    ))}
-                </select>
-              </div>
-              <div>
-                <label
-                  htmlFor="idTipoCita"
-                  className="block text-lg lg:text-xl font-medium text-gray-700 mb-2"
-                >
-                  Tipo de Cita:
-                </label>
-                <select
-                  id="idTipoCita"
-                  value={idTipoCita}
-                  onChange={handleTipoCitaChange}
-                  className="block w-full p-2 lg:p-3 border border-gray-300 rounded-lg text-lg lg:text-xl"
-                >
-                  <option value="" disabled>
-                    Selecciona un tipo de cita
-                  </option>
-                  {tiposCita.map((tipo) => (
-                    <option key={tipo.id} value={tipo.id}>
-                      {tipo.nombre}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              {idTipoCita === 5 && (
-                <div>
-                  <label
-                    htmlFor="descripcionT"
-                    className="block text-lg lg:text-xl font-medium text-gray-700 mb-2"
-                  >
-                    Describe el tipo de tratamiento:
-                  </label>
-                  <textarea
-                    type="text"
-                    id="descripcionT"
-                    maxLength={128}
-                    onChange={(e) => setDescripcionT(e.target.value)}
-                    value={descripcionT}
-                    className="mt-1 p-2 border rounded-md w-full h-24 resize-none"
-                  />
-                  <div className="text-gray-500 text-sm -mt-1 flex justify-end bg-">
-                    {descripcionT.length}/128
-                  </div>
-                </div>
-              )}
-              <div>
-                <label
-                  htmlFor="costo"
-                  className="block text-lg lg:text-xl font-medium text-gray-700 mb-2"
-                >
-                  Costo:
-                </label>
-                <input
-                  type="text"
-                  id="costo"
-                  value={costo}
-                  onChange={(e) => setCosto(e.target.value)}
-                  className="block w-full p-2 lg:p-3 border border-gray-300 rounded-lg text-lg lg:text-xl"
-                  readOnly
-                />
-                {idTipoCita === 5 && (
-                  <span>
-                    <strong>Nota: </strong>El costo puede cambiar dependiendo
-                    del tratamiento que brinde el oftalmólogo.
-                  </span>
-                )}
-              </div>
-            </>
-          )}
-          <div className="flex justify-center mt-4">
+        <div className="px-6 py-6 bg-white rounded-xl shadow-md space-y-2 w-full max-w-md lg:max-w-lg xl:max-w-xl">
+          <h2 className="text-3xl font-bold mb-6 text-center">Agendar Cita</h2>
+          <div className="mb-4">
+            <label htmlFor="tipoCita" className="block mb-1 font-semibold">
+              Tipo de Cita
+            </label>
+            <select
+              id="tipoCita"
+              className="w-full border border-gray-300 rounded-lg p-2"
+              value={idTipoCita}
+              onChange={handleTipoCitaChange}
+              required
+              disabled
+            >
+              <option value="">Seleccione un tipo de cita</option>
+              {tiposCita.map((tipo) => (
+                <option key={tipo.id} value={tipo.id}>
+                  {tipo.nombre} - ${tipo.costo}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="descripcionT" className="block mb-1 font-semibold">
+              Descripción (Solo si seleccionó "Otro")
+            </label>
+            <textarea
+              id="descripcionT"
+              className="w-full border border-gray-300 rounded-lg p-2"
+              value={descripcionT}
+              onChange={(e) => {
+                setDescripcionT(e.target.value);
+                setDescripcionTLength(e.target.value.length);
+              }}
+              maxLength={100}
+              disabled
+            />
+            <div className="text-right text-sm text-gray-500">
+              {descripcionTLength}/100
+            </div>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="costo" className="block mb-1 font-semibold">
+              Costo
+            </label>
+            <input
+              id="costo"
+              type="number"
+              className="w-full border border-gray-300 rounded-lg p-2"
+              value={costo}
+              disabled
+              onChange={(e) => setCosto(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="calendario" className="block mb-1 font-semibold">
+              Fecha
+            </label>
+            <div
+              id="calendario"
+              className="px-4 bg-white rounded-xl shadow-md space-y-2 w-full max-w-md lg:max-w-lg xl:max-w-xl"
+            >
+              {renderHeader()}
+              {renderDays()}
+              {renderCells()}
+            </div>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="hora" className="block mb-1 font-semibold">
+              Hora
+            </label>
+            <select
+              id="hora"
+              className="w-full border border-gray-300 rounded-lg p-2"
+              value={selectHora}
+              onChange={(e) => setSelectHora(e.target.value)}
+              required
+            >
+              <option value="">Seleccione una hora</option>
+              {horarios.map((horario, index) => (
+                <option key={index} value={horario.Hora}>
+                  {horario.Hora}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex justify-center pt-4">
             <button
               onClick={handleSubmit}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-lg lg:text-xl"
@@ -358,21 +339,21 @@ const CrearCita = () => {
             </button>
           </div>
         </div>
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Fot />
     </>
   );
 };
 
-export default CrearCita;
+export default ModificarCita;

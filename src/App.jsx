@@ -135,8 +135,8 @@ function App() {
                 element={<RutaProtegida element={<VerCitas />} />}
               />
               <Route
-                path="/modificar-cita"
-                element={<RutaProtegida element={<ModificarCita/>} />}
+                path="/modificar-cita/:id"
+                element={<RutaProtegida element={<ModificarCita />} />}
               />
               {/*           <Route
             path="/carrito"

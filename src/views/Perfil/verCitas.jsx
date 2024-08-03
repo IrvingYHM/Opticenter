@@ -148,7 +148,7 @@ const VerCitas = () => {
                     <td className="px-6 py-4 text-sm font-medium">
                       <div className="flex space-x-2">
                         <Link
-                          to="/modificar-cita"
+                          to={`/modificar-cita/${cita.IdCita}`}
                           onClick={() => handleEdit(cita.IdCita)}
                           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out"
                         >

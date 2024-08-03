@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom"; // Importa useParams para obtener el id de la cita
 import { toast, ToastContainer } from "react-toastify";
 import {
   format,
@@ -36,7 +36,7 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
-const CrearCita = () => {
+const ModificarCita = () => {
   const [mesActual, setMesActual] = useState(new Date());
   const [selectFecha, setSelectFecha] = useState(null);
   const [selectHora, setSelectHora] = useState("");
@@ -48,16 +48,9 @@ const CrearCita = () => {
     selectFecha ? format(selectFecha, "yyyy-MM-dd") : null
   );
   const navigate = useNavigate();
-  const [descripcionTLength, setDescripcionTLength] = useState(0);
 
-  // Datos de los tipos de citas
-  const tiposCita = [
-    { id: 1, nombre: "Examen de vista", costo: 100 },
-    { id: 2, nombre: "Ajuste de Gafas", costo: 150 },
-    { id: 3, nombre: "Examen de Lentes de Contacto", costo: 120 },
-    { id: 4, nombre: "Examen de Salud Ocular", costo: 160 },
-    { id: 5, nombre: "Otro", costo: 180 },
-  ];
+  // Obteniendo el id de la cita desde la URL
+  const { id } = useParams();
 
   useEffect(() => {
     // Verificar el tipo de usuario al cargar la página
@@ -67,6 +60,33 @@ const CrearCita = () => {
       setIdCliente(decodedToken.clienteId);
     }
   }, []);
+
+  // Cargar datos de la cita existente
+  useEffect(() => {
+    const fetchCita = async () => {
+      try {
+        const response = await axios.get(
+          `https://backopt-production.up.railway.app/cita/${id}`
+        );
+        const cita = response.data;
+
+        // Actualiza los estados con los datos de la cita
+        setSelectFecha(new Date(cita.Fecha));
+        setSelectHora(cita.Hora);
+        setIdCliente(cita.IdCliente);
+        setIdTipoCita(cita.IdTipoCita);
+        setCosto(cita.Costo);
+        setDescripcionT(cita.DescripcionT || "");
+        
+      } catch (error) {
+        toast.error("Error al cargar los datos de la cita");
+      }
+    };
+
+    if (id) {
+      fetchCita();
+    }
+  }, [id]);
 
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -86,20 +106,8 @@ const CrearCita = () => {
     setMesActual(subMonths(mesActual, 1));
   };
 
-  const handleTipoCitaChange = (e) => {
-    const tipoCitaSeleccionada = tiposCita.find(
-      (tipo) => tipo.id === parseInt(e.target.value)
-    );
-    if (tipoCitaSeleccionada) {
-      setIdTipoCita(tipoCitaSeleccionada.id);
-      setCosto(tipoCitaSeleccionada.costo);
-      if (tipoCitaSeleccionada.id !== 5) {
-        setDescripcionT(""); // Resetea el campo "Otro" si no está seleccionado
-      }
-    }
-  };
-
-  const handleSubmit = async () => {
+  const handleUpdate = async () => {
+    // Verificar que todos los campos necesarios estén completos
     if (
       selectFecha &&
       selectHora &&
@@ -109,22 +117,25 @@ const CrearCita = () => {
       (idTipoCita !== 5 || (idTipoCita === 5 && descripcionT))
     ) {
       try {
-        // Crear la cita
-        const citaResponse = await axios.post(
-          "https://backopt-production.up.railway.app/cita",
+        // Actualizar la cita
+        const citaResponse = await axios.put(
+          `https://backopt-production.up.railway.app/cita/${id}`,
           {
             Fecha: format(selectFecha, "yyyy-MM-dd"),
             Hora: selectHora,
             IdCliente: idCliente,
             IdTipoCita: idTipoCita,
             Costo: costo,
-            IdEstadoCita: 1,
+            IdEstadoCita: 1, // Asegúrate de actualizar el estado si es necesario
             DescripcionT: idTipoCita === 5 ? descripcionT : null,
           }
         );
 
-        if (citaResponse.status === 201) {
-          // Reservar el horario
+        if (citaResponse.status === 200) {
+          // La cita se actualizó correctamente
+          toast.success("Cita actualizada exitosamente");
+
+          // Reservar el horario después de actualizar la cita
           try {
             const reservaResponse = await axios.post(
               "https://backopt-production.up.railway.app/horarios/reservar",
@@ -135,31 +146,34 @@ const CrearCita = () => {
             );
 
             if (reservaResponse.status === 200) {
-              toast.success("Cita agendada y horario reservado exitosamente");
-              setTimeout(() => {
-                navigate("/inicio"); // Redirige al usuario a la página de inicio de sesión
-              }, 5000);
+              console.log(`Cita y horario reservado exitosamente`);
             } else {
               toast.error(
-                "Cita agendada, pero hubo un problema al reservar el horario"
+                "Cita actualizada, pero hubo un problema al reservar el horario"
               );
             }
           } catch (reservaError) {
             toast.error(
-              `Cita agendada, pero hubo un problema al reservar el horario: ${reservaError.message}`
+              `Cita actualizada, pero hubo un problema al reservar el horario: ${reservaError.message}`
             );
           }
+
+          // Redirigir al usuario después de completar la operación
+          setTimeout(() => {
+            navigate("/inicio"); // Redirige al usuario a la página de inicio
+          }, 5000);
         } else {
-          toast.error("Hubo un problema al agendar la cita");
+          toast.error("Hubo un problema al actualizar la cita");
         }
       } catch (error) {
+        // Manejo de errores durante la actualización de la cita
         if (error.response) {
           if (error.response.status === 409) {
             toast.error("La hora y fecha seleccionada ya están ocupadas");
           } else if (error.response.data && error.response.data.message) {
             toast.error(`Error: ${error.response.data.message}`);
           } else {
-            toast.error("Hubo un problema al agendar la cita");
+            toast.error("Hubo un problema al actualizar la cita");
           }
         } else {
           toast.error(`Error: ${error.message}`);
@@ -172,14 +186,20 @@ const CrearCita = () => {
 
   const renderHeader = () => {
     return (
-      <div className="flex justify-between items-center">
-        <button onClick={handlePrevMonth} className="text-xl lg:text-2xl">
+      <div className="flex justify-between items-center py-2">
+        <button
+          onClick={handlePrevMonth}
+          className="text-xl lg:text-2xl font-semibold text-gray-700 hover:text-blue-500"
+        >
           &lt;
         </button>
-        <span className="text-xl lg:text-2xl font-bold uppercase">
+        <span className="text-xl lg:text-2xl font-bold text-gray-800">
           {format(mesActual, "MMMM yyyy", { locale: es })}
         </span>
-        <button onClick={handleNextMonth} className="text-xl lg:text-2xl">
+        <button
+          onClick={handleNextMonth}
+          className="text-xl lg:text-2xl font-semibold text-gray-700 hover:text-blue-500"
+        >
           &gt;
         </button>
       </div>
@@ -190,7 +210,10 @@ const CrearCita = () => {
     return (
       <div className="grid grid-cols-7 gap-2 text-center mt-4">
         {daysOfWeek.map((day) => (
-          <div key={day} className="text-sm lg:text-lg font-semibold">
+          <div
+            key={day}
+            className="text-sm lg:text-lg font-semibold text-gray-600"
+          >
             {day}
           </div>
         ))}
@@ -244,70 +267,21 @@ const CrearCita = () => {
     <>
       <div className="flex flex-col items-center mt-28 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <Barra />
-        <div className="px-4 bg-white rounded-xl shadow-md space-y-2 w-full max-w-md lg:max-w-lg xl:max-w-xl">
-          <h2 className="text-2xl font-bold mb-4">Agendar Cita</h2>
-          <div className="mb-4">
-            <label htmlFor="tipoCita" className="block mb-1 font-semibold">
-              Tipo de Cita
-            </label>
-            <select
-              id="tipoCita"
-              className="w-full border border-gray-300 rounded-lg p-2"
-              value={idTipoCita}
-              onChange={handleTipoCitaChange}
-              required
-              disabled
-            >
-              <option value="">Seleccione un tipo de cita</option>
-              {tiposCita.map((tipo) => (
-                <option key={tipo.id} value={tipo.id}>
-                  {tipo.nombre} - ${tipo.costo}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="descripcionT" className="block mb-1 font-semibold">
-              Descripción (Solo si seleccionó "Otro")
-            </label>
-            <textarea
-              id="descripcionT"
-              className="w-full border border-gray-300 rounded-lg p-2"
-              value={descripcionT}
-              onChange={(e) => {
-                setDescripcionT(e.target.value);
-                setDescripcionTLength(e.target.value.length);
-              }}
-              maxLength={100}
-              disabled
-            />
-            <div className="text-right text-sm text-gray-500">
-              {descripcionTLength}/100
-            </div>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="costo" className="block mb-1 font-semibold">
-              Costo
-            </label>
-            <input
-              id="costo"
-              type="number"
-              className="w-full border border-gray-300 rounded-lg p-2"
-              value={costo}
-              disabled
-              onChange={(e) => setCosto(e.target.value)}
-            />
-          </div>
+        <div className="p-6 mb-10 bg-white rounded-xl shadow-md space-y-2 w-full max-w-md lg:max-w-lg xl:max-w-xl">
+          <h2 className="text-3xl font-bold mb-6 text-center">
+            Modificar Cita
+          </h2>
           <div className="mb-4">
             <label htmlFor="calendario" className="block mb-1 font-semibold">
               Fecha
             </label>
-            <div id="calendario" className="bg-white rounded-lg shadow-md p-4">
+            <div className="px-4 py-4 bg-white rounded-xl shadow-md space-y-2 w-full max-w-md lg:max-w-lg xl:max-w-xl">
               {renderHeader()}
               {renderDays()}
               {renderCells()}
             </div>
           </div>
+
           <div className="mb-4">
             <label htmlFor="hora" className="block mb-1 font-semibold">
               Hora
@@ -327,18 +301,31 @@ const CrearCita = () => {
               ))}
             </select>
           </div>
-          <button
-            onClick={handleSubmit}
-            className="bg-blue-500 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-600"
-          >
-            Agendar Cita
-          </button>
+
+          <div className="flex justify-center pt-4">
+            <button
+              onClick={handleUpdate}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-lg lg:text-xl"
+            >
+              Agendar Cita
+            </button>
+          </div>
         </div>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
-      <ToastContainer />
       <Fot />
     </>
   );
 };
 
-export default CrearCita;
+export default ModificarCita;
