@@ -26,7 +26,7 @@ const Lentes = () => {
   }, []);
 
   async function buscarProductos(categoria, marca) {
-    let url = `http://localhost:3000/productos/filtro_producto?categoria=${categoria}&marca=${marca}`;
+    let url = `https://edbb-201-97-61-85.ngrok-free.app/productos/filtro_producto?categoria=${categoria}&marca=${marca}`;
     try {
       const response = await fetch(url);
       const data = await response.json();

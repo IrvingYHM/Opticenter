@@ -9,7 +9,7 @@ function App() {
   const [clientes, setClientes] = useState([]);
   
   useEffect(() => {
-    fetch("http://localhost:3000/clientes")
+    fetch("https://edbb-201-97-61-85.ngrok-free.app/clientes")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los clientes");

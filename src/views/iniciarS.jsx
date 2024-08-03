@@ -56,7 +56,7 @@ useEffect(() => {
       console.log("El usuario no es un robot");
       try {
         const response = await fetch(
-          "http://localhost:3000/auth/login",
+          "https://edbb-201-97-61-85.ngrok-free.app/auth/login",
           {
             method: "POST",
             headers: {

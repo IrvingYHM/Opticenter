@@ -27,7 +27,7 @@ const RecuperacionCodigo = ({ onBack}) => {
     console.log(codigo);
     try {
       const response = await fetch(
-        "http://localhost:3000/clientes/Verificacion_codigo",
+        "https://edbb-201-97-61-85.ngrok-free.app/clientes/Verificacion_codigo",
         {
           method: "POST",
           headers: {

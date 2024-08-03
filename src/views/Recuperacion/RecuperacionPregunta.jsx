@@ -12,7 +12,7 @@ function RecuperacionPregunta() {
     e.preventDefault();
     try {
       const response = await fetch(
-        "http://localhost:3000/clientes/verificar-respuesta",
+        "https://edbb-201-97-61-85.ngrok-free.app/clientes/verificar-respuesta",
         {
           method: "POST",
           headers: {

@@ -63,7 +63,7 @@ const RContraseña = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
       /* console.log("Datos a enviar al backend:", info);
       console.log(vchPassword) */
       const response = await fetch(
-        "https://backopt-production.up.railway.app/clientes/",
+        "https://edbb-201-97-61-85.ngrok-free.app/clientes/",
         {
           method: "POST",
           headers: {
