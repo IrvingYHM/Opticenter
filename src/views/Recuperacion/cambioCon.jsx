@@ -30,7 +30,7 @@ const CambioContrasena = ({ correo }) => {
 
   async function cambiarContraseña(nuevaContraseña){
     try{
-      const response = await fetch('https://edbb-201-97-61-85.ngrok-free.app/clientes/cambiar-contrasena', {
+      const response = await fetch('https://backopt-production.up.railway.app/clientes/cambiar-contrasena', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -40,7 +40,7 @@ const Carrito = () => {
       const fetchDetalleCarrito = async () => {
         try {
           const response = await fetch(
-            `https://edbb-201-97-61-85.ngrok-free.app/Carrito/uno?userId=${clienteId}`
+            `https://backopt-production.up.railway.app/Carrito/uno?userId=${clienteId}`
           );
           if (!response.ok) {
             throw new Error("Error al obtener el detalle del carrito");
@@ -78,7 +78,7 @@ const Carrito = () => {
   const handlePayment = async () => {
     try {
       // Realizar la compra en MercadoPago
-      const orderResponse = await fetch("https://edbb-201-97-61-85.ngrok-free.app/create-order", {
+      const orderResponse = await fetch("https://backopt-production.up.railway.app/create-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +97,7 @@ const Carrito = () => {
       window.location.href = orderData.init_point;
 
        // Espera hasta que la compra esté completa y después crea el pedido
-       const pedidoResponse = await fetch("https://edbb-201-97-61-85.ngrok-free.app/pedido/agregar", {
+       const pedidoResponse = await fetch("https://backopt-production.up.railway.app/pedido/agregar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -123,7 +123,7 @@ const Carrito = () => {
 
       // Crear los detalles del pedido
       for (const detalle of detalleCarrito) {
-        await fetch("https://edbb-201-97-61-85.ngrok-free.app/detallePedido/crear", {
+        await fetch("https://backopt-production.up.railway.app/detallePedido/crear", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -143,7 +143,7 @@ const Carrito = () => {
 
       // Enviar la información de la compra al backend
       const updateResponse = await fetch(
-        "https://edbb-201-97-61-85.ngrok-free.app/productos/update",
+        "https://backopt-production.up.railway.app/productos/update",
         {
           method: "POST",
           headers: {
@@ -169,7 +169,7 @@ const Carrito = () => {
     try {
       // Eliminar el carrito del cliente después de la compra
       const eliminarCarritoResponse = await fetch(
-        "https://edbb-201-97-61-85.ngrok-free.app/Carrito/eliminarCa",
+        "https://backopt-production.up.railway.app/Carrito/eliminarCa",
         {
           method: "DELETE",
           headers: {

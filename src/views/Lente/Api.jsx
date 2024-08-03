@@ -1,6 +1,6 @@
 export async function obtenerProductos() {
     try {
-      const response = await fetch("https://edbb-201-97-61-85.ngrok-free.app/productos/Productos");
+      const response = await fetch("https://backopt-production.up.railway.app/productos/Productos");
       if (!response.ok) {
         throw new Error("Error al obtener los productos");
       }

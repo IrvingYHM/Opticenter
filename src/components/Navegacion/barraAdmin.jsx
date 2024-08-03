@@ -101,7 +101,7 @@ function Barra() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/productos/Buscar_productos?busqueda=${busqueda}`
+        `https://backopt-production.up.railway.app/productos/Buscar_productos?busqueda=${busqueda}`
       );
       const data = await response.json();
       if (data.length > 0) {

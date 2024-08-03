@@ -32,7 +32,7 @@ const SearchAdvanced = () => {
   }, []);
 
   const buscar = () => {
-    fetch(`http://localhost:3000/productos/Buscar_productos?busqueda=${nombre}`)
+    fetch(`https://backopt-production.up.railway.app/productos/Buscar_productos?busqueda=${nombre}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al buscar productos");

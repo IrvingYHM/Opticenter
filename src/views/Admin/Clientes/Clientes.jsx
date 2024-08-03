@@ -9,7 +9,7 @@ function App() {
   const [clientes, setClientes] = useState([]);
   
   useEffect(() => {
-    fetch("https://edbb-201-97-61-85.ngrok-free.app/clientes")
+    fetch("https://backopt-production.up.railway.app/clientes")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los clientes");

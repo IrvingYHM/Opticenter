@@ -25,7 +25,7 @@ function Recuperar() {
     if (method === 'code') {
       try {
         const response = await fetch(
-          "https://edbb-201-97-61-85.ngrok-free.app/clientes/enviar_codigo",
+          "https://backopt-production.up.railway.app/clientes/enviar_codigo",
           {
             method: "POST",
             headers: {
@@ -50,7 +50,7 @@ function Recuperar() {
   const onSubmit = async (data) => {
     try {
       const response = await fetch(
-        "https://edbb-201-97-61-85.ngrok-free.app/clientes/recuperar-contrasena",
+        "https://backopt-production.up.railway.app/clientes/recuperar-contrasena",
         {
           method: "POST",
           headers: {

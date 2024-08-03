@@ -8,7 +8,7 @@ const SuccessPage = () => {
       try {
         // Llama a la API para eliminar el carrito
         const response = await fetch(
-          "https://edbb-201-97-61-85.ngrok-free.app/Carrito/eliminarCa",
+          "https://backopt-production.up.railway.app/Carrito/eliminarCa",
           {
             method: "DELETE",
             headers: {

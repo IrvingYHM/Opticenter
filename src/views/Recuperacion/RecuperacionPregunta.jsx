@@ -12,7 +12,7 @@ function RecuperacionPregunta() {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://edbb-201-97-61-85.ngrok-free.app/clientes/verificar-respuesta",
+        "https://backopt-production.up.railway.app/clientes/verificar-respuesta",
         {
           method: "POST",
           headers: {
