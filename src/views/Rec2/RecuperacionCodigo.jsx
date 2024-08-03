@@ -27,7 +27,7 @@ const RecuperacionCodigo = ({ onBack }) => {
     console.log(codigo);
     try {
       const response = await fetch(
-        "https://backopt-production.up.railway.app/clientes/Verificacion_codigo",
+        "http://localhost:3000/clientes/Verificacion_codigo",
         {
           method: "POST",
           headers: {

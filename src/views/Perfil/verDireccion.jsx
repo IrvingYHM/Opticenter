@@ -35,7 +35,7 @@ function VerEditarDireccion() {
 
   useEffect(() => {
     if (clienteId) {
-      fetch(`https://backopt-production.up.railway.app/clientes/clientes/${clienteId}/direccion`)
+      fetch(`http://localhost:3000/clientes/clientes/${clienteId}/direccion`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Error al obtener la dirección del cliente");
@@ -57,7 +57,7 @@ function VerEditarDireccion() {
   };
 
   const guardarCambios = () => {
-    fetch(`https://backopt-production.up.railway.app/clientes/actualizar/${clienteId}/direccion`, {
+    fetch(`http://localhost:3000/clientes/actualizar/${clienteId}/direccion`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

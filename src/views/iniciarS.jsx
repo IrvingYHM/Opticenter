@@ -56,7 +56,7 @@ useEffect(() => {
       console.log("El usuario no es un robot");
       try {
         const response = await fetch(
-          "https://backopt-production.up.railway.app/auth/login",
+          "http://localhost:3000/auth/login",
           {
             method: "POST",
             headers: {

@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const fetchEmpleados = async () => {
       try {
-        const response = await fetch("https://backopt-production.up.railway.app/empleados/empleado");
+        const response = await fetch("http://localhost:3000/empleados/empleado");
         if (!response.ok) {
           throw new Error("Error al obtener los empleados");
         }
@@ -32,7 +32,7 @@ function App() {
 
       // Manejar baja del empleado
   const handleDeactivate = () => {
-    fetch(`https://backopt-production.up.railway.app/empleados/empleado/${id}/baja`, {
+    fetch(`http://localhost:3000/empleados/empleado/${id}/baja`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

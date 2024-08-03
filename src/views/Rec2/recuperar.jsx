@@ -22,7 +22,7 @@ function Recuperar() {
     if (method === 'code') {
       try {
         const response = await fetch(
-          "https://backopt-production.up.railway.app/clientes/enviar_codigo",
+          "http://localhost:3000/clientes/enviar_codigo",
           {
             method: "POST",
             headers: {
@@ -47,7 +47,7 @@ function Recuperar() {
   const onSubmit = async (data) => {
     try {
       const response = await fetch(
-        "https://backopt-production.up.railway.app/clientes/recuperar-contrasena",
+        "http://localhost:3000/clientes/recuperar-contrasena",
         {
           method: "POST",
           headers: {
