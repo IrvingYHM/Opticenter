@@ -70,7 +70,7 @@ const CreateProductForm = () => {
     form.append('image', formData.image);
 
     try {
-      const response = await axios.post('http://localhost:3000/productos/Crear_productos', form, {
+      const response = await axios.post('https://backopt-production.up.railway.app/productos/Crear_productos', form, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

@@ -21,7 +21,7 @@ function ModificarProducto() {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:3000/productos/Productos/${id}`)
+      fetch(`https://backopt-production.up.railway.app/productos/Productos/${id}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Error al obtener el producto");
@@ -50,7 +50,7 @@ function ModificarProducto() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/productos/Productos/${id}`, {
+    fetch(`https://backopt-production.up.railway.app/productos/Productos/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

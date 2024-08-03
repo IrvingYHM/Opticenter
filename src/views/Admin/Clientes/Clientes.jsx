@@ -9,7 +9,7 @@ function App() {
   const [clientes, setClientes] = useState([]);
   
   useEffect(() => {
-    fetch("http://localhost:3000/clientes")
+    fetch("https://backopt-production.up.railway.app/clientes")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los clientes");

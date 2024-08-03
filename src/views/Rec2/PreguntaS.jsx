@@ -42,7 +42,7 @@ const FormularioPregunta = ({ handleBack }) => {
   const onSubmit = async (data) => {
     try {
       setProcesando(true);
-      const response = await fetch("http://localhost:3000/clientes/recuperar-contrasena", {
+      const response = await fetch("https://backopt-production.up.railway.app/clientes/recuperar-contrasena", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const FormularioPregunta = ({ handleBack }) => {
     const vchRespuestaSecreta = formData.get("answer");
 
     try {
-      const response = await fetch("http://localhost:3000/clientes/verificar-respuesta", {
+      const response = await fetch("https://backopt-production.up.railway.app/clientes/verificar-respuesta", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -122,7 +122,7 @@ const FormularioPregunta = ({ handleBack }) => {
 
   const enviarCodigoRecuperacion = async () => {
     try {
-      const response = await fetch("http://localhost:3000/clientes/enviar_codigo", {
+      const response = await fetch("https://backopt-production.up.railway.app/clientes/enviar_codigo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -8,7 +8,7 @@ const SuccessPage = () => {
       try {
         // Llama a la API para eliminar el carrito
         const response = await fetch(
-          "http://localhost:3000/Carrito/eliminarCa",
+          "https://backopt-production.up.railway.app/Carrito/eliminarCa",
           {
             method: "DELETE",
             headers: {

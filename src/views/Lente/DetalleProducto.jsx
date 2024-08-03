@@ -49,14 +49,14 @@ const DetalleProducto = () => {
   const [precioTratamiento, setPrecioTratamiento] = useState(0);
   const [precioTotal, setPrecioTotal] = useState(0);
 
-  const carritoApiBaseUrl = "http://localhost:3000/Carrito/";
-  const detallesCarritoApiBaseUrl = "http://localhost:3000/DetalleCarrito/";
+  const carritoApiBaseUrl = "https://backopt-production.up.railway.app/Carrito/";
+  const detallesCarritoApiBaseUrl = "https://backopt-production.up.railway.app/DetalleCarrito/";
 
   useEffect(() => {
     const fetchProducto = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3000/productos/productosId",
+          "https://backopt-production.up.railway.app/productos/productosId",
           {
             method: "POST",
             headers: {
@@ -100,7 +100,7 @@ const DetalleProducto = () => {
   useEffect(() => {
     const fetchGraduaciones = async () => {
       try {
-        const response = await fetch("http://localhost:3000/graduaciones");
+        const response = await fetch("https://backopt-production.up.railway.app/graduaciones");
         const data = await response.json();
         setGraduaciones(data);
       } catch (error) {
@@ -114,7 +114,7 @@ const DetalleProducto = () => {
   useEffect(() => {
     const fetchTratamientos = async () => {
       try {
-        const response = await fetch("http://localhost:3000/Tratamiento");
+        const response = await fetch("https://backopt-production.up.railway.app/Tratamiento");
         const data = await response.json();
         setTratamientos(data);
       } catch (error) {

@@ -1,1 +1,1 @@
-export const Apiurl = "http://localhost:3000/auth/login"
+export const Apiurl = "https://backopt-production.up.railway.app/auth/login"

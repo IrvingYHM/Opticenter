@@ -10,7 +10,7 @@ function App() {
   const [marcas, setMarcas] = useState({});
   
   useEffect(() => {
-    fetch("http://localhost:3000/productos/Productos")
+    fetch("https://backopt-production.up.railway.app/productos/Productos")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los productos");

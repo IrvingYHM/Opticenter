@@ -25,7 +25,7 @@ const CheckoutForm = () => {
     if (!error) {
       try {
         const { id } = paymentMethod;
-        const { data } = await axios.post('http://localhost:3000/stripe/checkout', {
+        const { data } = await axios.post('https://backopt-production.up.railway.app/stripe/checkout', {
           id,
           amount: 10000
         });
