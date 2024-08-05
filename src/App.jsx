@@ -31,8 +31,8 @@ import Registrarse from "./views/Registro/RegistroPage";
 import Cambiar from "./views/Recuperacion/cambioCon";
 
 import AgendarCita from "./views/Citas/crearCita";
-import VerCitas from "./views/Perfil/verCitas";
-import ModificarCita from "./views/Perfil/modificarCita";
+import VerCitas from "./views/Perfil/Citas/verCitas";
+import ModificarCita from "./views/Perfil/Citas/modificarCita";
 
 import Barra from "./components/Navegacion/barra";
 //Seccion productos del administrador
