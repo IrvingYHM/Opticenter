@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Barra from "../../components/Navegacion/barra";
-import Fot from "../../components/Footer";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import Barra from "../../../components/Navegacion/barra";
+import Fot from "../../../components/Footer";
+import { Link } from "react-router-dom";
+import CancelarCita from "./cancelarCita";
 
 // Función para decodificar JWT
 function parseJwt(token) {
@@ -28,6 +29,27 @@ const VerCitas = () => {
   const [usuarioLogueado, setUsuarioLogueado] = useState(false);
   const [idUsuario, setIdUsuario] = useState("");
 
+  // Función para obtener citas
+  const fetchCitas = async () => {
+    if (idUsuario) {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `https://backopt-production.up.railway.app/cita/usuario/${idUsuario}`
+        );
+        // Ordenar citas por fecha en orden descendente
+        const citasOrdenadas = response.data.sort(
+          (a, b) => new Date(b.Fecha) - new Date(a.Fecha)
+        );
+        setCitas(citasOrdenadas);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   useEffect(() => {
     // Verificar el tipo de usuario al cargar la página
     const token = localStorage.getItem("token");
@@ -39,36 +61,22 @@ const VerCitas = () => {
   }, []);
 
   useEffect(() => {
-    const fetchCitas = async () => {
-      if (idUsuario) {
-        try {
-          const response = await axios.get(
-            `https://backopt-production.up.railway.app/cita/usuario/${idUsuario}`
-          );
-          // Ordenar citas por fecha en orden descendente
-          const citasOrdenadas = response.data.sort(
-            (a, b) => new Date(b.Fecha) - new Date(a.Fecha)
-          );
-          setCitas(citasOrdenadas);
-          setLoading(false);
-        } catch (err) {
-          setError(err.message);
-          setLoading(false);
-        }
-      }
-    };
-
     fetchCitas();
   }, [idUsuario]);
 
-  const handleEdit = (id) => {
-    // Implementar lógica para modificar la cita
-    console.log(`Modificar cita ID: ${id}`);
-  };
+  // Función para manejar la eliminación de la cita
+  const handleCancelSuccess = async (citaId) => {
+    try {
+      // Llamar al endpoint de cancelación de cita
+      await axios.put(
+        `https://backopt-production.up.railway.app/cita/cancelar/${citaId}`
+      );
 
-  const handleCancel = (id) => {
-    // Implementar lógica para cancelar la cita
-    console.log(`Cancelar cita ID: ${id}`);
+      // Volver a obtener las citas actualizadas
+      fetchCitas();
+    } catch (error) {
+      console.error("Error al cancelar la cita:", error);
+    }
   };
 
   if (loading) {
@@ -149,17 +157,14 @@ const VerCitas = () => {
                       <div className="flex space-x-2">
                         <Link
                           to={`/modificar-cita/${cita.IdCita}`}
-                          onClick={() => handleEdit(cita.IdCita)}
-                          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out"
+                          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out"
                         >
                           Modificar
                         </Link>
-                        <button
-                          onClick={() => handleCancel(cita.IdCita)}
-                          className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-300 ease-in-out"
-                        >
-                          Cancelar
-                        </button>
+                        <CancelarCita
+                          citaId={cita.IdCita}
+                          onCancelSuccess={() => handleCancelSuccess(cita.IdCita)}
+                        />
                       </div>
                     </td>
                   </tr>
