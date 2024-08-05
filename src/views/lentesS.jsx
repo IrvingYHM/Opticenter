@@ -49,7 +49,7 @@ const ProductRecommendations = () => {
         <option value="Lentsa reyescar">Lentsa reyescar</option>
         <option value="NovaLens">NovaLens</option>
         <option value="Infinivue">Infinivue</option>
-        <option value="PrismView:">PrismView:</option>
+        <option value="PrismView">PrismView:</option>
       </select>
 
       {selectedProduct && (

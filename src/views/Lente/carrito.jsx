@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Fot from "../../components/Footer";
 import { useCart } from "./hooks/useCart";
-import Barra from '../../components/Navegacion/barra'
+import Barra from '../../components/Navegacion/barra';
 
 function parseJwt(token) {
   var base64Url = token.split(".")[1];
@@ -24,7 +24,10 @@ const Carrito = () => {
   const [detalleCarrito, setDetalleCarrito] = useState([]);
   const [userType, setUserType] = useState(null);
   const [clienteId, setClienteId] = useState("");
-  const [total, setTotal] = useState("")
+  const [total, setTotal] = useState("");
+  const [rules, setRules] = useState([]);
+  const [productos, setProductos] = useState([]);
+  const [recomendaciones, setRecomendaciones] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -51,11 +54,11 @@ const Carrito = () => {
           console.error(error);
         }
       };
-  
+
       fetchDetalleCarrito();
     }
   }, [clienteId]);
-  
+
   useEffect(() => {
     const subtotal = detalleCarrito.reduce(
       (total, detalle) => total + detalle.SubTotal,
@@ -64,16 +67,63 @@ const Carrito = () => {
     setTotal(subtotal);
   }, [detalleCarrito]);
 
-/*   useEffect(() => {
-    if (detalleCarrito.length > 0) {
-      const interval = setInterval(() => {
-        eliminarCarritoDespuesCompra();
-      }, 1000); // 60000 ms = 60 segundos
+  useEffect(() => {
+    const fetchRules = async () => {
+      try {
+        const response = await fetch('association_rules.json'); // O la URL de tu API
+        const data = await response.json();
+        setRules(data);
+        console.log('Reglas cargadas:', data); // Añade este log
+      } catch (error) {
+        console.error('Error al cargar las reglas:', error);
+      }
+    };
 
-      return () => clearInterval(interval); // Cleanup on component unmount
+    fetchRules();
+  }, []);
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/productos/Productos');
+        const data = await response.json();
+        setProductos(data);
+      } catch (error) {
+        console.error('Error al cargar los productos:', error);
+      }
+    };
+
+    fetchProductos();
+  }, []);
+
+  useEffect(() => {
+    const productosEnCarrito = detalleCarrito.map(detalle => detalle.producto.vchNombreProducto.trim().replace(/\s+/g, ' '));
+    console.log('Productos en carrito:', productosEnCarrito);
+
+    if (productosEnCarrito.length && rules.length) {
+      const newRecommendations = rules
+        .filter(rule => rule.antecedents.some(antecedent => productosEnCarrito.includes(antecedent.trim().replace(/\s+/g, ' '))))
+        .flatMap(rule => rule.consequents);
+
+      // Filtrar recomendaciones duplicadas
+      const uniqueRecommendations = [...new Set(newRecommendations)];
+
+      // Obtener solo los primeros 5 elementos
+      const limitedRecommendations = uniqueRecommendations.slice(0, 7);
+
+      setRecomendaciones(limitedRecommendations);
     }
-  }, [detalleCarrito]); */
+  }, [detalleCarrito, rules]);
 
+  useEffect(() => {
+    console.log('Recomendaciones:', recomendaciones); // Añade este log
+  }, [recomendaciones]);
+
+  // Obtener productos recomendados con detalles adicionales
+  const recomendacionesConDetalles = recomendaciones.map((recomendacion) => {
+    const producto = productos.find(p => p.vchNombreProducto.trim().replace(/\s+/g, ' ') === recomendacion);
+    return producto ? { ...producto, vchNombreProducto: recomendacion } : null;
+  }).filter(Boolean);
 
   const handlePayment = async () => {
     try {
@@ -96,8 +146,8 @@ const Carrito = () => {
       const orderData = await orderResponse.json();
       window.location.href = orderData.init_point;
 
-       // Espera hasta que la compra esté completa y después crea el pedido
-       const pedidoResponse = await fetch("http://localhost:3000/pedido/agregar", {
+      // Espera hasta que la compra esté completa y después crea el pedido
+      const pedidoResponse = await fetch("http://localhost:3000/pedido/agregar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -154,17 +204,15 @@ const Carrito = () => {
       );
       const updateData = await updateResponse.json();
       console.log(updateData);
-  
+
       // Llamar a la función para eliminar el carrito después de la compra
-      //await eliminarCarritoDespuesCompra();
-  
-      // Resto del código para enviar información al backend y crear el pedido...
+      await eliminarCarritoDespuesCompra();
+
     } catch (error) {
       console.error(error);
     }
   };
-  
-  
+
   const eliminarCarritoDespuesCompra = async () => {
     try {
       // Eliminar el carrito del cliente después de la compra
@@ -183,16 +231,12 @@ const Carrito = () => {
       console.error("Error al eliminar el carrito:", error);
     }
   };
-  
-
   return (
     <div className="min-h-screen bg-gray-100 pt-20">
-      <Barra/>
-      <h1 className="mb-10 mt-8 text-center text-2xl font-bold">
-        Carrito de compras
-      </h1>
+      <Barra />
+      <h1 className="mb-10 mt-8 text-center text-2xl font-bold">Carrito de compras</h1>
       <div className="mx-auto max-w-7xl px-6 md:flex md:space-x-6 xl:px-0">
-        <div className="w-full md:w-2/3">
+      <div className="w-full md:w-2/3">
           {detalleCarrito.map((detalle) => (
             <div
               key={detalle.IdDetalle_Carrito}
@@ -230,8 +274,8 @@ const Carrito = () => {
             </div>
           ))}
         </div>
-        <div className="w-full md:w-1/3 mb-8">
-          <div className="rounded-lg border bg-white p-6 shadow-md">
+        <div className="w-full md:w-1/3">
+        <div className="rounded-lg border bg-white p-6 shadow-md">
             <h2 className="text-lg font-bold mb-4">Detalle de tu compra</h2>
             <h3 className="text-gray-700 font-semibold mb-2">
               Productos SubTotal
@@ -259,6 +303,29 @@ const Carrito = () => {
               Pagar
             </button>
           </div>
+          <h2 className="text-xl font-bold text-center mt-10 mb-6">Recomendaciones</h2>
+      <div className="flex flex-wrap justify-center">
+      {recomendacionesConDetalles.length ? (
+            recomendacionesConDetalles.map((producto) => (
+              <div
+                key={producto.IdProducto}
+                className="mb-4 rounded-lg bg-white p-4 shadow-md"
+              >
+                <img
+                  src={producto.vchNomImagen}
+                  alt={producto.vchNombreProducto}
+                  className="w-20 h-20 object-cover rounded-md"
+                />
+                <h3 className="mt-2 text-lg font-semibold">
+                  {producto.vchNombreProducto}
+                </h3>
+                <p className="text-gray-600">${producto.Precio}</p>
+              </div>
+            ))
+          ) : (
+            <p>No hay recomendaciones disponibles.</p>
+          )}
+      </div>
         </div>
       </div>
       <Fot />
