@@ -49,6 +49,10 @@ const DetalleProducto = () => {
   const [precioTratamiento, setPrecioTratamiento] = useState(0);
   const [precioTotal, setPrecioTotal] = useState(0);
 
+  const [rules, setRules] = useState([]);
+  const [productos, setProductos] = useState([]);
+  const [recomendaciones, setRecomendaciones] = useState([]);
+
   const carritoApiBaseUrl = "http://localhost:3000/Carrito/";
   const detallesCarritoApiBaseUrl = "http://localhost:3000/DetalleCarrito/";
 
@@ -82,6 +86,65 @@ const DetalleProducto = () => {
       toast.error("No hay suficientes productos en existencia.");
     }
   };
+
+  useEffect(() => {
+    const fetchRules = async () => {
+      try {
+        const response = await fetch('../association_rules.json');
+        const data = await response.json();
+        setRules(data);
+        console.log('Reglas cargadas:', data);
+      } catch (error) {
+        console.error('Error al cargar las reglas:', error);
+      }
+    };
+
+    fetchRules();
+  }, []);
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/productos/Productos');
+        const data = await response.json();
+        setProductos(data);
+      } catch (error) {
+        console.error('Error al cargar los productos:', error);
+      }
+    };
+
+    fetchProductos();
+  }, []);
+
+  useEffect(() => {
+    if (producto && productos.length && rules.length) {
+      const productoNombre = producto.vchNombreProducto?.trim().replace(/\s+/g, ' ') || '';
+      console.log('Nombre del producto:', productoNombre);
+
+      const newRecommendations = rules
+        .filter(rule => {
+          console.log('Antecedents:', rule.antecedents);
+          return rule.antecedents.includes(productoNombre);
+        })
+        .flatMap(rule => rule.consequents);
+
+      console.log('New Recommendations:', newRecommendations);
+
+      const uniqueRecommendations = [...new Set(newRecommendations)];
+      const limitedRecommendations = uniqueRecommendations.slice(0, 7);
+      const productosRecomendados = productos.filter(p => 
+        limitedRecommendations.includes(p.vchNombreProducto.trim().replace(/\s+/g, ' '))
+      );
+
+      console.log('Productos Recomendados:', productosRecomendados);
+
+      setRecomendaciones(productosRecomendados);
+    }
+  }, [producto, productos, rules]);
+
+  useEffect(() => {
+    console.log('Recomendaciones:', recomendaciones);
+  }, [recomendaciones]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -492,6 +555,34 @@ const DetalleProducto = () => {
           </div>
         </div>
       )}
+
+       {/* Sección de recomendaciones */}
+{/*     {recomendaciones.length > 0 && (
+      <div className="container mx-auto px-6 py-20">
+        <h2 className="text-black uppercase text-lg font-bold">Recomendaciones</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+          {recomendaciones.map((recomendado) => (
+            <div key={recomendado.IdProducto} className="bg-white shadow-md rounded-lg overflow-hidden">
+              <img
+                className="w-20 h-20 object-cover rounded-md"
+                src={recomendado.vchNomImagen}
+                alt={recomendado.vchNombreProducto}
+              />
+              <div className="p-4">
+                <h3 className="text-gray-700 font-bold">{recomendado.vchNombreProducto}</h3>
+                <p className="mt-2 text-gray-700">${recomendado.Precio}</p>
+                <button
+                  className="mt-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+                  onClick={() => navigate(`/detalle-producto/${recomendado.IdProducto}`)}
+                >
+                  Ver detalles
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )} */}
 
       <Fot />
       <ToastContainer
