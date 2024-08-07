@@ -91,21 +91,20 @@ const Lentes = () => {
             </p>
           )}
         </div>
-        <div className="flex flex-row flex-wrap justify-around mt-8">
+        <div className="flex flex-row flex-wrap justify-around mt-8 mx-4">
           {resultadosCategoria.map((producto) => {
             return (
               <div
                 key={producto.IdProducto}
-                className="w-80 bg-white shadow rounded mr-4 mb-4 flex flex-col"
+                className="w-80 bg-blue-100 shadow-xl rounded-xl mr-4 mb-4 flex flex-col"
               >
                 <div
-                  className="h-48 w-full bg-gray-200 flex flex-col justify-between p-4 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${producto.vchNomImagen})` }}
+                  className="h-48 w-full flex flex-col justify-between p-4 bg-cover bg-center"
                 >
                   <img
                     src={producto.vchNomImagen}
                     alt="Producto"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover rounded-lg"
                   />
                 </div>
                 <div className="p-2 flex flex-col items-center">
@@ -142,7 +141,7 @@ const Lentes = () => {
                   </p>
                   <Link
                     to={`/productoDetalle/${producto.IdProducto}`}
-                    className="py-2 px-4 disabled:opacity-50 mt-4 w-full flex items-center justify-center   bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+                    className="py-2 px-4 rounded-lg disabled:opacity-50 mt-4 w-full flex items-center justify-center   bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
                   >
                     Ver producto
                   </Link>
