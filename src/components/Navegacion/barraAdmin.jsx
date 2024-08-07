@@ -137,7 +137,7 @@ function Barra() {
             alt="logo"
           />
         </Link>
-{/*         <div className="md:hidden">
+        {/*         <div className="md:hidden">
           <Busqueda
             busqueda={busqueda}
             setBusqueda={setBusqueda}
@@ -161,7 +161,7 @@ function Barra() {
           >
             <AiOutlineHome size={20} className="mr-1" /> Inicio
           </Link>
-{/*           <Link
+          {/*           <Link
             to="/lentes"
             className="hover:bg-blue-900 rounded-md font-bold flex items-center"
           >
@@ -201,7 +201,7 @@ function Barra() {
       </div>
 
       <div className="hidden md:flex flex-grow items-center justify-between ml-4 md:ml-32">
-{/*         <div className="flex items-center justify-center">
+        {/*         <div className="flex items-center justify-center">
           <Busqueda
             busqueda={busqueda}
             setBusqueda={setBusqueda}
@@ -216,7 +216,7 @@ function Barra() {
           >
             <AiOutlineHome size={20} className="mr-1" /> Inicio
           </Link>
-{/*           <Link
+          {/*           <Link
             to="/lentes"
             className=" hover:border-b-2 border-blue-700 font-bold flex items-center"
           >
@@ -231,7 +231,7 @@ function Barra() {
             Accesorios
           </Link> */}
 
-{usuarioLogueado && userType === "empleado" && (
+          {usuarioLogueado && userType === "empleado" && (
             <div className="flex space-x-4">
               <Link
                 to="/Productos"
@@ -258,12 +258,12 @@ function Barra() {
                 Reportes
               </Link>
               <Link
-                to="/EmpleadoAd"
+                to="/Admin-citas"
                 className="hover:border-b-2 border-blue-700 font-bold flex items-center"
               >
                 Administracion de citas
               </Link>
-{/*               <Link
+              {/*               <Link
                 to="/Dashboard"
                 className="hover:border-b-2 border-blue-700 font-bold flex items-center"
               >
@@ -275,7 +275,7 @@ function Barra() {
         </div>
 
         <div className="hidden md:flex items-center space-x-5 mx-5">
-{/*           <Link
+          {/*           <Link
             to="/Agendar-cita"
             className="hover:text-blue-800 text-white rounded-md font-bold flex whitespace-nowrap uppercase"
           >
@@ -344,7 +344,7 @@ function Barra() {
             </>
           )}
 
-{/*           <Link to="/carrito">
+          {/*           <Link to="/carrito">
             <FaShoppingCart size={30} className="rounded-md" alt="carrito" />
           </Link> */}
         </div>
