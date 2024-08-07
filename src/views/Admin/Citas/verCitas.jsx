@@ -35,7 +35,7 @@ const VerCitas = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `https://backopt-production.up.railway.app/cita/usuario/${idUsuario}`
+          `https://backopt-production.up.railway.app/cita`
         );
         // Ordenar citas por fecha en orden descendente
         const citasOrdenadas = response.data.sort(
@@ -163,7 +163,9 @@ const VerCitas = () => {
                         </Link>
                         <CancelarCita
                           citaId={cita.IdCita}
-                          onCancelSuccess={() => handleCancelSuccess(cita.IdCita)}
+                          onCancelSuccess={() =>
+                            handleCancelSuccess(cita.IdCita)
+                          }
                         />
                       </div>
                     </td>

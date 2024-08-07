@@ -14,7 +14,6 @@ import Cookies from "./views/cookies";
 import IniciarS from "./views/iniciarS";
 import IniciarSEmpleado from "./views/Admin/Empleados/iniciarSEmpleado";
 import TerminoC from "./views/terminosC";
-import GestionarC from "./views/Citas/opcionRe";
 import Carrito from "./views/Lente/carrito";
 
 
@@ -23,16 +22,16 @@ import BarraNavegacion from "./components/Navegacion/barraResponsiva";
 
 
 /* import Carrito from "../src/components/err/NotFound"; */
-/* import OpcionRe from "./views/Citas/opcionRe"; */
 import NotFound from "./components/err/NotFound";
 import NotFound500 from "./components/err/error500";
 import Recuperar from "./views/Recuperacion/recuperar";
 import Registrarse from "./views/Registro/RegistroPage";
 import Cambiar from "./views/Recuperacion/cambioCon";
 
-import AgendarCita from "./views/Citas/crearCita";
+import AgendarCita from "./views/Citas/AgendarCita";
 import VerCitas from "./views/Perfil/Citas/verCitas";
 import ModificarCita from "./views/Perfil/Citas/modificarCita";
+import AdminCitas from "./views/Admin/Citas/verCitas";
 
 import Barra from "./components/Navegacion/barra";
 //Seccion productos del administrador
@@ -47,7 +46,6 @@ import { CartProvider } from "./views/Lente/context/cart";
 /* import inicioAd from './views/Admin/inicioadmin'; */
 
 import DetalleProducto from "./views/Lente/DetalleProducto";
-import Opciones from './views/opcionRe';
 import VerDireccion from './views/Perfil/verDireccion'
 import CambiarContraseñaPerfil from './views/Perfil/CambiarContra'
 import { AuthProvider } from "./views/AuthContext";
@@ -142,7 +140,11 @@ function App() {
                 path="/modificar-cita/:id"
                 element={<RutaProtegida element={<ModificarCita />} />}
               />
-              {/*           <Route
+              <Route
+                path="/Admin-citas"
+                element={<RutaProtegida element={<AdminCitas />} />}
+              />
+              {/*<Route
             path="/carrito"
             element={<RutaProtegida element={<Carrito />} />}
           /> */}
@@ -153,7 +155,6 @@ function App() {
 
               <Route path="/Login_Empleado" element={<IniciarSEmpleado />} />
               <Route path="/inicio/terminosC" element={<TerminoC />} />
-              {/* <Route path="/opcionesRe" element={<OpcionRe />} /> */}
               <Route path="/Recuperar" element={<Recuperar />} />
               <Route path="/RegistroPage" element={<Registrarse />} />
               <Route path="/Cambio" element={<Cambiar />} />
@@ -166,15 +167,19 @@ function App() {
               <Route path="/" element={<App />} />
               <Route path="/Productos" element={<Productos />} />
               <Route path="/ProductosAg" element={<AgregarProductos />} />
-              <Route path="/ModificarProducto/:id" element={<EditarProducto />} />
-              <Route path="/opcionesConfig" element={<Opciones/>}/>
-              <Route path='/VerDireccion' element={<VerDireccion/>}/>
-              <Route path='/CambiarContraseñaPerfil' element={<CambiarContraseñaPerfil/>}/>
-              <Route path='/CambiarContra' element={<CambiarContra/>}/>
-              <Route path='/Pedidos' element={<Pedidos/>}/>
-              <Route path='/PaginaSuccess' element={<PaginaSuccess/>}/>
-              
-              
+              <Route
+                path="/ModificarProducto/:id"
+                element={<EditarProducto />}
+              />
+              <Route path="/VerDireccion" element={<VerDireccion />} />
+              <Route
+                path="/CambiarContraseñaPerfil"
+                element={<CambiarContraseñaPerfil />}
+              />
+              <Route path="/CambiarContra" element={<CambiarContra />} />
+              <Route path="/Pedidos" element={<Pedidos />} />
+              <Route path="/PaginaSuccess" element={<PaginaSuccess />} />
+
               {/*Rutas para Admin  */}
               <Route path="/ClientesAd" element={<ClienteAd />} />
               <Route path="/EmpleadoAd" element={<EmpleadoAd />} />
@@ -182,12 +187,12 @@ function App() {
               <Route path="/inicioAd" element={<inicioAd />} />
               <Route path="/editarEmpleado/:id" element={<EditarEmpleado />} />
 
-          {/* RUta de matematicas */}
-          <Route path="/Matematicas" element={<Matematicas/>}/>
-          <Route path="/Mate" element={<Matematicas2/>}/>
-          <Route path="/Mate3" element={<Matematicas3/>}/>
-          
-          <Route path="/stripe" element={<Stripe/>}/>
+              {/* RUta de matematicas */}
+              <Route path="/Matematicas" element={<Matematicas />} />
+              <Route path="/Mate" element={<Matematicas2 />} />
+              <Route path="/Mate3" element={<Matematicas3 />} />
+
+              <Route path="/stripe" element={<Stripe />} />
 
               <Route path="/Opcion" element={<Opcion />} />
             </Routes>
