@@ -234,9 +234,11 @@ const Carrito = () => {
   return (
     <div className="min-h-screen bg-gray-100 pt-20">
       <Barra />
-      <h1 className="mb-10 mt-8 text-center text-2xl font-bold">Carrito de compras</h1>
+      <h1 className="mb-10 mt-8 text-center text-2xl font-bold">
+        Carrito de compras
+      </h1>
       <div className="mx-auto max-w-7xl px-6 md:flex md:space-x-6 xl:px-0">
-      <div className="w-full md:w-2/3">
+        <div className="w-full md:w-2/3">
           {detalleCarrito.map((detalle) => (
             <div
               key={detalle.IdDetalle_Carrito}
@@ -275,7 +277,7 @@ const Carrito = () => {
           ))}
         </div>
         <div className="w-full md:w-1/3">
-        <div className="rounded-lg border bg-white p-6 shadow-md">
+          <div className="rounded-lg border bg-white p-6 shadow-md">
             <h2 className="text-lg font-bold mb-4">Detalle de tu compra</h2>
             <h3 className="text-gray-700 font-semibold mb-2">
               Productos SubTotal
@@ -303,29 +305,35 @@ const Carrito = () => {
               Pagar
             </button>
           </div>
-          <h2 className="text-xl font-bold text-center mt-10 mb-6">Recomendaciones</h2>
-      <div className="flex flex-wrap justify-center">
-      {recomendacionesConDetalles.length ? (
+        </div>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold text-center mt-10 mb-6">
+          Recomendaciones
+        </h2>
+        <div className="flex flex-wrap justify-center">
+          {recomendacionesConDetalles.length ? (
             recomendacionesConDetalles.map((producto) => (
-              <div
-                key={producto.IdProducto}
-                className="mb-4 rounded-lg bg-white p-4 shadow-md"
-              >
-                <img
-                  src={producto.vchNomImagen}
-                  alt={producto.vchNombreProducto}
-                  className="w-20 h-20 object-cover rounded-md"
-                />
-                <h3 className="mt-2 text-lg font-semibold">
-                  {producto.vchNombreProducto}
-                </h3>
-                <p className="text-gray-600">${producto.Precio}</p>
+              <div className="flex items-center flex-col m-2 max-w-5xl w-52">
+                <div
+                  key={producto.IdProducto}
+                  className="mb-4 rounded-lg bg-white p-6 shadow-md"
+                >
+                  <img
+                    src={producto.vchNomImagen}
+                    alt={producto.vchNombreProducto}
+                    className="w-36 h-20 object-cover rounded-lg shadow-md"
+                  />
+                  <h3 className="mt-2 text-lg font-semibold">
+                    {producto.vchNombreProducto}
+                  </h3>
+                  <p className="text-gray-600">${producto.Precio}</p>
+                </div>
               </div>
             ))
           ) : (
             <p>No hay recomendaciones disponibles.</p>
           )}
-      </div>
         </div>
       </div>
       <Fot />
