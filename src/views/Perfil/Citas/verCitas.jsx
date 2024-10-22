@@ -35,7 +35,7 @@ const VerCitas = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `https://backopt-production.up.railway.app/cita/usuario/${idUsuario}`
+          `http://localhost:3000/cita/usuario/${idUsuario}`
         );
         // Ordenar citas por fecha en orden descendente
         const citasOrdenadas = response.data.sort(
@@ -69,7 +69,7 @@ const VerCitas = () => {
     try {
       // Llamar al endpoint de cancelación de cita
       await axios.put(
-        `https://backopt-production.up.railway.app/cita/cancelar/${citaId}`
+        `http://localhost:3000/cita/cancelar/${citaId}`
       );
 
       // Volver a obtener las citas actualizadas

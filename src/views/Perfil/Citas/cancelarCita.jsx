@@ -21,7 +21,7 @@ const CancelarCita = ({ citaId, onCancelSuccess }) => {
       setLoading(true);
       // Hacer la solicitud de cancelación al backend
       const response = await axios.put(
-        `https://backopt-production.up.railway.app/cita/cancelar/${citaId}`
+        `http://localhost:3000/cita/cancelar/${citaId}`
       );
 
       if (response.status === 200) {
