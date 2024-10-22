@@ -1,6 +1,6 @@
-import Fot from '../components/Footer';
+import Fot from '../../components/Footer';
 import { Link } from 'react-router-dom';
-import Barra from "../components/Navegacion/barra";
+import Barra from "../../components/Navegacion/barra";
 
 function App() {
   return (

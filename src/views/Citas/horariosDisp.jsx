@@ -17,7 +17,7 @@ const useFetchHorarios = (fecha) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://backopt-production.up.railway.app/horarios/HrPorFecha?fecha=${fecha}`
+          `http://localhost:3000/horarios/HrPorFecha?fecha=${fecha}`
         );
         setHorarios(response.data);
 

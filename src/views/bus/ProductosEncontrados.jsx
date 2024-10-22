@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import Fot from "../../components/Footer";
 import { Link } from "react-router-dom";
+import Barra from '../../components/Navegacion/barra';
 
 
 function ProductosEncontrados() {
@@ -9,6 +10,7 @@ function ProductosEncontrados() {
 
   return (
     <div className="flex-center">
+      <Barra />
       <div className="my-32">
         <p className="sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4 text-center">Productos encontrados</p>
 
