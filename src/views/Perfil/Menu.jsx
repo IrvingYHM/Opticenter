@@ -37,7 +37,7 @@ function ProfileCard() {
     const fetchProfileData = async (clienteId) => {
       try {
         const response = await fetch(
-          `http://localhost:3000/clientes/id/${clienteId}`
+          `https://backopt-production.up.railway.app/clientes/id/${clienteId}`
         );
         const data = await response.json();
         setProfileData(data);

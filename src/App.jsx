@@ -28,7 +28,6 @@ import AgendarCita from "./views/Citas/AgendarCita";
 import VerCitas from "./views/Perfil/Citas/verCitas";
 import ModificarCita from "./views/Perfil/Citas/modificarCita";
 import AdminCitas from "./views/Admin/Citas/verCitas";
-import Configuracion from "./views/Perfil/configuracion"
 
 import Barra from "./components/Navegacion/barra";
 //Seccion productos del administrador
@@ -87,7 +86,7 @@ function App() {
               <Route path="/inicio" element={<Inicio />} />
               <Route path="/inicioAd" element={<InicioAd />} />
               <Route path="/Menu" element={<Menu />} />
-              <Route path="/configuracion" element={<Configuracion />} />
+
               <Route path="/lentes" element={<Lentes />} />
               <Route
                 path="/productoDetalle/:id"
@@ -167,7 +166,6 @@ function App() {
 
               <Route path="/" element={<App />} />
               <Route path="/Productos" element={<Productos />} />
-              <Route path="/productos-encontrados" element={<ProductosEncontrados />} />
               <Route path="/ProductosAg" element={<AgregarProductos />} />
               <Route
                 path="/ModificarProducto/:id"

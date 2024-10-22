@@ -111,7 +111,7 @@ const CrearCita = () => {
       try {
         // Crear la cita
         const citaResponse = await axios.post(
-          "http://localhost:3000/cita",
+          "https://backopt-production.up.railway.app/cita",
           {
             Fecha: format(selectFecha, "yyyy-MM-dd"),
             Hora: selectHora,
@@ -127,7 +127,7 @@ const CrearCita = () => {
           // Reservar el horario
           try {
             const reservaResponse = await axios.post(
-              "http://localhost:3000/horarios/reservar",
+              "https://backopt-production.up.railway.app/horarios/reservar",
               {
                 Fecha: format(selectFecha, "yyyy-MM-dd"),
                 Hora: selectHora,
