@@ -1,0 +1,37 @@
+name: PWA CI/CD Workflow  # Nombre del flujo de trabajo
+
+# Definir los eventos que activan el flujo de trabajo
+on:
+  push:
+    branches:
+      - Irving
+      - Julio
+      - Jesus
+      - Master
+  pull_request:
+    branches:
+      - Irving
+      - Julio
+      - Jesus
+      - Master
+  workflow_dispatch:  # Activación manual opcional
+
+# Definir los trabajos (jobs) a ejecutar
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Sistema operativo donde se ejecutará el flujo
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # Descargar el código del repositorio
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2  # Configurar Node.js
+        with:
+          node-version: '16'  # Especificar la versión de Node.js
+
+      - name: Install dependencies
+        run: npm install  # Instalar las dependencias del proyecto
+
+      - name: Run tests
+        run: npm test  # Ejecutar las pruebas del proyecto
