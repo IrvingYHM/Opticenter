@@ -1,5 +1,5 @@
 describe('Mi primera prueba', () => {
   it('Visita la página de ejemplo', () => {
-    cy.visit('http://localhost:5173/');
+    cy.visit('https://opticenter-hu.vercel.app');
   });
 });
