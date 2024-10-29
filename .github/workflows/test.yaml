@@ -1,37 +1,35 @@
-name: PWA CI/CD Workflow  # Nombre del flujo de trabajo
+name: Cypress CI
 
-# Definir los eventos que activan el flujo de trabajo
 on:
   push:
     branches:
-      - Irving
-      - Julio
-      - Jesus
-      - Master
+      - master         # Despliegue en producción
+      - julio          # Ramas de desarrollo
+      - irving         # Ramas de desarrollo
+      - jesus          # Ramas de desarrollo
+      - feature/*      
   pull_request:
     branches:
-      - Irving
-      - Julio
-      - Jesus
-      - Master
-  workflow_dispatch:  # Activación manual opcional
+      - master         
+      - julio          
+      - irving         
+      - jesus          
+  workflow_dispatch:   # Activación manual opcional
 
-# Definir los trabajos (jobs) a ejecutar
 jobs:
-  build:
-    runs-on: ubuntu-latest  # Sistema operativo donde se ejecutará el flujo
-
+  cypress:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Descargar el código del repositorio
+        uses: actions/checkout@v2      # Clonar el repositorio
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2  # Configurar Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Especificar la versión de Node.js
+          node-version: '16'          
 
       - name: Install dependencies
-        run: npm install  # Instalar las dependencias del proyecto
+        run: npm install --legacy-peer-deps # Instalar dependencias
 
-      - name: Run tests
-        run: npm test  # Ejecutar las pruebas del proyecto
+      - name: Run Cypress tests
+        run: npx cypress run           # Ejecutar las pruebas de Cypress

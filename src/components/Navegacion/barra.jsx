@@ -58,7 +58,7 @@ function Barra() {
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
 
   useEffect(() => {
-    // Verificar el tipo de usuario al cargar la página
+    // Verificar el tipo de usuario al cargar la página.
     const token = localStorage.getItem("token");
     let nombreUsuario = "";
     //let fotoUsuario = "";
