@@ -7,13 +7,13 @@ on:
       - julio          # Ramas de desarrollo
       - irving         # Ramas de desarrollo
       - jesus          # Ramas de desarrollo
-      - feature/*      # Ramas de características
+      - feature/*      
   pull_request:
     branches:
-      - master         # Validar cambios en solicitudes de extracción hacia master
-      - julio          # Validar cambios en solicitudes de extracción hacia julio
-      - irving         # Validar cambios en solicitudes de extracción hacia irving
-      - jesus          # Validar cambios en solicitudes de extracción hacia jesus
+      - master         
+      - julio          
+      - irving         
+      - jesus          
   workflow_dispatch:   # Activación manual opcional
 
 jobs:
@@ -27,36 +27,36 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'         # Especificar la versión de Node.js
+          node-version: '16'         
 
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: ~/.npm               # Caché de dependencias de npm
+          path: ~/.npm               
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
 
       - name: Install dependencies
-        run: npm install             # Instalar dependencias
+        run: npm install  --legacy-peer-deps   # Instalar dependencias
 
       - name: Run tests
         run: npm test                # Ejecutar pruebas
 
       - name: Build project
-        run: npm run build           # Compilar el proyecto
+        run: npm run build           
 
   cypress:
     runs-on: ubuntu-latest
-    needs: build                     # Espera a que se complete el trabajo de build
+    needs: build                     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2     # Clonar el repositorio
+        uses: actions/checkout@v2     
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'          # Especificar la versión de Node.js
+          node-version: '16'          
 
       - name: Install Cypress
         run: npm install cypress       # Instalar Cypress
@@ -66,8 +66,8 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build                     # Espera a que se complete el trabajo de build
-    if: github.ref == 'refs/heads/master'   # Desplegar solo desde la rama master
+    needs: build                     
+    if: github.ref == 'refs/heads/master'   
 
     steps:
       - name: Deploy to Production
