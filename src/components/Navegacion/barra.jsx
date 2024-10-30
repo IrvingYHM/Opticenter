@@ -139,7 +139,7 @@ function Barra() {
           <img
             className="hidden md:block w-18 h-16 md:w-25 md:h-20 flex-wrap"
             src={Logo}
-            alt="logo"
+            alt="icono"
           />
         </Link>
         <IoIosMenu

@@ -150,12 +150,13 @@ useEffect(() => {
               </div>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full flex flex-col">
-                  <label htmlFor="vchCorreo" className="input-text">
+                  <label htmlFor="email" className="input-text">
                     Correo Electronico:
                   </label>
                   <input
                     type="email"
                     placeholder="Correo electronico"
+                    id="email"
                     {...register("vchCorreo", {
                       required: {
                         value: true,
@@ -182,13 +183,14 @@ useEffect(() => {
                       {errors.vchCorreo.message}
                     </span>
                   )}
-                  <label htmlFor="vchPassword" className="input-text">
-                    Contraseña:
+                  <label htmlFor="password" className="input-text">
+                    Contraseña
                   </label>
                   <div className="relative">
                     <input
                       autoComplete="current-password"
                       type={mostrarContra ? "text" : "password"}
+                      id="password"
                       placeholder="Contraseña"
                       {...register("vchPassword", {
                         required: {
