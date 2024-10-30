@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2      # Clonar el repositorio
+        uses: actions/checkout@v2      
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -29,7 +29,7 @@ jobs:
           node-version: '16'          
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps # Instalar dependencias
+        run: npm install --legacy-peer-deps 
 
       - name: Run Jest tests
-        run: npx jest --ci --coverage # Ejecutar las pruebas de Jest en modo CI y generar cobertura
+        run: npx jest --ci --coverage --env=jsdom 
