@@ -5,20 +5,24 @@ import { obtenerProductos } from "./Api";
 import { Link } from "react-router-dom";
 import Barra from "../../components/Navegacion/barra";
 
-
 const Lentes = () => {
   const [productos, setProductos] = useState([]);
   const [resultadosCategoria, setResultadosCategoria] = useState([]);
   const [selectedMarca, setSelectedMarca] = useState("all");
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("all");
   const [productoAgregado, setProductoAgregado] = useState(null); // Nuevo estado para manejar el producto agregado
-
+  const [sinProductos, setSinProductos] = useState(false); // Estado para verificar si hay productos
 
   useEffect(() => {
     obtenerProductos()
       .then((data) => {
         setProductos(data);
         setResultadosCategoria(data); // Inicializar resultadosCategoria con todos los productos
+        if (data.length === 0) {
+          setSinProductos(true); // Cambia el estado a true si no hay productos
+        } else {
+          setSinProductos(false); // Cambia el estado a false si hay productos
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -31,6 +35,13 @@ const Lentes = () => {
       const response = await fetch(url);
       const data = await response.json();
       setResultadosCategoria(data);
+
+      // Verificar si no hay productos en los resultados de búsqueda
+      if (data.length === 0) {
+        setSinProductos(true);
+      } else {
+        setSinProductos(false);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -38,7 +49,7 @@ const Lentes = () => {
 
   return (
     <div className="flex-center">
-    <Barra/>
+      <Barra />
       <div className="my-32">
         <div className="flex justify-center">
           <div className="p-4 flex items-center flex-col  sm:flex-row ">
@@ -92,32 +103,34 @@ const Lentes = () => {
           )}
         </div>
         <div className="flex flex-row flex-wrap justify-around mt-8 mx-4">
-          {resultadosCategoria.map((producto) => {
-            return (
-              <div
-                key={producto.IdProducto}
-                className="w-80 bg-blue-100 shadow-xl rounded-xl mr-4 mb-4 flex flex-col"
-              >
+          {sinProductos ? (
+            <p className="text-red-500 text-center mt-4">
+              No hay productos disponibles en la tienda.
+            </p>
+          ) : (
+            resultadosCategoria.map((producto) => {
+              return (
                 <div
-                  className="h-48 w-full flex flex-col justify-between p-4 bg-cover bg-center"
+                  key={producto.IdProducto}
+                  className="w-80 bg-blue-100 shadow-xl rounded-xl mr-4 mb-4 flex flex-col"
                 >
-                  <img
-                    src={producto.vchNomImagen}
-                    alt="Producto"
-                    className="h-full w-full object-cover rounded-lg"
-                  />
-                </div>
-                <div className="p-2 flex flex-col items-center">
-                  <h1 className="text-gray-800 text-center mt-1">
-                    Nombre: {producto.vchNombreProducto}
-                  </h1>
-                  <h1 className="text-gray-800 text-center mt-1">
-                    Categoría: {producto.categoria.NombreCategoria}
-                  </h1>
-                  <h1 className="text-gray-800 text-center mt-1">
-                    Marca: {producto.marca.NombreMarca}
-                  </h1>
-                  {
+                  <div className="h-48 w-full flex flex-col justify-between p-4 bg-cover bg-center">
+                    <img
+                      src={producto.vchNomImagen}
+                      alt="Producto"
+                      className="h-full w-full object-cover rounded-lg"
+                    />
+                  </div>
+                  <div className="p-2 flex flex-col items-center">
+                    <h1 className="text-gray-800 text-center mt-1">
+                      Nombre: {producto.vchNombreProducto}
+                    </h1>
+                    <h1 className="text-gray-800 text-center mt-1">
+                      Categoría: {producto.categoria.NombreCategoria}
+                    </h1>
+                    <h1 className="text-gray-800 text-center mt-1">
+                      Marca: {producto.marca.NombreMarca}
+                    </h1>
                     <div className="flex items-center justify-center bg-gray-100 rounded-full py-1 px-3 mt-2">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -135,21 +148,21 @@ const Lentes = () => {
                         {producto.Existencias}
                       </span>
                     </div>
-                  }
-                  <p className="text-center text-gray-800 mt-1">
-                    ${producto.Precio}
-                  </p>
-                  <Link
-                    to={`/productoDetalle/${producto.IdProducto}`}
-                    className="py-2 px-4 rounded-lg disabled:opacity-50 mt-4 w-full flex items-center justify-center   bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
-                  >
-                    Ver producto
-                  </Link>
-                  <div className="flex justify-between w-full mt-4"></div>
+                    <p className="text-center text-gray-800 mt-1">
+                      ${producto.Precio}
+                    </p>
+                    <Link
+                      to={`/productoDetalle/${producto.IdProducto}`}
+                      className="py-2 px-4 rounded-lg disabled:opacity-50 mt-4 w-full flex items-center justify-center bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+                    >
+                      Ver producto
+                    </Link>
+                    <div className="flex justify-between w-full mt-4"></div>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </div>
       <Fot />
