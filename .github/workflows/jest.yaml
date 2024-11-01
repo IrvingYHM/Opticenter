@@ -29,7 +29,7 @@ jobs:
           node-version: '16'          
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps 
+        run: yarn install
 
       - name: Run Jest tests
-        run: npx jest --ci --coverage --env=jsdom 
+        run: yarn jest --ci --coverage --env=jsdom
