@@ -34,7 +34,7 @@ jobs:
 
 
       - name: Install Vitest
-        run: npm install --save-dev vitest  # Instalar Vitest como dependencia de desarrollo
+        run: npm install --save-dev vitest --force # Instalar Vitest como dependencia de desarrollo
 
       - name: Run Vitest
         run: npm run test:unit  # Ejecutar las pruebas de Vitest
