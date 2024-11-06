@@ -3,10 +3,10 @@ name: Vitest CI
 on:
   push:
     branches:
-      - main            # Despliegue en producción (cambiar 'master' a 'main' si es tu rama principal)
-      - julio           # Rama de desarrollo
-      - irving          # Rama de desarrollo
-      - jesus           # Rama de desarrollo
+      - main            # Despliegue en producción
+      - julio           # Ramas de desarrollo
+      - irving          # Ramas de desarrollo
+      - jesus           # Ramas de desarrollo
       - feature/*       # Cualquier rama feature
   pull_request:
     branches:
@@ -30,7 +30,7 @@ jobs:
           node-version: '16'  # Configurar la versión de Node.js
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps  # Instalar dependencias del proyecto
+        run: npm install --legacy-peer-deps  # Usar --legacy-peer-deps para resolver dependencias
 
       - name: Install Vite (si es necesario)
         run: npm install --save-dev vite  # Asegurarse de que Vite esté instalado
