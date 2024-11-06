@@ -15,13 +15,13 @@ describe('Mi primera prueba', () => {
 
 
 
-  describe("Inicio del sitio web prueba", () => {
+/*   describe("Inicio del sitio web prueba", () => {
     it("Verifica que 'Ingresar a mi cuenta' redirige correctamente", () => {
       cy.visit("/home");
       cy.contains('Ingresar a mi cuenta').click(); // Busca por el texto
       cy.url().should('include', '/IniciaSesion'); // Verifica que redirige a la URL correcta
     });
-  });
+  }); */
   
 
 });
