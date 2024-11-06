@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent  } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Login from '../views/iniciarS.jsx'; 
-import { AuthProvider } from '../views/AuthContext';
+import Login from '../src/views/iniciarS.jsx'; 
+import { AuthProvider } from '../src/views/AuthContext.jsx';
 import '@testing-library/jest-dom';
 
 describe('Componente Login', () => {

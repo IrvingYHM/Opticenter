@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom"; // Importa MemoryRouter
-import Barra from "../components/Navegacion/barra"; // Ajusta la ruta según tu estructura de archivos
+import Barra from "../src/components/Navegacion/barra"; // Ajusta la ruta según tu estructura de archivos
 import "@testing-library/jest-dom";
 
 describe("Barra de navegacion", () => {

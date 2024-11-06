@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import App from '../views/inicio'; // Ajusta la ruta según tu estructura de archivos
+import App from '../src/views/inicio'; // Ajusta la ruta según tu estructura de archivos
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 
