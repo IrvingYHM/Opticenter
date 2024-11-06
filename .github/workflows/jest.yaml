@@ -19,6 +19,13 @@ on:
 jobs:
   jest:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test_file:
+          - 'servicios.test.tsx'
+          - 'home.test.tsx'
+          - 'citas.test.tsx'
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2      
@@ -34,4 +41,4 @@ jobs:
           npm install --save-dev @testing-library/jest-dom --legacy-peer-deps  # Instala jest-dom para pruebas
 
       - name: Run Jest tests
-        run: npx jest --ci --coverage --env=jsdom
+        run: npx jest --ci --coverage --env=jsdom --testPathPattern='${{ matrix.test_file }}'

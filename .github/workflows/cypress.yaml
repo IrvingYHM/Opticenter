@@ -7,18 +7,19 @@ on:
       - julio          # Ramas de desarrollo
       - irving         # Ramas de desarrollo
       - jesus          # Ramas de desarrollo
-      - feature/*      
+      - feature/*      # Ramas de características
   pull_request:
     branches:
-      - master         
-      - julio          
-      - irving         
-      - jesus          
+      - master
+      - julio
+      - irving
+      - jesus
   workflow_dispatch:   # Activación manual opcional
 
 jobs:
   cypress:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2      # Clonar el repositorio
@@ -26,7 +27,15 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'          
+          node-version: '16'
+
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps # Instalar dependencias
@@ -36,3 +45,22 @@ jobs:
 
       - name: Run Cypress tests
         run: npx cypress run             # Ejecutar las pruebas de Cypress
+
+      # Guardar resultados de pruebas como artefactos
+      - name: Archive Cypress results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-results
+          path: cypress/results
+
+      # Notificar en caso de éxito o fallo
+      - name: Notify result
+        if: failure()
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              body: "❌ Las pruebas E2E de Cypress han fallado. Revisa los resultados adjuntos."
+            })

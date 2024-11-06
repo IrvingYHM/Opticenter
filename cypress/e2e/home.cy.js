@@ -15,10 +15,12 @@ describe('Mi primera prueba', () => {
 
 
 
-  //Prueba de mostrar el footer
-  it("Debería mostrar el footer en la página", () => {
-    cy.visit("/");
-    cy.get("footer").should("exist"); 
+  describe("Inicio del sitio web prueba", () => {
+    it("Verifica que 'Ingresar a mi cuenta' redirige correctamente", () => {
+      cy.visit("/home");
+      cy.contains('Ingresar a mi cuenta').click(); // Busca por el texto
+      cy.url().should('include', '/IniciaSesion'); // Verifica que redirige a la URL correcta
+    });
   });
   
 
