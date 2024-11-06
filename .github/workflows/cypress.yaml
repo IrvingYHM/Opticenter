@@ -49,7 +49,7 @@ jobs:
       # Guardar resultados de pruebas como artefactos
       - name: Archive Cypress results
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: cypress-results
           path: cypress/results
