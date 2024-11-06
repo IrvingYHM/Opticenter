@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
+import { defineConfig as defineTestConfig } from "vitest/config"; // Importación de Vitest
 
 export default defineConfig({
   plugins: [
@@ -90,4 +91,9 @@ export default defineConfig({
       },
     }),
   ],
+  test: {
+    globals: true, // Habilita funciones globales como describe, it, expect
+    environment: "jsdom", // Configura el entorno de prueba como jsdom
+    setupFiles: "./src/setupTests.ts", // Opcional: archivo de configuración para pruebas
+  },
 });

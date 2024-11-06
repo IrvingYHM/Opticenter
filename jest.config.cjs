@@ -1,4 +1,3 @@
-// jest.config.cjs
 module.exports = {
   testEnvironment: 'jsdom',
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
@@ -7,5 +6,4 @@ module.exports = {
       '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.cjs'],
-  roots: ['<rootDir>/src/test'],
 };
