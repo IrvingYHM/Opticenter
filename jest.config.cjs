@@ -1,4 +1,4 @@
-module.exports = {
+/* module.exports = {
   testEnvironment: 'jsdom',
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
@@ -7,3 +7,4 @@ module.exports = {
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.cjs'],
 };
+ */
