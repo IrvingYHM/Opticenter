@@ -75,7 +75,7 @@
     "postcss": "^8.4.31",
     "react-scripts": "^5.0.1",
     "tailwindcss": "^3.3.5",
-    "vite": "^4.4.5",
+    "vite": "^5.4.11",
     "vite-plugin-pwa": "^0.20.5",
     "vitest": "^2.1.4"
   },
