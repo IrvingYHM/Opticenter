@@ -22,19 +22,19 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Clonar el repositorio
+        uses: actions/checkout@v3  
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Configurar la versión de Node.js
+          node-version: '16'  
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps  # Usar --legacy-peer-deps para resolver dependencias
+        run: npm install --legacy-peer-deps  
 
 
       - name: Install Vitest
-        run: npm install --save-dev vitest --force # Instalar Vitest como dependencia de desarrollo
+        run: npm install --save-dev vitest --force 
 
       - name: Run Vitest
-        run: npm run test:unit  # Ejecutar las pruebas de Vitest
+        run: npm run test:unit  

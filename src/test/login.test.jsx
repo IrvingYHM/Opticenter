@@ -17,7 +17,7 @@ describe('App', () => {
   it('debería renderizar el formulario de login con ReCAPTCHA', () => {
     render(
       <AuthContext.Provider value={{ login: mockLogin }}>
-        <BrowserRouter> {/* Asegúrate de envolver el componente con Router */}
+        <BrowserRouter> 
           <App />
         </BrowserRouter>
       </AuthContext.Provider>
@@ -30,7 +30,5 @@ describe('App', () => {
     // Verificar que el ReCAPTCHA se muestra correctamente
     expect(screen.getByTestId('recaptcha-mock')).toBeInTheDocument();
   });
-
-
 
 });

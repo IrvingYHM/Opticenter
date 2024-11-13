@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import Logo from "../../img/Venta.png";
+import Logo from "../../img/logo.png";
 import burgerMenu from "../../img/user/user-01.png";
 import { FaShoppingCart } from "react-icons/fa";
 import { BiGlassesAlt } from "react-icons/bi";

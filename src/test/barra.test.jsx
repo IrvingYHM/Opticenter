@@ -20,7 +20,6 @@ describe('Componente Barra', () => {
     expect(logo).toBeInTheDocument();
   });
 
-  // Test 2: Comprobamos si el input de búsqueda se renderiza correctamente
   it('debe renderizar el campo de entrada de búsqueda', () => {
     render(
       <Busqueda busqueda="" setBusqueda={() => {}} handleSearch={() => {}} />
@@ -40,12 +39,10 @@ describe('Componente Barra', () => {
 
     const input = screen.getByPlaceholderText('Buscar');
     fireEvent.change(input, { target: { value: 'lentes' } });
-
-    // Verifica que la función setBusqueda haya sido llamada con el nuevo valor
     expect(setBusquedaMock).toHaveBeenCalledWith('lentes');
   });
 
-  // Test 4: Verificar si handleSearch es llamado al presionar "Enter"
+  // Test 4: Verificar si handleSearch es llamado al presionar 
   it('debe llamar a handleSearch cuando se presione "Enter"', () => {
     const handleSearchMock = vi.fn();
     render(
@@ -55,7 +52,6 @@ describe('Componente Barra', () => {
     const input = screen.getByPlaceholderText('Buscar');
     fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
 
-    // Espera que handleSearch se haya llamado
     expect(handleSearchMock).toHaveBeenCalledTimes(1);
   });
 
@@ -70,7 +66,6 @@ describe('Componente Barra', () => {
     fireEvent.click(button);
 
     await waitFor(() => {
-      // Espera que handleSearch se haya llamado cuando el botón sea clickeado
       expect(handleSearchMock).toHaveBeenCalledTimes(1);
     });
   });
