@@ -13,6 +13,7 @@ describe('Mi primera prueba', () => {
     cy.get('img[alt="Sunset in the mountains"]').first().should("not.have.class", "zoom"); 
   });
 
+  //Cambios
 
 
 /*   describe("Inicio del sitio web prueba", () => {
