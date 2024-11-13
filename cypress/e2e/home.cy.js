@@ -1,7 +1,7 @@
 describe('Mi primera prueba', () => {
   //Primera prueba de pagina de inicio
   it('Visita la página de inicio del sitio web', () => {
-    cy.visit('https://opticenter-hu.vercel.app');
+    cy.visit('https://opticenter-hue.vercel.app/');
   });
 
   //Prueba de zoom en las imagenes
