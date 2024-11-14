@@ -17,10 +17,6 @@ import TerminoC from "./views/terminosC";
 import Carrito from "./views/Lente/carrito";
 
 
-//Esta barra es temporal
-import BarraNavegacion from "./components/Navegacion/barraResponsiva";
-
-
 /* import Carrito from "../src/components/err/NotFound"; */
 import NotFound from "./components/err/NotFound";
 import NotFound500 from "./components/err/error500";
@@ -98,6 +94,10 @@ function App() {
                 element={<DetalleProducto />}
               />
 
+              <Route
+                path="/Agendar-cita" element={<AgendarCita />}
+              />
+
               <Route path="/accesorios" element={<Accesorios />} />
               <Route
                 path="/lentesS"
@@ -129,10 +129,10 @@ function App() {
               {/* Rutas protegidas */}
 
               {/* Rutas protegidas */}
-              <Route
+              {/* <Route
                 path="/Agendar-cita"
                 element={<RutaProtegida element={<AgendarCita />} />}
-              />
+              /> */}
               <Route
                 path="/ver-cita"
                 element={<RutaProtegida element={<VerCitas />} />}
