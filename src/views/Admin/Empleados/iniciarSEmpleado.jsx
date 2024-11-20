@@ -43,7 +43,7 @@ function App() {
     if (captcha.current.getValue()) {
       console.log("El usuario no es un robot");
       try {
-        const response = await fetch("http://localhost:3000/empleados/login", {
+        const response = await fetch("https://backopt-production.up.railway.app/empleados/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

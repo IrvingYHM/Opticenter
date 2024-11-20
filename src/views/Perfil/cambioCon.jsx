@@ -58,7 +58,7 @@ const CambioContrasena = () => {
   async function cambiarContraseña(nuevaContraseña) {
     try {
       const response = await fetch(
-        `http://localhost:3000/clientes/${clienteId}/password`, // Modificado para incluir el id del cliente
+        `https://backopt-production.up.railway.app/clientes/${clienteId}/password`, // Modificado para incluir el id del cliente
         {
           method: "POST",
           headers: {
