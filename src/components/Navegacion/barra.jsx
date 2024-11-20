@@ -107,7 +107,7 @@ function Barra() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/productos/Buscar_productos?busqueda=${busqueda}`
+        `https://backopt-production.up.railway.app/productos/Buscar_productos?busqueda=${busqueda}`
       );
       const data = await response.json();
       if (data.length > 0) {
@@ -115,6 +115,7 @@ function Barra() {
         navigate("/productos-encontrados", { state: { productos: data } });
       } else {
         console.log("No se encontraron productos.");
+        navigate("/productos-Noencontrados")
         // Podemos mostrar un mensaje al usuario indicando que no se encontraron productos
         setProductosEncontrados([]);
       }
@@ -148,7 +149,7 @@ function Barra() {
           onClick={toggleMenu}
         />
 
-        <div className=" flex-grow mx-auto md:hidden m-3 ">
+        <div className="flex-grow mx-auto md:hidden m-3 max-w-[250px] sm:max-w-none">
           <Busqueda
             busqueda={busqueda}
             setBusqueda={setBusqueda}

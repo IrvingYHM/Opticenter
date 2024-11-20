@@ -252,7 +252,7 @@ function Barra() {
                 Empleados
               </Link>
               <Link
-                to="/EmpleadoAd"
+                to="/Reporte"
                 className="hover:border-b-2 border-blue-700 font-bold flex items-center"
               >
                 Reportes

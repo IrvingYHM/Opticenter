@@ -18,6 +18,7 @@ import axios from "axios";
 import useFetchHorarios from "./horariosDisp";
 import Barra from "../../components/Navegacion/barra";
 import Fot from "../../components/Footer";
+import Encuesta from "../feedback/encuesta"
 
 // Función para decodificar JWT
 function parseJwt(token) {
@@ -47,6 +48,8 @@ const CrearCita = () => {
   const { horarios, loading, error } = useFetchHorarios(
     selectFecha ? format(selectFecha, "yyyy-MM-dd") : null
   );  
+
+  const [showFeedback, setShowFeedback] = useState(false); // Nuevo estado
   const navigate = useNavigate();
   const [descripcionTLength, setDescripcionTLength] = useState(0);
 
@@ -111,7 +114,7 @@ const CrearCita = () => {
       try {
         // Crear la cita
         const citaResponse = await axios.post(
-          "http://localhost:3000/cita",
+          "https://backopt-production.up.railway.app/cita",
           {
             Fecha: format(selectFecha, "yyyy-MM-dd"),
             Hora: selectHora,
@@ -127,7 +130,7 @@ const CrearCita = () => {
           // Reservar el horario
           try {
             const reservaResponse = await axios.post(
-              "http://localhost:3000/horarios/reservar",
+              "https://backopt-production.up.railway.app/horarios/reservar",
               {
                 Fecha: format(selectFecha, "yyyy-MM-dd"),
                 Hora: selectHora,
@@ -136,9 +139,7 @@ const CrearCita = () => {
 
             if (reservaResponse.status === 200) {
               toast.success("Cita agendada y horario reservado exitosamente");
-              setTimeout(() => {
-                navigate("/inicio"); // Redirige al usuario a la página de inicio de sesión
-              }, 5000);
+              setShowFeedback(true); //Muestra la encuenta
             } else {
               toast.error(
                 "Cita agendada, pero hubo un problema al reservar el horario"
@@ -169,6 +170,8 @@ const CrearCita = () => {
       toast.error("Por favor, completa todos los campos");
     }
   };
+
+
 
   const renderHeader = () => {
     return (
@@ -240,10 +243,23 @@ const CrearCita = () => {
     return <div>{rows}</div>;
   };
 
+  const handleFeedbackComplete = () =>{
+    setShowFeedback(false);
+    navigate("/inicio");
+  }
+
   return (
     <div className="bg-gray-100 mt-20">
       <div className="flex flex-col items-center mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <Barra />
+      {showFeedback ? (
+      <Encuesta onComplete ={handleFeedbackComplete}/>
+      ):(
+        <div>
+    {/* Aquí va el resto de la lógica para mostrar el formulario */}
+  </div>
+      )}
+
         <div className="p-6 my-10 bg-white rounded-xl shadow-md space-y-2 w-full max-w-md lg:max-w-lg xl:max-w-xl">
           <h1 className="text-3xl font-bold mb-6 text-center">Agendar cita</h1>
           <div className="px-4 py-4 bg-white rounded-xl shadow-md space-y-2 w-full max-w-md lg:max-w-lg xl:max-w-xl">

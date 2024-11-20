@@ -81,7 +81,7 @@ function App() {
                 <div className="font-bold text-xl mb-2 ">
                   The Coldest Sunset
                 </div>
-                <p className="text-gray-700 text-justify">
+                <div className="text-gray-700 text-justify">
                   Estos lentes ofrecen un estilo único y moderno que te hará
                   destacar en cualquier ocasión. Con su diseño elegante y
                   funcional, podrás disfrutar de la máxima protección UV y una
@@ -97,7 +97,7 @@ function App() {
                       increíble con los lentes The Coldest Sunset!
                     </div>
                   )}
-                </p>
+                </div>
               </div>
               <div className="px-6 pt-4 pb-4">
                 <button
@@ -130,7 +130,7 @@ function App() {
                 <div className="font-bold text-xl mb-2 ">
                   The Coldest Sunset
                 </div>
-                <p className="text-gray-700 text-justify">
+                <div className="text-gray-700 text-justify">
                   Estos lentes ofrecen un estilo único y moderno que te hará
                   destacar en cualquier ocasión. Con su diseño elegante y
                   funcional, podrás disfrutar de la máxima protección UV y una
@@ -146,7 +146,7 @@ function App() {
                       increíble con los lentes The Coldest Sunset!
                     </div>
                   )}
-                </p>
+                </div>
               </div>
               <div className="px-6 pt-4 pb-4">
                 <button
@@ -176,7 +176,7 @@ function App() {
                 <div className="font-bold text-xl mb-2 ">
                   The Coldest Sunset
                 </div>
-                <p className="text-gray-700 text-justify">
+                <div className="text-gray-700 text-justify">
                   Estos lentes ofrecen un estilo único y moderno que te hará
                   destacar en cualquier ocasión. Con su diseño elegante y
                   funcional, podrás disfrutar de la máxima protección UV y una
@@ -192,7 +192,7 @@ function App() {
                       increíble con los lentes The Coldest Sunset!
                     </div>
                   )}
-                </p>
+                </div>
               </div>
               <div className="px-6 pt-4 pb-4">
                 <button
