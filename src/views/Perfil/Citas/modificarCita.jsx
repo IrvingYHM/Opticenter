@@ -66,7 +66,7 @@ const ModificarCita = () => {
     const fetchCita = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/cita/${id}`
+          `https://backopt-production.up.railway.app/cita/${id}`
         );
         const cita = response.data;
 
@@ -119,7 +119,7 @@ const ModificarCita = () => {
       try {
         // Actualizar la cita
         const citaResponse = await axios.put(
-          `http://localhost:3000/cita/${id}`,
+          `https://backopt-production.up.railway.app/cita/${id}`,
           {
             Fecha: format(selectFecha, "yyyy-MM-dd"),
             Hora: selectHora,
@@ -138,7 +138,7 @@ const ModificarCita = () => {
           // Reservar el horario después de actualizar la cita
           try {
             const reservaResponse = await axios.post(
-              "http://localhost:3000/horarios/reservar",
+              "https://backopt-production.up.railway.app/horarios/reservar",
               {
                 Fecha: format(selectFecha, "yyyy-MM-dd"),
                 Hora: selectHora,

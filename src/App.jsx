@@ -64,6 +64,11 @@ import Pedidos from './views/Perfil/Pedidos';
 import PaginaSuccess from './views/Lente/SuccessPage'//cuando se realiza el pago de mercadopago
 import Stripe from './views/Metodopago/stripe'
 
+import Noencontrados from "./views/bus/noencontrados";
+import Reporte from "./views/Admin/reportes";
+
+
+
 
 
 
@@ -153,6 +158,9 @@ function App() {
               <Route path="/inicio/avisoP" element={<AvisoP />} />
               <Route path="/inicio/cookies" element={<Cookies />} />
               <Route path="/inicioS" element={<IniciarS />} />
+              <Route path="/Reporte" element={<Reporte />} />
+
+              
 
               <Route path="/Login_Empleado" element={<IniciarSEmpleado />} />
               <Route path="/inicio/terminosC" element={<TerminoC />} />
@@ -168,6 +176,7 @@ function App() {
               <Route path="/" element={<App />} />
               <Route path="/Productos" element={<Productos />} />
               <Route path="/productos-encontrados" element={<ProductosEncontrados />} />
+              <Route path="/productos-Noencontrados" element={<Noencontrados />} />
               <Route path="/ProductosAg" element={<AgregarProductos />} />
               <Route
                 path="/ModificarProducto/:id"
