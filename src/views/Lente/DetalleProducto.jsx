@@ -7,6 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom"; // Importa useHistory para manejar la redirección
 import Barra from "../../components/Navegacion/barra";
+import lente from "../../img/3d.jpg"
 
 
 function parseJwt(token) {
@@ -409,8 +410,14 @@ const DetalleProducto = () => {
                 </button>
               </div>
             </div>
+
+
           </div>
+          <div className="flex justify-center items-center h-screen bg-gray-100">
+  <img src={lente} alt="Código QR" className="w-96 h-96 object-contain shadow-lg rounded-md" />
+</div>
         </div>
+        
       )}
       
       

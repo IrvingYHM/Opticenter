@@ -6,6 +6,8 @@ import imagen from "../img/Venta.png";
 import imagen2 from "../img/lentes2.png";
 import Scrool from '../components/scroll';
 import Barra from "../components/Navegacion/barra";
+import lente from "../img/3d.jpg";
+
 
 
 function App() {
@@ -203,8 +205,12 @@ function App() {
                 </button>
               </div>
             </div>
+
           </div>
           <br />
+          <div>
+              <img className="flex justify-center" src={lente} alt="" />
+            </div>
         </div>
         
       </div>
