@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Bar } from "react-chartjs-2"; // Importamos el componente de gráfico de barras
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
+import { Pie } from "react-chartjs-2"; // Importamos el componente de gráfico de pastel
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale } from 'chart.js';
 
-// Registramos los componentes necesarios de Chart.js para el gráfico de barras
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+// Registramos los componentes necesarios de Chart.js para el gráfico de pastel
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
 
 function ResultadosEncuestas() {
   const [resultados, setResultados] = useState([]);
@@ -48,38 +48,39 @@ function ResultadosEncuestas() {
 
   // Procesar las respuestas para construir los datos de la gráfica
   const procesarDatos = () => {
-    const respuestasPorCalificacion = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 };
+    const respuestasPorPregunta = {};
 
-    // Contamos las respuestas por calificación
+    // Contamos las respuestas por pregunta
     resultados.forEach((encuesta) => {
-      const { respuestas } = encuesta;
+      const { pregunta, respuestas } = encuesta;
 
-      // Contamos las respuestas de cada calificación
+      // Si la pregunta no existe en el objeto, la inicializamos
+      if (!respuestasPorPregunta[pregunta]) {
+        respuestasPorPregunta[pregunta] = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 };
+      }
+
+      // Contamos las respuestas de la calificación para cada pregunta
       Object.entries(respuestas).forEach(([calificacion, cantidad]) => {
-        respuestasPorCalificacion[calificacion] += cantidad; // Incrementamos el contador
+        respuestasPorPregunta[pregunta][calificacion] += cantidad; // Incrementamos el contador
       });
     });
 
-    // Asignamos colores diferentes a cada calificación
-    const colores = ["#FF6F61", "#FF9F40", "#FFCD44", "#4BC0C0", "#36A2EB"]; // Colores para las barras
+    // Creamos los datos para el gráfico de pastel
+    const labels = Object.keys(respuestasPorPregunta); // Las preguntas
+    const datasets = labels.map((pregunta) => {
+      const totalRespuestas = Object.values(respuestasPorPregunta[pregunta]).reduce((a, b) => a + b, 0); // Total de respuestas por pregunta
+      return {
+        label: pregunta,
+        data: Object.values(respuestasPorPregunta[pregunta]), // Los valores de cada calificación
+        backgroundColor: ['#FF6F61', '#6B5B95', '#88B04B', '#F7CAC9', '#92A8D1'], // Colores para el gráfico
+      };
+    });
 
-    // Creamos los datos para el gráfico de barras
     return {
-      labels: ["1", "2", "3", "4", "5"], // Las respuestas posibles
-      datasets: [
-        {
-          label: "Distribución de Respuestas",
-          data: Object.values(respuestasPorCalificacion), // Datos de cada calificación
-          backgroundColor: colores, // Asignamos los colores diferentes a cada barra
-          borderColor: '#D66F58', // Color de los bordes de las barras
-          borderWidth: 1,
-        },
-      ],
+      labels: ['1', '2', '3', '4', '5'], // Respuestas posibles
+      datasets,
     };
   };
-
-  // Contamos el total de encuestas
-  const totalEncuestas = resultados.reduce((total, encuesta) => total + Object.values(encuesta.respuestas).reduce((sum, cantidad) => sum + cantidad, 0), 0);
 
   const data = procesarDatos();
 
@@ -89,44 +90,29 @@ function ResultadosEncuestas() {
       {resultados.length === 0 ? (
         <p>No se han completado encuestas aún.</p>
       ) : (
-        <div>
-          {/* Mostrar el total de encuestas */}
-          <p className="text-xl mb-4">Total de Encuestas Completadas: {totalEncuestas}</p>
-
-          <Bar
-            data={data}
-            options={{
-              responsive: true,
-              plugins: {
-                title: {
-                  display: true,
-                  text: "Distribución Total de Respuestas de sitio web", // Título del gráfico
-                },
-                tooltip: {
-                  callbacks: {
-                    label: function (context) {
-                      const label = context.dataset.label || '';
-                      return `${label}: ${context.raw}`; // Mostrar valor de cada barra en el tooltip
+        <div className="flex flex-wrap gap-4 justify-center">
+          {data.datasets.map((dataset, index) => (
+            <div key={index} className="flex-1 max-w-sm p-6 bg-white rounded-lg shadow">
+              <h3 className="text-xl font-semibold mb-2">{`Pregunta: ${dataset.label}`}</h3>
+              <div className="w-full h-[400px]"> {/* Altura ajustada */}
+                <Pie
+                  data={{
+                    labels: data.labels, // Respuestas posibles
+                    datasets: [dataset],
+                  }}
+                  options={{
+                    responsive: true,
+                    plugins: {
+                      title: {
+                        display: true,
+                        text: "Distribución de Respuestas",
+                      },
                     },
-                  },
-                },
-              },
-              scales: {
-                x: {
-                  title: {
-                    display: true,
-                    text: 'Calificación', // Título de la escala X
-                  },
-                },
-                y: {
-                  title: {
-                    display: true,
-                    text: 'Cantidad de Respuestas', // Título de la escala Y
-                  },
-                },
-              },
-            }}
-          />
+                  }}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
