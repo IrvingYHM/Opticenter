@@ -12,7 +12,7 @@ function RecuperacionPregunta() {
     e.preventDefault();
     try {
       const response = await fetch(
-        "http://localhost:3000/clientes/verificar-respuesta",
+        "https://backopt-production.up.railway.app/clientes/verificar-respuesta",
         {
           method: "POST",
           headers: {

@@ -97,6 +97,7 @@ function Barra() {
     localStorage.removeItem("token");
     setUserType(null);
     setUsuarioLogueado(false);
+    navigate("/")
   };
 
   const handleSearch = async () => {
