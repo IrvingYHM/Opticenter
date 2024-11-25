@@ -61,7 +61,7 @@ import PaginaSuccess from './views/Lente/SuccessPage'//cuando se realiza el pago
 import Stripe from './views/Metodopago/stripe'
 
 import Noencontrados from "./views/bus/noencontrados";
-import Reporte from "./views/Admin/reportes";
+import Reporte from "./views/Admin/report/inicio";
 
 
 
