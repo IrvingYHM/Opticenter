@@ -63,7 +63,7 @@ const RContraseña = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
       /* console.log("Datos a enviar al backend:", info);
       console.log(vchPassword) */
       const response = await fetch(
-        "http://localhost:3000/clientes/",
+        "https://backopt-production.up.railway.app/clientes/",
         {
           method: "POST",
           headers: {

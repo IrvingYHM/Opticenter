@@ -229,8 +229,8 @@ function InfoPersonal({ onNext, onBack, onValidationChange, setMaxWidth }) {
                   className="mt-1 p-2 border rounded-md w-full"
                 >
                   <option value="">Seleccionar</option>
-                  <option value="Masculino">Masculino</option>
-                  <option value="Femenino">Femenino</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
                 </select>
               </div>
               {errors.chrSexo && (

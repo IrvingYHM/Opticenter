@@ -92,7 +92,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
     // Envía los datos al servidor
     try {
       const response = await fetch(
-        "http://localhost:3000/direcciones-clientes/",
+        "https://backopt-production.up.railway.app/direcciones-clientes/",
         {
           method: "POST",
           headers: {
