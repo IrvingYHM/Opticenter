@@ -45,26 +45,23 @@ function ResultadosEncuestas() {
 
   const procesarDatos = () => {
     const respuestasPorPregunta = {};
-    const totalPorPregunta = {};  // Para almacenar el total de respuestas por pregunta
 
     resultados.forEach((encuesta) => {
       const { pregunta, respuestas } = encuesta;
 
       if (!respuestasPorPregunta[pregunta]) {
         respuestasPorPregunta[pregunta] = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 };
-        totalPorPregunta[pregunta] = 0;  // Inicializamos el total de respuestas
       }
 
       Object.entries(respuestas).forEach(([calificacion, cantidad]) => {
         respuestasPorPregunta[pregunta][calificacion] += cantidad;
-        totalPorPregunta[pregunta] += cantidad;  // Sumar la cantidad total de respuestas
       });
     });
 
     const labels = Object.keys(respuestasPorPregunta);
     const datasets = labels.map((pregunta) => {
       return {
-        label: `${pregunta} - Total: ${totalPorPregunta[pregunta]}`, // Agregar total al label
+        label: pregunta,
         data: Object.values(respuestasPorPregunta[pregunta]),
         backgroundColor: ["#FF6F61", "#6B5B95", "#88B04B", "#F7CAC9", "#92A8D1"],
       };
@@ -86,41 +83,38 @@ function ResultadosEncuestas() {
       {resultados.length === 0 ? (
         <p>No se han completado encuestas aún.</p>
       ) : (
-        <div>
-          <p className="mb-4">Total de encuestas completadas: {resultados.length}</p> {/* Mostrar total de encuestas */}
-          <div className="flex flex-wrap gap-4 justify-center">
-            {data.datasets.map((dataset, index) => (
-              <div key={index} className="flex-1 max-w-sm p-6 bg-white rounded-lg shadow">
-                <h3 className="text-xl font-semibold mb-2">{dataset.label}</h3>
-                <div className="w-full h-[400px]">
-                  <Pie
-                    data={{
-                      labels: data.labels,
-                      datasets: [dataset],
-                    }}
-                    options={{
-                      responsive: true,
-                      plugins: {
-                        tooltip: {
-                          callbacks: {
-                            label: (tooltipItem) => {
-                              const calificacion = estrellas[tooltipItem.dataIndex]; // Convertir índice a estrellas
-                              const value = dataset.data[tooltipItem.dataIndex];
-                              return `${calificacion}: Personas que han respondido: ${value}`;
-                            },
+        <div className="flex flex-wrap gap-4 justify-center">
+          {data.datasets.map((dataset, index) => (
+            <div key={index} className="flex-1 max-w-sm p-6 bg-white rounded-lg shadow">
+              <h3 className="text-xl font-semibold mb-2">{${dataset.label}}</h3>
+              <div className="w-full h-[400px]">
+                <Pie
+                  data={{
+                    labels: data.labels,
+                    datasets: [dataset],
+                  }}
+                  options={{
+                    responsive: true,
+                    plugins: {
+                      tooltip: {
+                        callbacks: {
+                          label: (tooltipItem) => {
+                            const calificacion = estrellas[tooltipItem.dataIndex]; // Convertir índice a estrellas
+                            const value = dataset.data[tooltipItem.dataIndex];
+                            return ${calificacion}: Personas que han respondido: ${value};
                           },
                         },
-                        title: {
-                          display: true,
-                          text: `Respuestas por calificación`,
-                        },
                       },
-                    }}
-                  />
-                </div>
+                      title: {
+                        display: true,
+                        text: Respuestas por calificación,
+                      },
+                    },
+                  }}
+                />
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
