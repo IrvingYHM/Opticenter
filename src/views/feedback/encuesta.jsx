@@ -9,13 +9,12 @@ function EncuestaCitas() {
   const navigate = useNavigate();
 
   const preguntas = [
-    "¿Qué tan fácil fue encontrar la información que buscabas?",
+    "¿Qué tan difícil te pareció el proceso para agendar tu cita?",
     "¿Cómo calificarías la facilidad de uso del sistema para agendar tu cita?",
-    "¿Qué tan satisfecho estás con el proceso de agendar una cita?",
-    "¿Qué tan rápido te pareció el sistema para agendar tu cita?",
-    "¿Qué tan claro fue el mensaje de confirmación de tu cita?",
+    "¿En qué medida encontraste complicado el proceso de agendar tu cita?",
+    "¿Consideras que el proceso de agendar tu cita fue intuitivo?",
+    "¿Cuánto tiempo te llevó completar el proceso de agendar tu cita?",
   ];
-  
 
   // Verificar si el usuario ya completó la encuesta al montar el componente
   useEffect(() => {
