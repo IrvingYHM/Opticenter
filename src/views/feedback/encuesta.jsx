@@ -52,32 +52,36 @@ function EncuestaCitas() {
     e.preventDefault();
 
     if (Object.keys(respuestas).length !== preguntas.length) {
-      alert("Por favor responde todas las preguntas antes de enviar.");
-      return;
+        alert("Por favor responde todas las preguntas antes de enviar.");
+        return;
     }
 
     try {
-      const response = await fetch("https://backopt-production.up.railway.app/Encuesta", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idUsuario: 1, respuestas }), // Ajusta idUsuario
-      });
+        const response = await fetch("https://backopt-production.up.railway.app/Encuesta", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                idUsuario: 1, // Ajusta el ID del usuario
+                respuestas,
+                preguntas // Envía las preguntas al backend
+            }),
+        });
 
-      if (response.ok) {
-        setEnviada(true);
+        if (response.ok) {
+            setEnviada(true);
 
-        // Redirigir al inicio después de 3 segundos
-        setTimeout(() => {
-          navigate("/ver-cita");
-        }, 3000); // Retrasar la redirección 3 segundos
-      } else {
-        alert("Hubo un error al enviar tu feedback. Intenta nuevamente.");
-      }
+            // Redirigir al inicio después de 3 segundos
+            setTimeout(() => {
+                navigate("/ver-cita");
+            }, 3000);
+        } else {
+            alert("Hubo un error al enviar tu feedback. Intenta nuevamente.");
+        }
     } catch (error) {
-      console.error("Error:", error);
-      alert("Hubo un error al enviar tu feedback. Intenta nuevamente.");
+        console.error("Error:", error);
+        alert("Hubo un error al enviar tu feedback. Intenta nuevamente.");
     }
-  };
+};
 
   if (cargando) {
     return (

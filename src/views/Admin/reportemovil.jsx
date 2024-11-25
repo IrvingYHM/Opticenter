@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale } from "chart.js";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  LinearScale
+);
 
 function ResultadosEncuestas() {
   const [resultados, setResultados] = useState([]);
@@ -11,10 +26,13 @@ function ResultadosEncuestas() {
   useEffect(() => {
     const obtenerResultados = async () => {
       try {
-        const response = await fetch("https://backopt-production.up.railway.app/resultados", {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
+        const response = await fetch(
+          "https://backopt-production.up.railway.app/resultadosM",
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();
@@ -50,7 +68,7 @@ function ResultadosEncuestas() {
       const { pregunta, respuestas } = encuesta;
 
       if (!respuestasPorPregunta[pregunta]) {
-        respuestasPorPregunta[pregunta] = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 };
+        respuestasPorPregunta[pregunta] = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
       }
 
       Object.entries(respuestas).forEach(([calificacion, cantidad]) => {
@@ -63,7 +81,13 @@ function ResultadosEncuestas() {
       return {
         label: pregunta,
         data: Object.values(respuestasPorPregunta[pregunta]),
-        backgroundColor: ["#FF6F61", "#6B5B95", "#88B04B", "#F7CAC9", "#92A8D1"],
+        backgroundColor: [
+          "#FF6F61",
+          "#6B5B95",
+          "#88B04B",
+          "#F7CAC9",
+          "#92A8D1",
+        ],
       };
     });
 
@@ -79,13 +103,16 @@ function ResultadosEncuestas() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Resultados de Encuestas Web</h1>
+      <h1 className="text-3xl font-bold mb-4">Resultados de Encuesta Movil</h1>
       {resultados.length === 0 ? (
         <p>No se han completado encuestas aún.</p>
       ) : (
         <div className="flex flex-wrap gap-4 justify-center">
           {data.datasets.map((dataset, index) => (
-            <div key={index} className="flex-1 max-w-sm p-6 bg-white rounded-lg shadow">
+            <div
+              key={index}
+              className="flex-1 max-w-sm p-6 bg-white rounded-lg shadow"
+            >
               <h3 className="text-xl font-semibold mb-2">{`${dataset.label}`}</h3>
               <div className="w-full h-[400px]">
                 <Pie
@@ -99,7 +126,8 @@ function ResultadosEncuestas() {
                       tooltip: {
                         callbacks: {
                           label: (tooltipItem) => {
-                            const calificacion = estrellas[tooltipItem.dataIndex]; // Convertir índice a estrellas
+                            const calificacion =
+                              estrellas[tooltipItem.dataIndex]; // Convertir índice a estrellas
                             const value = dataset.data[tooltipItem.dataIndex];
                             return `${calificacion}: Personas que han respondido: ${value}`;
                           },
