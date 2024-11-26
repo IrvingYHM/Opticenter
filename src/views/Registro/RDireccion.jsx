@@ -56,7 +56,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
   };
 
   useEffect(() => {
-    setMaxWidth("3xl"); //Tamaño maximo del formulario
+    setMaxWidth("3xl"); // Tamaño máximo del formulario
 
     // Obtener el IdCliente utilizando la función fetchIdCliente
     const obtenerIdCliente = async () => {
@@ -114,7 +114,7 @@ const RDireccion = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
 
       if (response.ok) {
         // Realiza alguna acción si la solicitud fue exitosa (por ejemplo, redirigir al usuario)
-        toast.success("El registro se completo exitosamente");
+        toast.success("El registro se completó exitosamente");
         setTimeout(() => {
           navigate("/inicioS"); // Redirige al usuario a la página de inicio de sesión
         }, 5000);
@@ -126,13 +126,20 @@ const RDireccion = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
     }
   };
 
+  const handleSkip = () => {
+    toast.success("Usuario creado correctamente");
+    setTimeout(() => {
+      navigate("/inicioS"); // Redirige al usuario al inicio después de 5 segundos
+    }, 5000);
+  };
+
   return (
     <>
       <div className="pt-24 text-center rounded-lg shadow-md overflow-hidden">
         <div className="container ml-auto mr-auto">
           <div className="bg-white px-12">
             <p className="sm:text-2xl md:text-base lg:text-2xl text-cyan-950 font-bold mb-4">
-              Formulario de direccion del contacto
+              Formulario de dirección del contacto
             </p>
             <form onSubmit={handleSubmit(handleFormSubmit)}>
               <div className="grid grid-cols-2 gap-x-14">
@@ -243,85 +250,74 @@ const RDireccion = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
                     className={`mt-1 p-2 border rounded-md w-full ${
                       sinNumChecked ? "bg-gray-50 cursor-default" : ""
                     }`}
-                    placeholder="Numero exterior"
-                    {...register("NumExt")}
                     value={numExtValue}
                     onChange={(e) => setNumExtValue(e.target.value)}
-                    readOnly={numExtValue === "S/N"} // Deshabilitar el input si el valor es "S/N"
+                    placeholder="Numero Exterior"
+                    disabled={sinNumChecked}
+                    {...register("NumExt")}
                   />
-
-                  {/* Checkbox para indicar "Sin número" */}
-                  <div className="absolute ml-48 -mt-8 pointer-events-auto">
-                    <label
-                      htmlFor="withoutNumber"
-                      className="text-gray-800 ml-1 cursor-pointer"
-                    >
-                      Sin número
-                    </label>
-                    <input
-                      type="checkbox"
-                      id="withoutNumber"
-                      name="withoutNumber"
-                      className="ml-1"
-                      checked={numExtValue === "S/N"} // Marcar el checkbox si el valor del input es "S/N"
-                      onChange={handleCheckboxChange}
-                    />
-                  </div>
                 </div>
                 <div className="mb-4">
                   <label htmlFor="" className="block text-left font-bold">
-                    Numero interior (Opcional):
+                    Numero interior:
                   </label>
                   <input
                     type="text"
                     name="NumInt"
                     id="NumInt"
-                    maxLength={5}
+                    maxLength={7}
                     className="mt-1 p-2 border rounded-md w-full"
-                    placeholder="Numero interior"
+                    placeholder="Numero Interior"
                     {...register("NumInt")}
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="" className="block text-left font-bold">
+                  <label
+                    htmlFor="Referencia"
+                    className="block text-left font-bold"
+                  >
                     Referencia:
                   </label>
-                  <textarea
+                  <input
+                    type="text"
                     name="Referencia"
                     id="Referencia"
-                    required
-                    maxLength={128}
-                    className="mt-1 p-2 border rounded-md w-full h-24 resize-none"
-                    placeholder="Descripcion de la fachada, puntos de referencia para encontrala, indicaciones de seguridad, etc."
+                    maxLength={200}
+                    className="mt-1 p-2 border rounded-md w-full"
+                    placeholder="Referencia"
                     {...register("Referencia")}
                     onChange={handleReferenciaChange}
                   />
-                  <div className="text-gray-500 text-sm -mt-1 flex justify-end bg-">
-                    {referenciaLength}/128
-                  </div>
+                  {referenciaLength === 0 && (
+                    <p className="text-sm text-red-500">
+                      La referencia es obligatoria.
+                    </p>
+                  )}
                 </div>
               </div>
 
-              <div className="grid grid-cols-3">
+              <div className="flex justify-between">
                 <button
                   type="button"
                   onClick={onBack}
-                  className="bg-gray-500 border border-black hover:bg-gray-400 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"
+                  className="mt-6 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg"
                 >
                   Regresar
                 </button>
-                <Link
-                  to="/inicio"
-                  className="bg-yellow-400 border border-black hover:bg-yellow-500 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"
-                >
-                  Omitir
-                </Link>
                 <button
                   type="submit"
-                  className="bg-blue-700 border border-black hover:bg-blue-600 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"
-                  disabled={Object.keys(errors).length > 0}
+                  className="mt-6 bg-cyan-950 hover:bg-cyan-800 text-white font-bold py-2 px-4 rounded-lg"
                 >
-                  Enviar
+                  Guardar y continuar
+                </button>
+              </div>
+              <div className="mt-6">
+                <button
+                  type="button"
+                  onClick={handleSkip}
+                  className="text-sm text-blue-500 hover:underline"
+                >
+                  Omitir
                 </button>
               </div>
             </form>
