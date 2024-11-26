@@ -312,10 +312,10 @@ const RDireccion = ({ onNext, onBack, onValidationChange, setMaxWidth }) => {
                 </button>
               </div>
               <div className="mt-6">
-                <button
+              <button
                   type="button"
-                  onClick={handleSkip}
-                  className="text-sm text-blue-500 hover:underline"
+                  onClick={handleSkip} // Llamar a la función handleSkip al hacer clic en "Omitir"
+                  className="bg-yellow-400 border border-black hover:bg-yellow-500 text-white rounded-lg font-bold flex px-4 py-2 my-5 justify-center mx-auto items-center"
                 >
                   Omitir
                 </button>
