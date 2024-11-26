@@ -16,7 +16,6 @@ function EncuestaCitas() {
     "¿Cuánto tiempo te llevó completar el proceso de agendar tu cita?",
   ];
 
-  // Verificar si el usuario ya completó la encuesta al montar el componente
   useEffect(() => {
     const verificarEncuesta = async () => {
       try {
