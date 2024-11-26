@@ -16,7 +16,6 @@ function EncuestaCitas() {
     "¿Qué tan claro fue el mensaje de confirmación de tu cita?",
   ];
 
-  // Verificar si el usuario ya completó la encuesta al montar el componente
   useEffect(() => {
     const verificarEncuesta = async () => {
       try {
