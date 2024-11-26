@@ -1,6 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+// Función para decodificar JWT
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+  return JSON.parse(jsonPayload);
+}
+
 function EncuestaCitas() {
   const [respuestas, setRespuestas] = useState({});
   const [enviada, setEnviada] = useState(false);
@@ -15,30 +31,41 @@ function EncuestaCitas() {
     "¿Qué tan rápido te pareció el sistema para agendar tu cita?",
     "¿Qué tan claro fue el mensaje de confirmación de tu cita?",
   ];
-  
 
   useEffect(() => {
-    const verificarEncuesta = async () => {
-      try {
-        const response = await fetch("https://backopt-production.up.railway.app/Encuesta/completada?idUsuario=1", {  // Ajusta el parámetro idUsuario
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem("token");
 
-        if (response.ok) {
-          const data = await response.json();
-          if (data.completada) {
-            setEncuestaCompletada(true); // Establecer que la encuesta ya fue completada
+    if (token) {
+      const decodedToken = parseJwt(token);
+      const idUsuario = decodedToken.clienteId; // Asumimos que el idUsuario está en el campo `id`
+
+      // Verificar si la encuesta ya fue completada
+      const verificarEncuesta = async () => {
+        try {
+          const response = await fetch(`https://backopt-production.up.railway.app/Encuesta/completada?idUsuario=${idUsuario}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.completada) {
+              setEncuestaCompletada(true); // Establecer que la encuesta ya fue completada
+            }
           }
+        } catch (error) {
+          console.error("Error al verificar encuesta:", error);
+        } finally {
+          setCargando(false); // Finaliza el estado de carga
         }
-      } catch (error) {
-        console.error("Error al verificar encuesta:", error);
-      } finally {
-        setCargando(false); // Finaliza el estado de carga
-      }
-    };
+      };
 
-    verificarEncuesta();
+      verificarEncuesta();
+    } else {
+      // Si no hay token, redirigir al login o manejar el error
+      navigate("/login");
+    }
   }, [navigate]);
 
   const handleRespuestaChange = (index, value) => {
@@ -52,36 +79,40 @@ function EncuestaCitas() {
     e.preventDefault();
 
     if (Object.keys(respuestas).length !== preguntas.length) {
-        alert("Por favor responde todas las preguntas antes de enviar.");
-        return;
+      alert("Por favor responde todas las preguntas antes de enviar.");
+      return;
     }
+
+    const token = localStorage.getItem("token");
+    const decodedToken = parseJwt(token);
+    const idUsuario = decodedToken.clienteId;
 
     try {
-        const response = await fetch("https://backopt-production.up.railway.app/Encuesta", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-                idUsuario: 1, // Ajusta el ID del usuario
-                respuestas,
-                preguntas // Envía las preguntas al backend
-            }),
-        });
+      const response = await fetch("https://backopt-production.up.railway.app/Encuesta", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          idUsuario, // Usar el id del usuario decodificado del JWT
+          respuestas,
+          preguntas, // Envía las preguntas al backend
+        }),
+      });
 
-        if (response.ok) {
-            setEnviada(true);
+      if (response.ok) {
+        setEnviada(true);
 
-            // Redirigir al inicio después de 3 segundos
-            setTimeout(() => {
-                navigate("/ver-cita");
-            }, 3000);
-        } else {
-            alert("Hubo un error al enviar tu feedback. Intenta nuevamente.");
-        }
-    } catch (error) {
-        console.error("Error:", error);
+        // Redirigir al inicio después de 3 segundos
+        setTimeout(() => {
+          navigate("/ver-cita");
+        }, 3000);
+      } else {
         alert("Hubo un error al enviar tu feedback. Intenta nuevamente.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Hubo un error al enviar tu feedback. Intenta nuevamente.");
     }
-};
+  };
 
   if (cargando) {
     return (
@@ -91,7 +122,6 @@ function EncuestaCitas() {
     );
   }
 
-  // Si la encuesta ya fue completada, redirige a la página de la cita sin mostrar la encuesta
   if (encuestaCompletada) {
     setTimeout(() => {
       navigate("/ver-cita"); // Redirigir a la página de cita después de un breve retraso
