@@ -10,17 +10,11 @@ import {
   LinearScale,
 } from "chart.js";
 
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-  CategoryScale,
-  LinearScale
-);
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
 
 function ResultadosEncuestas() {
   const [resultados, setResultados] = useState([]);
+  const [totalPersonas, setTotalPersonas] = useState(0); // Nuevo estado para personas únicas
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
@@ -39,9 +33,11 @@ function ResultadosEncuestas() {
 
           if (data && data.data && Array.isArray(data.data)) {
             setResultados(data.data);
+            setTotalPersonas(data.totalPersonas || 0); // Guardar el total de personas únicas
           } else {
             console.error("La respuesta no contiene un arreglo de resultados");
             setResultados([]);
+            setTotalPersonas(0);
           }
         } else {
           alert("Error al obtener los resultados");
@@ -104,6 +100,12 @@ function ResultadosEncuestas() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Resultados de Encuesta Movil</h1>
+
+      {/* Mostrar cantidad de personas únicas que han respondido */}
+      <p className="text-lg font-semibold mb-6">
+        Total de personas que han respondido: {totalPersonas}
+      </p>
+
       {resultados.length === 0 ? (
         <p>No se han completado encuestas aún.</p>
       ) : (
