@@ -79,14 +79,14 @@ function ResultadosEncuestas() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Resultados de Encuestas Web</h1>
+      <h1 className="text-3xl font-bold mb-4">Resultados de Encuestas </h1>
       {resultados.length === 0 ? (
         <p>No se han completado encuestas aún.</p>
       ) : (
         <div className="flex flex-wrap gap-4 justify-center">
           {data.datasets.map((dataset, index) => (
             <div key={index} className="flex-1 max-w-sm p-6 bg-white rounded-lg shadow">
-              <h3 className="text-xl font-semibold mb-2">{${dataset.label}}</h3>
+              <h3 className="text-xl font-semibold mb-2">{`${dataset.label}`}</h3>
               <div className="w-full h-[400px]">
                 <Pie
                   data={{
@@ -101,13 +101,13 @@ function ResultadosEncuestas() {
                           label: (tooltipItem) => {
                             const calificacion = estrellas[tooltipItem.dataIndex]; // Convertir índice a estrellas
                             const value = dataset.data[tooltipItem.dataIndex];
-                            return ${calificacion}: Personas que han respondido: ${value};
+                            return `${calificacion}: Personas que han respondido: ${value}`;
                           },
                         },
                       },
                       title: {
                         display: true,
-                        text: Respuestas por calificación,
+                        text: `Respuestas por calificación`,
                       },
                     },
                   }}
