@@ -17,7 +17,6 @@ function EncuestaCitas() {
   ];
   
 
-  // Verificar si el usuario ya completó la encuesta al montar el componente
   useEffect(() => {
     const verificarEncuesta = async () => {
       try {
