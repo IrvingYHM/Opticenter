@@ -6,6 +6,7 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale)
 
 function ResultadosEncuestas() {
   const [resultados, setResultados] = useState([]);
+  const [totalPersonas, setTotalPersonas] = useState(0); // Nuevo estado para personas únicas
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
@@ -19,11 +20,13 @@ function ResultadosEncuestas() {
         if (response.ok) {
           const data = await response.json();
 
-          if (data && data.data && Array.isArray(data.data)) {
-            setResultados(data.data);
+          if (data) {
+            setResultados(data.data || []); // Manejo de resultados de encuestas
+            setTotalPersonas(data.totalPersonas || 0); // Guardar el total de personas únicas
           } else {
-            console.error("La respuesta no contiene un arreglo de resultados");
+            console.error("La respuesta no contiene datos válidos");
             setResultados([]);
+            setTotalPersonas(0);
           }
         } else {
           alert("Error al obtener los resultados");
@@ -74,19 +77,15 @@ function ResultadosEncuestas() {
   };
 
   const estrellas = ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"]; // Representación de estrellas
-
-  // Calcular cuántas personas han respondido (cada encuesta con respuestas)
-  const cantidadPersonas = resultados.filter(encuesta => Object.values(encuesta.respuestas).some(res => res > 0)).length;
-
   const data = procesarDatos();
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Resultados de Encuestas Web</h1>
 
-      {/* Mostrar cantidad de personas que han respondido arriba de las gráficas */}
+      {/* Mostrar cantidad de personas únicas que han respondido */}
       <p className="text-lg font-semibold mb-6">
-        Total de personas que han respondido: {cantidadPersonas}
+        Total de personas que han respondido: {totalPersonas}
       </p>
 
       {resultados.length === 0 ? (
