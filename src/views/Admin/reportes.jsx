@@ -75,18 +75,27 @@ function ResultadosEncuestas() {
 
   const estrellas = ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"]; // Representación de estrellas
 
+  // Calcular cuántas personas han respondido (cada encuesta con respuestas)
+  const cantidadPersonas = resultados.filter(encuesta => Object.values(encuesta.respuestas).some(res => res > 0)).length;
+
   const data = procesarDatos();
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Resultados de Encuestas </h1>
+      <h1 className="text-3xl font-bold mb-4">Resultados de Encuestas Web</h1>
+
+      {/* Mostrar cantidad de personas que han respondido arriba de las gráficas */}
+      <p className="text-lg font-semibold mb-6">
+        Total de personas que han respondido: {cantidadPersonas}
+      </p>
+
       {resultados.length === 0 ? (
         <p>No se han completado encuestas aún.</p>
       ) : (
         <div className="flex flex-wrap gap-4 justify-center">
           {data.datasets.map((dataset, index) => (
             <div key={index} className="flex-1 max-w-sm p-6 bg-white rounded-lg shadow">
-              <h3 className="text-xl font-semibold mb-2">{`${dataset.label}`}</h3>
+              <h3 className="text-xl font-semibold mb-2">{dataset.label}</h3>
               <div className="w-full h-[400px]">
                 <Pie
                   data={{
