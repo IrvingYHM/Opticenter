@@ -54,6 +54,12 @@ jobs:
           name: cypress-results
           path: cypress/results
 
+
+        # Desplegar a Vercel
+      - name: Deploy to Vercel
+        run: npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+        
+        
       # Notificar en caso de éxito o fallo
       - name: Notify result
         if: failure()
