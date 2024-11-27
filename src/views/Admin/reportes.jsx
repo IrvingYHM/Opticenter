@@ -12,7 +12,7 @@ function ResultadosEncuestas() {
   useEffect(() => {
     const obtenerResultados = async () => {
       try {
-        const response = await fetch("https://backopt-production.up.railway.app/resultados", {
+        const response = await fetch("http://localhost:3000/resultados", {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });

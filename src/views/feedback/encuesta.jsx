@@ -43,7 +43,7 @@ function EncuestaCitas() {
       // Verificar si la encuesta ya fue completada
       const verificarEncuesta = async () => {
         try {
-          const response = await fetch(`https://backopt-production.up.railway.app/Encuesta/completada?idUsuario=${idUsuario}`, {
+          const response = await fetch(`http://localhost:3000/Encuesta/completada?idUsuario=${idUsuario}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
           });
@@ -88,7 +88,7 @@ function EncuestaCitas() {
     const idUsuario = decodedToken.clienteId;
 
     try {
-      const response = await fetch("https://backopt-production.up.railway.app/Encuesta", {
+      const response = await fetch("http://localhost:3000/Encuesta", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
