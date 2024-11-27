@@ -54,11 +54,10 @@ jobs:
           name: cypress-results
           path: cypress/results
 
-
-        # Desplegar a Vercel
+      # Desplegar a Vercel si las pruebas pasan
       - name: Deploy to Vercel
+        if: success()                    # Ejecutar solo si las pruebas pasaron
         run: npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
-        
 
       # Notificar en caso de éxito o fallo
       - name: Notify result
