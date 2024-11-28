@@ -1,16 +1,41 @@
-import { useState } from "react";
-/* import Navbar from "../components/BarraNavegacion"; */
+import { useState, useEffect } from "react";
+import Barra from "../components/Navegacion/barra";
 import Slider from "../home/slider";
 import Fot from "../components/Footer";
+import Scrool from "../components/scroll";
 import imagen from "../img/Venta.png";
 import imagen2 from "../img/lentes2.png";
-import Scrool from '../components/scroll';
-import Barra from "../components/Navegacion/barra";
 import lente from "../img/3d.jpg";
+import Encuesta from "../views/feedback/encuesta";
 
+// Función para decodificar el JWT y obtener el clienteId
+function getClienteIdFromToken() {
+  const token = localStorage.getItem("token");
 
+  if (token) {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+    const decodedToken = JSON.parse(jsonPayload);
+    return decodedToken.clienteId;
+  }
+
+  return null;
+}
 
 function App() {
+  const [mostrarEncuesta, setMostrarEncuesta] = useState(false); // Estado para la encuesta pendiente
+  const [idUsuario, setIdUsuario] = useState(null); // Estado para idUsuario (inicializado como null)
+  const [encuesta, setEncuesta] = useState(null); // Estado para almacenar la información de la encuesta
+
   const [mostrarElemento, setMostrarElemento] = useState(false);
   const [mostrarElemento2, setMostrarElemento2] = useState(false);
   const [mostrarElemento3, setMostrarElemento3] = useState(false);
@@ -42,180 +67,105 @@ function App() {
     setIsZoomed3(false);
   };
 
+  // Función para verificar si el usuario tiene una encuesta pendiente
+  const obtenerEncuestaPendiente = async (idUsuario) => {
+    try {
+      const response = await fetch("https://backopt-production.up.railway.app/feedback/pendiente", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idUsuario }),
+      });
+
+      const data = await response.json();
+
+      if (data.estado === "Pendiente") {
+        return {
+          estado: "Pendiente",
+          id_encuesta: data.id_encuesta,
+          mensaje: data.mensaje,
+        };
+      } else {
+        return { estado: "Completado", mensaje: data.mensaje };
+      }
+    } catch (error) {
+      console.error("Error al obtener la encuesta pendiente:", error);
+      return {
+        estado: "Error",
+        mensaje: "No se pudo verificar la encuesta pendiente.",
+      };
+    }
+  };
+
+  useEffect(() => {
+    const id = getClienteIdFromToken();
+    if (id) {
+      setIdUsuario(id);
+    } else {
+      console.error("No se pudo obtener el idUsuario del token.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (idUsuario) {
+      const verificarEncuesta = async () => {
+        const encuesta = await obtenerEncuestaPendiente(idUsuario);
+        if (encuesta.estado === "Pendiente") {
+          setEncuesta(encuesta); // Guardamos la encuesta pendiente
+          setMostrarEncuesta(true); // Mostramos la encuesta
+        }
+      };
+      verificarEncuesta();
+    }
+  }, [idUsuario]);
+
   return (
     <>
-{/*       <Navbar /> */}
+      <Barra />
 
-  <Barra/>
-      <script
-        src="//code.tidio.co/lr3byfcdvywtakcwkxqmh0yvvnggymum.js"
-        async
-      ></script>
+      {mostrarEncuesta && encuesta && (
+        <div className="fixed top-1/2 left-1/2  z-50 bg-white p-6 rounded-lg shadow-lg">
+          <Encuesta encuesta={encuesta} />
+        </div>
+      )}
+
+      {/* Contenido de la página */}
       <div className="flex-center text-center mt-16">
         <div className="my-32 ">
-          <Slider />
-          <br />
-
-          
-          <div className="flex flex-col md:flex-row">
-            <div className="max-w-sm rounded overflow-hidden shadow-lg mx-8">
-
-
-
-              
-              <img
-                className={`w-full ${isZoomed1 ? "zoom" : ""}`}
-                src={imagen}
-                onMouseOver={handleMouseOver1}
-                onMouseOut={handleMouseOut1}
-                alt="Sunset in the mountains"
-                style={{
-                  width: isZoomed1 ? "120%" : "100%",
-                  height: isZoomed1 ? "50%" : "30%",
-                  objectFit: "cover",
-                }}
-              />
-
-
-
-
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2 ">
-                  The Coldest Sunset
-                </div>
-                <div className="text-gray-700 text-justify">
-                  Estos lentes ofrecen un estilo único y moderno que te hará
-                  destacar en cualquier ocasión. Con su diseño elegante y
-                  funcional, podrás disfrutar de la máxima protección UV y una
-                  visión nítida y clara en todo momento.
-                  <button
-                    onClick={() => setMostrarElemento(!mostrarElemento)}
-                  ></button>
-                  {mostrarElemento && (
-                    <div>
-                      Su montura ligera y resistente garantiza una comodidad
-                      duradera, mientras que sus cristales de alta calidad te
-                      brindan una visión sin igual. ¡Prepárate para lucir
-                      increíble con los lentes The Coldest Sunset!
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="px-6 pt-4 pb-4">
-                <button
-                  className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                  onClick={() => setMostrarElemento(!mostrarElemento)}
-                >
-                  {mostrarElemento ? "Ocultar" : "Ver más"}
-                </button>
-              </div>
-            </div>
-
-
-            
-
-            {/* Aquí empieza El segundo */}
-            <div className="max-w-sm rounded overflow-hidden shadow-lg mx-8">
-              <img
-                className={`w-full ${isZoomed2 ? "zoom" : ""}`}
-                src={imagen2}
-                onMouseOver={handleMouseOver2}
-                onMouseOut={handleMouseOut2}
-                alt="Sunset in the mountains"
-                style={{
-                  width: isZoomed2 ? "120%" : "100%",
-                  height: isZoomed2 ? "50%" : "30%",
-                  objectFit: "cover",
-                }}
-              />
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2 ">
-                  The Coldest Sunset
-                </div>
-                <div className="text-gray-700 text-justify">
-                  Estos lentes ofrecen un estilo único y moderno que te hará
-                  destacar en cualquier ocasión. Con su diseño elegante y
-                  funcional, podrás disfrutar de la máxima protección UV y una
-                  visión nítida y clara en todo momento.
-                  <button
-                    onClick={() => setMostrarElemento2(!mostrarElemento2)}
-                  ></button>
-                  {mostrarElemento2 && (
-                    <div>
-                      Su montura ligera y resistente garantiza una comodidad
-                      duradera, mientras que sus cristales de alta calidad te
-                      brindan una visión sin igual. ¡Prepárate para lucir
-                      increíble con los lentes The Coldest Sunset!
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="px-6 pt-4 pb-4">
-                <button
-                  className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                  onClick={() => setMostrarElemento2(!mostrarElemento2)}
-                >
-                  {mostrarElemento2 ? "Ocultar" : "Ver más"}
-                </button>
-              </div>
-            </div>
-            
-            {/* Aquí empieza el tercero */}
-            <div className="max-w-sm rounded overflow-hidden shadow-lg mx-8">
-              <img
-                className={`w-full ${isZoomed3 ? "zoom" : ""}`}
-                src={imagen}
-                onMouseOver={handleMouseOver3}
-                onMouseOut={handleMouseOut3}
-                alt="Sunset in the mountains"
-                style={{
-                  width: isZoomed3 ? "120%" : "100%",
-                  height: isZoomed3 ? "50%" : "30%",
-                  objectFit: "cover",
-                }}
-              />
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2 ">
-                  The Coldest Sunset
-                </div>
-                <div className="text-gray-700 text-justify">
-                  Estos lentes ofrecen un estilo único y moderno que te hará
-                  destacar en cualquier ocasión. Con su diseño elegante y
-                  funcional, podrás disfrutar de la máxima protección UV y una
-                  visión nítida y clara en todo momento.
-                  <button
-                    onClick={() => setMostrarElemento3(!mostrarElemento3)}
-                  ></button>
-                  {mostrarElemento3 && (
-                    <div>
-                      Su montura ligera y resistente garantiza una comodidad
-                      duradera, mientras que sus cristales de alta calidad te
-                      brindan una visión sin igual. ¡Prepárate para lucir
-                      increíble con los lentes The Coldest Sunset!
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="px-6 pt-4 pb-4">
-                <button
-                  className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                  onClick={() => setMostrarElemento3(!mostrarElemento3)}
-                >
-                  {mostrarElemento3 ? "Ocultar" : "Ver más"}
-                </button>
-              </div>
-            </div>
-
+          <div>
+            <Slider />
           </div>
           <br />
-          <div>
-              <img className="flex justify-center" src={lente} alt="" />
+          <div className="flex justify-around mb-5">
+            <div>
+              <img
+                src={imagen2}
+                alt="Imagen 2"
+                className="rounded-lg w-80 h-60 object-cover"
+              />
             </div>
+            <div>
+              <img
+                src={imagen}
+                alt="Imagen"
+                className="rounded-lg w-80 h-60 object-cover"
+              />
+            </div>
+          </div>
+          <br />
+          <div className="mb-16">
+            <h2 className="font-extrabold text-center text-3xl text-indigo-800 mb-5">
+              ¡Estás a un paso de obtener lo que necesitas!
+            </h2>
+            <p className="text-xl text-center text-gray-500">
+              Encuentra tus productos ópticos favoritos y realiza tu compra de
+              forma fácil y rápida.
+            </p>
+          </div>
         </div>
-        
       </div>
-      <Scrool/>
-
+      <Scrool />
       <Fot />
     </>
   );
