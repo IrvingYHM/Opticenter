@@ -54,13 +54,20 @@ jobs:
           name: cypress-results
           path: cypress/results
 
+      # Desplegar a Vercel si las pruebas pasan
+      - name: Deploy to Vercel
+        if: success()                    # Ejecutar solo si las pruebas pasaron
+        run: npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+
       # Notificar en caso de éxito o fallo
       - name: Notify result
-        if: failure()
+        if: failure() && github.event_name == 'pull_request'
         uses: actions/github-script@v4
         with:
           script: |
             github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               issue_number: context.issue.number,
               body: "❌ Las pruebas E2E de Cypress han fallado. Revisa los resultados adjuntos."
             })

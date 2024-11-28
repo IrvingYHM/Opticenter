@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Función para decodificar JWT
@@ -24,6 +24,9 @@ function EncuestaCitas() {
   const [encuestaCompletada, setEncuestaCompletada] = useState(false); // Estado para verificar si ya se completó la encuesta
   const navigate = useNavigate();
 
+  // Usamos un useRef para asegurarnos de que registrarAcceso se ejecute solo una vez
+  const accesoRegistrado = useRef(false);
+
   const preguntas = [
     "¿Qué tan fácil fue encontrar la información que buscabas?",
     "¿Cómo calificarías la facilidad de uso del sistema para agendar tu cita?",
@@ -33,40 +36,53 @@ function EncuestaCitas() {
   ];
 
   useEffect(() => {
-    // Recuperar el token del localStorage
     const token = localStorage.getItem("token");
 
     if (token) {
-      const decodedToken = parseJwt(token);
-      const idUsuario = decodedToken.clienteId; // Asumimos que el idUsuario está en el campo `id`
+        const decodedToken = parseJwt(token);
+        console.log(decodedToken); // Verifica el contenido del token
 
-      // Verificar si la encuesta ya fue completada
-      const verificarEncuesta = async () => {
-        try {
-          const response = await fetch(`http://localhost:3000/Encuesta/completada?idUsuario=${idUsuario}`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          });
+        const idUsuario = decodedToken.clienteId;
 
-          if (response.ok) {
-            const data = await response.json();
-            if (data.completada) {
-              setEncuestaCompletada(true); // Establecer que la encuesta ya fue completada
-            }
-          }
-        } catch (error) {
-          console.error("Error al verificar encuesta:", error);
-        } finally {
-          setCargando(false); // Finaliza el estado de carga
+        if (!idUsuario) {
+            console.error("El idUsuario no se pudo obtener del token.");
+            return; // Salir si no hay idUsuario
         }
-      };
 
-      verificarEncuesta();
+        // Evitar llamar registrarAcceso si ya fue completado
+        if (!accesoRegistrado.current && !encuestaCompletada) {
+            const registrarAcceso = async () => {
+                try {
+                    const response = await fetch("https://backopt-production.up.railway.app/feedback/acceso", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ idUsuario }),
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.estado === "Encuesta ya completada") {
+                            setEncuestaCompletada(true); // Marcar como completada si ya está hecho
+                        }
+                    } else {
+                        console.error("Error al registrar el acceso al feedback");
+                    }
+                } catch (error) {
+                    console.error("Error al registrar acceso:", error);
+                } finally {
+                    setCargando(false); // Finaliza el estado de carga
+                }
+            };
+
+            registrarAcceso(); // Solo ejecutar si la encuesta no está completada
+            accesoRegistrado.current = true; // Marcar como registrado
+        } else {
+            setCargando(false); // Si ya está completada, no hacer nada
+        }
     } else {
-      // Si no hay token, redirigir al login o manejar el error
-      navigate("/login");
+        navigate("/login"); // Redirige al login si no hay token
     }
-  }, [navigate]);
+}, [encuestaCompletada, navigate]); // Solo ejecutará cuando cambie `encuestaCompletada`
 
   const handleRespuestaChange = (index, value) => {
     setRespuestas((prev) => ({
@@ -87,14 +103,22 @@ function EncuestaCitas() {
     const decodedToken = parseJwt(token);
     const idUsuario = decodedToken.clienteId;
 
+    if (!idUsuario) {
+      alert("No se pudo obtener el idUsuario del token.");
+      return; // Salir si no hay idUsuario
+    }
+
     try {
-      const response = await fetch("http://localhost:3000/Encuesta", {
-        method: "POST",
+      const response = await fetch("https://backopt-production.up.railway.app/feedback/completar", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          idUsuario, // Usar el id del usuario decodificado del JWT
-          respuestas,
-          preguntas, // Envía las preguntas al backend
+          idUsuario,
+          question1: respuestas[0],
+          question2: respuestas[1],
+          question3: respuestas[2],
+          question4: respuestas[3],
+          question5: respuestas[4],
         }),
       });
 
