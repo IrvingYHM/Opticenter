@@ -10,14 +10,30 @@ import {
   LinearScale,
 } from "chart.js";
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  LinearScale
+);
 
 function ResultadosEncuestas() {
-  const [resultados, setResultados] = useState([]);
-  const [totalPersonas, setTotalPersonas] = useState(0); // Nuevo estado para personas únicas
-  const [cargando, setCargando] = useState(true);
+  const [resultados, setResultados] = useState([]); // Datos de las encuestas
+  const [totalPersonas, setTotalPersonas] = useState(0); // Total de personas que han respondido
+  const [cargando, setCargando] = useState(true); // Estado de carga
+
+  const mapeoPreguntas = {
+    question1: "¿Qué tan fácil fue encontrar la información que buscabas?",
+    question2: "¿Cómo calificarías la facilidad de uso del sistema para agendar tu cita?",
+    question3: "¿Qué tan satisfecho estás con el proceso de agendar una cita?",
+    question4: "¿Qué tan rápido te pareció el sistema para agendar tu cita?",
+    question5: "¿Qué tan claro fue el mensaje de confirmación de tu cita?",
+  };
 
   useEffect(() => {
+    // Obtener los resultados de las encuestas
     const obtenerResultados = async () => {
       try {
         const response = await fetch(
@@ -30,12 +46,10 @@ function ResultadosEncuestas() {
 
         if (response.ok) {
           const data = await response.json();
-
-          if (data && data.data && Array.isArray(data.data)) {
-            setResultados(data.data);
-            setTotalPersonas(data.totalPersonas || 0); // Guardar el total de personas únicas
+          if (data) {
+            setResultados(data.data || []); // Maneja los resultados de las encuestas
+            setTotalPersonas(data.totalPersonas || 0); // Guarda el total de personas únicas
           } else {
-            console.error("La respuesta no contiene un arreglo de resultados");
             setResultados([]);
             setTotalPersonas(0);
           }
@@ -43,14 +57,14 @@ function ResultadosEncuestas() {
           alert("Error al obtener los resultados");
         }
       } catch (error) {
-        console.error("Error al obtener los resultados:", error);
         alert("Hubo un error al obtener los resultados");
+        console.error("Error al obtener los resultados:", error);
       } finally {
-        setCargando(false);
+        setCargando(false); // Finaliza la carga
       }
     };
 
-    obtenerResultados();
+    obtenerResultados(); // Llamar la función de obtención de resultados
   }, []);
 
   if (cargando) {
@@ -58,25 +72,20 @@ function ResultadosEncuestas() {
   }
 
   const procesarDatos = () => {
-    const respuestasPorPregunta = {};
+    if (typeof resultados !== "object" || Array.isArray(resultados)) {
+      console.error("Los resultados no son un objeto:", resultados);
+      return { labels: [], datasets: [] };
+    }
 
-    resultados.forEach((encuesta) => {
-      const { pregunta, respuestas } = encuesta;
+    const respuestasPorPregunta = [];
 
-      if (!respuestasPorPregunta[pregunta]) {
-        respuestasPorPregunta[pregunta] = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-      }
+    Object.entries(resultados).forEach(([pregunta, respuestas]) => {
+      const preguntaReal = mapeoPreguntas[pregunta] || pregunta; // Usa el mapeo o la clave por defecto
+      const respuestasArray = Object.values(respuestas);
 
-      Object.entries(respuestas).forEach(([calificacion, cantidad]) => {
-        respuestasPorPregunta[pregunta][calificacion] += cantidad;
-      });
-    });
-
-    const labels = Object.keys(respuestasPorPregunta);
-    const datasets = labels.map((pregunta) => {
-      return {
-        label: pregunta,
-        data: Object.values(respuestasPorPregunta[pregunta]),
+      respuestasPorPregunta.push({
+        label: preguntaReal,
+        data: respuestasArray,
         backgroundColor: [
           "#FF6F61",
           "#6B5B95",
@@ -84,24 +93,23 @@ function ResultadosEncuestas() {
           "#F7CAC9",
           "#92A8D1",
         ],
-      };
+      });
     });
 
     return {
-      labels: ["1", "2", "3", "4", "5"], // Mantenemos las etiquetas originales (números)
-      datasets,
+      labels: ["1", "2", "3", "4", "5"],
+      datasets: respuestasPorPregunta,
     };
   };
 
   const estrellas = ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"]; // Representación de estrellas
-
   const data = procesarDatos();
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Resultados de Encuesta Movil</h1>
+      <h1 className="text-3xl font-bold mb-4">Resultados de Encuestas Movil</h1>
 
-      {/* Mostrar cantidad de personas únicas que han respondido */}
+      {/* Mostrar el total de personas que han respondido */}
       <p className="text-lg font-semibold mb-6">
         Total de personas que han respondido: {totalPersonas}
       </p>
@@ -115,7 +123,7 @@ function ResultadosEncuestas() {
               key={index}
               className="flex-1 max-w-sm p-6 bg-white rounded-lg shadow"
             >
-              <h3 className="text-xl font-semibold mb-2">{`${dataset.label}`}</h3>
+              <h3 className="text-xl font-semibold mb-2">{dataset.label}</h3>
               <div className="w-full h-[400px]">
                 <Pie
                   data={{
